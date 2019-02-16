@@ -33,8 +33,7 @@ export class SearchPropertiesComponent implements OnInit {
   }
 
   clear(){
-    this.searchProperties = "";
-    this.streetType = [{id:"", text:""}];
+    this.searchProperties = {};
   }
 
 }

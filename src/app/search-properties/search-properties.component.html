@@ -19,9 +19,9 @@
       </div>
       <div class="col-12 col-md-4">
           <label > Street Type</label>
-          <select name="" id="" class="form-control ">
-            <option value="" disabled selected >select street type</option>
-            <option *ngFor = "let type of streetType" [(ngModel)]="searchProperties.types" [value]="type.id">{{type.text}}</option>
+          <select name="" id="" class="form-control" [(ngModel)]="searchProperties.types">
+            <option  value="" disabled  selected >select street type</option>
+            <option *ngFor = "let type of streetType"  [value]="type.id">{{type.text}}</option>
           </select>
       </div>
       
@@ -29,9 +29,9 @@
     <div class="row form-panel">
         <div class="col-12 col-md-4">
           <label > Direction</label>
-          <select name="" id="" class="form-control ">
-            <option value="" disabled selected >select direction</option>
-            <option *ngFor = "let dir of streetDirection" [(ngModel)]="searchProperties.direction" [value]="dir.id">{{dir.text}}</option>
+          <select name="" id="" class="form-control" [(ngModel)]="searchProperties.direction">
+            <option value="" disabled   >select direction</option>
+            <option *ngFor = "let dir of streetDirection"  [value]="dir.id">{{dir.text}}</option>
           </select>
         </div>
         <div class="col-12 col-md-4">
