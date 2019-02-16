@@ -1,0 +1,62 @@
+
+<div class="">
+  <h4> <b> Online Permits </b> </h4>
+
+  <div class="search-properties-content" >
+    <h5> Search Properties</h5>
+    <p>
+        Search properties by property address, street or roll number. <br>
+        Please be advised that any building permits issued before  <b> January 1, 2000 </b> may not be available on this database.
+    </p>
+    <div class="row form-panel">
+      <div class="col-12 col-md-4">
+        <label > Street Number</label>
+        <input type="text" class="form-control" placeholder="enter street number" [(ngModel)] = 'searchProperties.number'>
+      </div>
+      <div class="col-12 col-md-4">
+        <label > Street Name</label>
+        <input type="text" class="form-control" placeholder="enter street name" [(ngModel)] = 'searchProperties.name'>
+      </div>
+      <div class="col-12 col-md-4">
+          <label > Street Type</label>
+          <select name="" id="" class="form-control ">
+            <option value="" disabled selected >select street type</option>
+            <option *ngFor = "let type of streetType" [(ngModel)]="searchProperties.types" [value]="type.id">{{type.text}}</option>
+          </select>
+      </div>
+      
+    </div>
+    <div class="row form-panel">
+        <div class="col-12 col-md-4">
+          <label > Direction</label>
+          <select name="" id="" class="form-control ">
+            <option value="" disabled selected >select direction</option>
+            <option *ngFor = "let dir of streetDirection" [(ngModel)]="searchProperties.direction" [value]="dir.id">{{dir.text}}</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-4">
+          <label > Unit Number</label>
+          <input type="text" class="form-control" placeholder="enter unit number" [(ngModel)] = 'searchProperties.unit'>
+        </div>
+        <div class="col-12 col-md-4">
+            <label > Roll Number</label>
+            <input type="text" class="form-control" placeholder="enter digits only" [(ngModel)] = 'searchProperties.roll'>
+        </div>
+        
+    </div>
+    <div class="">
+      <div class="button-panel">
+          <button class="btn btn-primary btn-sm float-left mt-3" (click) = clear()>
+            CLEAR
+          </button>
+          <button class="btn btn-primary btn-sm float-right mt-3">
+              <a routerLink="search-properties" > SEARCH </a>
+            </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+  
+  

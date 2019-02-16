@@ -25,9 +25,21 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",  
+              "./node_modules/popper.js/dist/umd/popper.min.js",  
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"  
+            ]
           },
           "configurations": {
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -62,6 +74,11 @@
           "configurations": {
             "production": {
               "browserTarget": "citizen-portal:build:production"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "citizen-portal:build:hmr",
+              "hmrWarning": false
             }
           }
         },

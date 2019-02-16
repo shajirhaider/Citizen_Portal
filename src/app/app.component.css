@@ -1,0 +1,13 @@
+.container-fluid{
+    padding: 20px
+}
+.main-container{
+    min-height: 400px;
+ -webkit-box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
+ -moz-box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
+  box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
+}
+.main-content{
+    background: white;
+    padding: 30px;
+}

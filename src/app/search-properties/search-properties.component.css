@@ -1,0 +1,15 @@
+.search-properties-content {
+    border: 1px solid #E7E7E7;
+}
+.search-properties-content h5{
+    background: #EDEDEE;
+    padding: 10px;
+}
+.search-properties-content p{
+    padding: 0 10px;
+    text-align: justify;
+}
+
+.form-panel{
+    padding: 10px;
+}

@@ -1,0 +1,24 @@
+.navbar-container {
+ height: 70px;
+ width: 100%;
+ background: white;
+ z-index: 1000;
+ -webkit-box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
+-moz-box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
+ box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
+}
+.navbar-nav-link{
+    color: #2E79B8;
+    display: block;
+    padding: .5rem .5rem;
+    border-right: 1px solid #E7E7E7;
+    line-height: 12px;
+}
+.navbar-nav-link a:last-child {
+    border: none
+}
+/* #navbarSupportedContent.navbar-collapse.collapse.show{
+    background: rgb(226, 226, 226);
+    width: 100%;
+    
+} */
