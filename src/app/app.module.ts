@@ -9,6 +9,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AgreeComponent } from './agree/agree.component';
 import { SearchPropertiesComponent } from './search-properties/search-properties.component';
 import { from } from 'rxjs';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-approvals.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { from } from 'rxjs';
     HeaderComponent,
     SidebarComponent,
     AgreeComponent,
-    SearchPropertiesComponent
+    SearchPropertiesComponent,
+    SearchResultComponent,
+    SitePlanApprovalsComponent
   ],
   imports: [
     BrowserModule,

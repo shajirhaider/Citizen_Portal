@@ -8,6 +8,9 @@ body {
 button{
   border: none !important
 }
+p{
+  margin: 5px !important
+}
 .button-panel{
   color: white;
 }

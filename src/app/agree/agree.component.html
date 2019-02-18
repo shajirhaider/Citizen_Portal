@@ -17,14 +17,14 @@
    
   <div class="agree-button text-center">
     <span class="mr-5"> 
-      <input type="radio"><b> I Agree</b>
+      <input type="radio" [(ngModel)] = "agree" [value]="true" (input) ="btnShow = true"><b> I Agree</b>
     </span>
     <span> 
-        <input type="radio"><b> I Disagree</b>
+        <input type="radio" [(ngModel)] = "agree" [value]="false" (input) ="btnShow = false"><b> I Disagree</b>
       </span>
   </div>
 
-  <div class="button-panel">
+  <div class="button-panel" *ngIf = "btnShow == true">
     <button class="btn btn-primary btn-sm float-right">
       <a routerLink="search-properties" > CONTINUE</a>
     </button>
