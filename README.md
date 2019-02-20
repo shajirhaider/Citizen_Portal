@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Node.js and npm must be preinstalled on the machine. Lastest version is recommended.
 
 ## Development server
-At first, run `npm install` at the root folder of the project to install all the dependencies. 
+At first, clone the project and run `npm install` at the root folder of the project to install all the dependencies. 
 
 Run `npm run hmr` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically replacement the change of any source files.
 
