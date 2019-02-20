@@ -3,10 +3,10 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
 
 ## Prerequisite
-Node.js and npm must be preinstalled on the machine.
+Node.js and npm must be preinstalled on the machine. Lastest version is recommended.
 
 ## Development server
-At first, run `npm install` at the root folder of the project to install all the dependency. 
+At first, run `npm install` at the root folder of the project to install all the dependencies. 
 
 Run `npm run hmr` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically replacement the change of any source files.
 
