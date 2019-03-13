@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from '../services/http.service'
+import { SearchResultComponent } from '../search-result/search-result.component';
 
 @Component({
   selector: 'app-search-properties',
@@ -17,7 +18,10 @@ export class SearchPropertiesComponent implements OnInit {
   streets: Object = [];
   searchResultshow: boolean = false;
   msgShow: boolean = false;
-  searchResult: Object = [];
+  searchResults: Object[] = [];
+  addSpacer = " ";
+  addComma= ","
+  searchResultCount:number = 0;
 constructor(private httpService: HttpService) {}
 
   ngOnInit() {
@@ -86,7 +90,9 @@ constructor(private httpService: HttpService) {}
             if(response.status == 200){
               this.searchResultshow = true
               this.msgShow = false
-              this.searchResult = response["body"][0]
+              this.searchResults = response["body"]
+              this.searchResultCount = this.searchResults.length
+              console.log(this.searchResults)
             }
            
           },

@@ -1,10 +1,22 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 body {
   background:#E7E7E7;
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
 }
+.card-body{
+  padding: .7rem !important
+}
+
+.card-header {
+  padding: .4rem .7rem !important
+}
+
 button{
   border: none !important
 }

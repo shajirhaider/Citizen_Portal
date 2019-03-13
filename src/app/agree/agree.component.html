@@ -10,12 +10,26 @@
         Please review the following terms carefully.
       </a> 
    
-  <div class="agree-button text-center">
+  <div class="agree-button text-center mt-2">
     <span class="mr-5"> 
-      <input type="radio" [(ngModel)] = "agree" [value]="true" (input) ="btnShow = true"><b> I Agree</b>
+      <!-- <input type="radio" [(ngModel)] = "agree" [value]="true" (input) ="btnShow = true"><b> I Agree</b> -->
+    
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" [(ngModel)] = "agree" [value]="true" (input) ="btnShow = true">
+        <label class="form-check-label">
+          <b> I Agree</b>
+        </label>
+      </div>
     </span>
     <span> 
-        <input type="radio" [(ngModel)] = "agree" [value]="false" (input) ="btnShow = false"><b> I Disagree</b>
+      <!-- <input type="radio" [(ngModel)] = "agree" [value]="false" (input) ="btnShow = false"><b> I Disagree</b> -->
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" [(ngModel)] = "agree" [value]="false" (input) ="btnShow = false">
+        <label class="form-check-label">
+          <b> I Disagree</b>
+        </label>
+      </div>
+    
       </span>
   </div>
 

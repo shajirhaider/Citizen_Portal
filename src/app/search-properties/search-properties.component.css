@@ -10,6 +10,17 @@
     text-align: justify;
 }
 
-/* .form-panel{
-    padding: 10px;
-} */
+.result-body{
+    min-height: 130px;
+    display: table-cell;
+    vertical-align: middle
+  }
+  
+.result-body p {
+    text-align: left
+}
+
+.result-body button{
+    width: 80px !important;
+    margin-top: 10px;
+  }
