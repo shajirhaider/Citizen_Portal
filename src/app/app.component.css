@@ -6,6 +6,7 @@
  -webkit-box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
  -moz-box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
   box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
+  margin-top: 85px
 }
 .main-content{
     background: white;

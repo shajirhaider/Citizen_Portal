@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from '../services/http.service'
 import { SearchResultComponent } from '../search-result/search-result.component';
+import { Button } from 'protractor';
 
 @Component({
   selector: 'app-search-properties',
@@ -22,6 +23,8 @@ export class SearchPropertiesComponent implements OnInit {
   addSpacer = " ";
   addComma= ","
   searchResultCount:number = 0;
+  msg: String ="msg";
+  progress: Boolean = false;
 constructor(private httpService: HttpService) {}
 
   ngOnInit() {
@@ -29,7 +32,14 @@ constructor(private httpService: HttpService) {}
     this.getValidStreetDirections()
     this.getValidStreet()
   }
-
+  // ngDoCheck(){
+  //   this.isDisable()
+  // }
+  // isDisable(){
+  //   if(this.searchProperties["rollNumber"]){
+  //     this.rollDisable = true
+  //   }
+  // }
   getValidStreetType(){
     let url = 'getValidStreetTypes'
     let body = {
@@ -60,6 +70,7 @@ constructor(private httpService: HttpService) {}
       );
   } 
   getValidStreet(){
+    this.progress = true
     let url = 'getValidStreet'
     let body = {
       "token":"amandaportal", 
@@ -70,17 +81,23 @@ constructor(private httpService: HttpService) {}
         (response) =>{
           console.log(response["body"])
           this.streets = response["body"]
+         this.progress = false
         },
         (error) => console.log(error)
       );
   }
   searchProperty(){
-    if( !this.searchProperties["streetNumber"] && !this.searchProperties["streetName"] && !this.searchProperties["streetType"] &&
-      !this.searchProperties["streetDirection"] && !this.searchProperties["unitNumber"] && !this.searchProperties["rollNumber"]){
+    if( !this.searchProperties["streetName"] && !this.searchProperties["rollNumber"]){
       this.msgShow = true;
       this.searchResultshow = false;
-      console.log("msg",this.searchProperties["streetNumber"])
+      this.msg = "Street Name or Roll Number is mandatory."
+
+    }else if(this.searchProperties["streetName"] && this.searchProperties["rollNumber"]){
+      this.msgShow = true;
+      this.searchResultshow = false;
+      this.msg = "Please enter either Street Name or Roll Number"
     }else{
+      this.progress = true
       let url = 'searchProperty'
       let body = this.searchProperties
       this.httpService.post(url,body)
@@ -92,6 +109,7 @@ constructor(private httpService: HttpService) {}
               this.msgShow = false
               this.searchResults = response["body"]
               this.searchResultCount = this.searchResults.length
+              this.progress = false
               console.log(this.searchResults)
             }
            

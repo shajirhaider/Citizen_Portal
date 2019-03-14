@@ -1,64 +1,77 @@
 
-<div class="">
-  <div *ngIf ="searchResultshow == false && msgShow ==false" >
-  <h5> <b> Online Permits </b> </h5>
-  <div class="card" >
-    <h5 class="card-header"> Search Properties</h5>
-    <div class="card-body">
-        <div class="alert alert-primary" role="alert">
-            <p>
-              Search properties by property address, street or roll number. <br>
-              Please be advised that any building permits issued before  <b> January 1, 2000 </b> may not be available on this database.
-            </p>    
-        </div>
-    <div class="row form-panel mt-2">
-      <div class="col-12 col-md-4 ">
-        <label > Street Number</label>
-        <input type="text" class="form-control" placeholder="enter street number" [(ngModel)] = 'searchProperties.streetNumber'>
-      </div>
-      <div class="col-12 col-md-4">
-        <label > Street Name</label>
-        <select name="" id="" class="form-control" [(ngModel)]="searchProperties.streetName">
-          <option value="" disabled selected  >select street</option>
-          <option *ngFor = "let street of streets"  [value]="street.propStreet">{{street.propStreet}}</option>
-        </select>
-      </div>
-      <div class="col-12 col-md-4">
-          <label > Street Type</label>
-          <select name="" id="" class="form-control" [(ngModel)]="searchProperties.streetType">
-            <option  value="" disabled  selected >select street type</option>
-            <option *ngFor = "let type of streetType"  [value]="type.id">{{type.description}}</option>
-          </select>
-      </div>    
-    </div>
-    <div class="row form-panel mt-2">
-        <div class="col-12 col-md-4">
-          <label > Direction</label>
-          <select name="" id="" class="form-control" [(ngModel)]="searchProperties.streetDirection">
-            <option value="" disabled   >select direction</option>
-            <option *ngFor = "let dir of streetDirection"  [value]="dir.addressDirection">{{dir.addressDirection}}</option>
-          </select>
-        </div>
-        <div class="col-12 col-md-4">
-          <label > Unit Number</label>
-          <input type="text" class="form-control" placeholder="enter unit number" [(ngModel)] = 'searchProperties.unitNumber'>
-        </div>     
-    </div>
+  <div class="">
 
-    <div class="row form-panel mt-2">
-      <div class="col-12 col-md-4">
-          <label > Roll Number</label>
-          <input type="text" class="form-control" placeholder="enter digits only" [(ngModel)] = 'searchProperties.rollNumber'>
-      </div>       
-    </div>
-
-    </div>
+  <div class="progress" *ngIf="progress == true">
+    <div class="indeterminate"></div>
   </div>
-</div>
-  <div class="card" *ngIf="msgShow == true">
-    <h5 class="card-header"> Search Results</h5>
-    <div class="card-body text-center text-red">
-       <b> No search criteria provided. </b>
+    <div *ngIf ="searchResultshow == false" >
+    <h5> <b> Online Permits </b> </h5>
+    <div class="card" >
+      <h5 class="card-header"> Search Properties</h5>
+      <div class="card-body">
+          <div class="alert alert-primary" role="alert">
+              <p>
+                Search properties by property address, street or roll number. <br>
+                Please be advised that any building permits issued before  <b> January 1, 2000 </b> may not be available on this database.
+              </p>    
+          </div>
+      <div class="row form-panel mt-2">
+        <div class="col-12 col-md-4 ">
+          <label > Street Number</label>
+          <input type="text" class="form-control" placeholder="Enter street number" [(ngModel)] = 'searchProperties.streetNumber'>
+        </div>
+        <div class="col-12 col-md-4">
+          <label > Street Name</label>
+          <ng-select 
+            [items]="streets"
+            bindLabel="propStreet"
+            bindValue="propStreet"
+            placeholder="Select street name"
+            [(ngModel)]="searchProperties.streetName">
+          </ng-select>
+        </div>
+        <div class="col-12 col-md-4">
+            <label > Street Type</label>
+            <ng-select 
+              [items]="streetType"
+              bindLabel="description"
+              bindValue="id"
+              placeholder="Select street type"
+              [(ngModel)]="searchProperties.streetType">
+            </ng-select>
+        </div>    
+      </div>
+      <div class="row form-panel mt-2">
+          <div class="col-12 col-md-4">
+            <label > Direction</label>
+            <ng-select 
+              [items]="streetDirection"
+              bindLabel="addressDirection"
+              bindValue="addressDirection"
+              placeholder="Select street direction"
+              [(ngModel)]="searchProperties.streetDirection">
+            </ng-select>
+          </div>
+          <div class="col-12 col-md-4">
+            <label > Unit Number</label>
+            <input type="text" class="form-control" placeholder="Enter unit number" [(ngModel)] = 'searchProperties.unitNumber'>
+          </div>     
+      </div>
+      <hr>
+      <div class="row form-panel" style="margin-top:-5px">
+        <div class="col-12 col-md-4">
+            <label > Roll Number</label>
+            <input type="text" class="form-control" placeholder="Enter digits only" [(ngModel)] = 'searchProperties.rollNumber'>
+        </div>       
+      </div>
+
+      </div>
+    </div>
+
+    <div style="height:18px" >
+      <div class="text-center text-red" *ngIf="msgShow == true">
+          <b> {{msg}} </b>
+      </div>
     </div>
   </div>
 
@@ -101,23 +114,19 @@
                 </button>
               </div>
             </div>
-          </div>
-        
+          </div>        
         </div>
       </div>
     </div>
   </div>
-
-
-
-  <div class="mt-3" *ngIf ="searchResultshow == false && msgShow == false">
+    <div class="mt-1" *ngIf ="searchResultshow == false">
       <div class="button-panel">
           <button class="btn btn-primary btn-sm float-left" (click) = clear()>
             CLEAR
           </button>
           <button class="btn btn-primary btn-sm float-right">
-              <a (click) = searchProperty() > SEARCH </a>
-            </button>
+            <a (click) = searchProperty() > SEARCH </a>
+          </button>
       </div>
     </div>
     <div class="mt-3" *ngIf ="searchResultshow == true ">
@@ -125,22 +134,15 @@
           <button class="btn btn-primary btn-sm float-left" (click) = searchShow()>
             BACK 
           </button>
-          <!-- <button class="btn btn-primary btn-sm float-right">
-              <a routerLink="/site-plan-approvals" > PERMITS </a>
-          </button> -->
       </div>
     </div>
-    <div class="mt-3" *ngIf ="msgShow == true ">
+    <!-- <div class="mt-3" *ngIf ="msgShow == true ">
       <div class="button-panel">
           <button class="btn btn-primary btn-sm float-left" (click) = searchShow()>
             BACK 
           </button>
-          <!-- <button class="btn btn-primary btn-sm float-right">
-              <a routerLink="/site-plan-approvals" > PERMITS </a>
-          </button> -->
       </div>
-    </div>
-  
-</div>
+    </div> -->
+  </div>
   
   

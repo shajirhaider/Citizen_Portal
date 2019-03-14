@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,7 @@ import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-appr
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    NgSelectModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

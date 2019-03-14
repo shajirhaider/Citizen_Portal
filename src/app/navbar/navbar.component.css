@@ -1,8 +1,9 @@
 .navbar-container {
-    height: 70px;
+    height: 90px;
     width: 100%;
     background: white;
     z-index: 1000;
+    position: fixed;
     /* -webkit-box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
     -moz-box-shadow: 2px 8px 20px 4px rgba(212,212,212,1);
     box-shadow: 2px 8px 20px 4px rgba(212,212,212,1); */
@@ -30,3 +31,14 @@
 .navbar-nav li:hover{
 color: white;
 } */
+.header-bg {
+    background: #363636;
+    height: 23px;
+    width: 100%;
+    color: rgb(187, 187, 187);
+    font-size: 10px;
+    padding: 5px
+}
+.header-bg span{
+    margin: 0px 10px;
+}
