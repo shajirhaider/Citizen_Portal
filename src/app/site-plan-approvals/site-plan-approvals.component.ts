@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {HttpService} from '../services/http.service'
+import { LoaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-site-plan-approvals',
@@ -17,332 +20,31 @@ export class SitePlanApprovalsComponent implements OnInit {
     {text:"Date Application Issued/Approved"},
     {text:"Date File Closed"}
   ];
-
-  datas: Object = [
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"Restaurant",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"Fascia Sign",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"30 Days",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    { 
-      folderRSN:"4610",
-      folderNumber:"97 000362 000 00 DP",
-      folderTypeDesc:"Demolition Permit",
-      subCodeDesc:"0",
-      workCodeDesc:"Demolition",
-      statusDesc:"Closed",
-      indate:"1997-04-21",
-      issueDate:"1997-04-29",
-      finalDate:"1997-05-09"
-    },
-    
-  ]
-  constructor() { }
+  datas: Object = []
+  constructor(private httpService: HttpService, private loaderService: LoaderService, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.searchFolderByProperty()
   }
+
+  searchFolderByProperty(){
+    this.loaderService.display(true);
+    let url = 'searchFolderByProperty'
+    let body = {
+      "token":"amandaportal", 
+      "lid":"",
+      "propertyRSN": +this.route.snapshot.params["id"]
+    }
+    this.httpService.post(url,body)
+      .subscribe(
+        (response) =>{
+          this.datas = response["body"]
+          console.log(this.datas)
+
+          this.loaderService.display(false);
+        },
+        (error) => console.log(error)
+      );
+  } 
 
 }

@@ -20,18 +20,18 @@
                 </thead>
                 <tbody>
                   <tr  *ngFor="let data of datas"  >
-                    <td style="width:10">{{data.folderRSN}}</td>
-                    <td style="width:15%">{{data.folderNumber}}</td>
-                    <td style="width:20%">{{data.folderTypeDesc}}
+                    <td style="width:10; vertical-align:middle">{{data.propertyRSN}}</td>
+                    <td style="width:15%; vertical-align:middle">{{data.folderNumber}}</td>
+                    <td style="width:20%; vertical-align:middle">{{data.folderTypeDesc}}
                       <hr>
                       {{data.subCodeDesc}}
                       <hr>
                       {{data.workCodeDesc}}
                     </td>
-                    <td style="width:10%">{{data.statusDesc}}</td>
-                    <td style="width:16%">{{data.indate}}</td>
-                    <td style="width:13%">{{data.issueDate}}</td>
-                    <td style="width:13%">{{data.finalDate}}</td>
+                    <td style="width:10% ; vertical-align:middle">{{data.statusDesc}}</td>
+                    <td style="width:16%; vertical-align:middle">{{data.indate}}</td>
+                    <td style="width:13%; vertical-align:middle">{{data.issueDate}}</td>
+                    <td style="width:13%; vertical-align:middle">{{data.finalDate}}</td>
                   </tr>
                 </tbody>
               </table>
