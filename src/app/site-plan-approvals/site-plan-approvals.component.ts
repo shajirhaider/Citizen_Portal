@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {HttpService} from '../services/http.service'
 import { LoaderService } from '../services/loader.service';
-
+import { Store } from '@ngrx/store';
+import {SearchPropertiesI} from '../search-properties/store/search-properties.reducers';
 @Component({
   selector: 'app-site-plan-approvals',
   templateUrl: './site-plan-approvals.component.html',
@@ -21,7 +22,7 @@ export class SitePlanApprovalsComponent implements OnInit {
     {text:"Date File Closed"}
   ];
   datas: Object = []
-  constructor(private httpService: HttpService, private loaderService: LoaderService, private route: ActivatedRoute) {}
+  constructor(private httpService: HttpService, private loaderService: LoaderService, private route: ActivatedRoute,  private store: Store<{searchProperties:{ searchProperties : SearchPropertiesI}}>) {}
 
   ngOnInit() {
     this.searchFolderByProperty()

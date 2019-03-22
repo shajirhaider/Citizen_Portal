@@ -16,6 +16,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AgreeComponent } from './agree/agree.component';
 import { SearchPropertiesComponent } from './search-properties/search-properties.component';
 import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-approvals.component';
+import { StoreModule } from '@ngrx/store';
+// import { SearchPropertiesReducer } from './search-properties/store/search-properties.reducers';
+import { reducers } from './store/app.reducers';
 
 
 @NgModule({
@@ -37,6 +40,9 @@ import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-appr
     AppRoutingModule,
     MaterialModule,
     NgSelectModule,
+    StoreModule.forRoot(reducers)
+    
+  //  StoreModule.forRoot({searchProperties : SearchPropertiesReducer})
   ],
   providers: [HttpService, LoaderService],
   bootstrap: [AppComponent]

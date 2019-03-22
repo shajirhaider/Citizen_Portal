@@ -21,6 +21,10 @@
 }
 
 .result-body button{
-    width: 80px !important;
+    width: 90px !important;
     margin-top: 10px;
-  }
+}
+
+.table hr{
+    margin: 0px !important
+}

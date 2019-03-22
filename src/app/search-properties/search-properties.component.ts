@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from '../services/http.service'
 import { LoaderService } from '../services/loader.service';
-
+import {SearchPropertiesI} from './store/search-properties.reducers';
 import { FormGroup, FormControl } from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, from} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-
+import { Store } from '@ngrx/store';
+import * as SearchPropertiesAction from './store/search-properties.actions'
+import * as moment from 'moment'
 export interface StreetType {
   description: string;
   id:string
@@ -37,6 +39,7 @@ export class SearchPropertiesComponent implements OnInit {
     lid:new FormControl(''), 
     count:new FormControl('0')
   });
+  searchForm: Boolean = true;
   streetTypes : StreetType[];
   filteredStreetTypes: Observable<StreetType[]>;
   streetNames : StreetName[];
@@ -51,14 +54,56 @@ export class SearchPropertiesComponent implements OnInit {
   searchResultCount:number = 0;
   msg: String ="msg";
   searchResultMsg: String = '';
-    constructor(private httpService: HttpService, private loaderService: LoaderService) {}
+  approvalsShow: Boolean = false;
+  address: String = "";
+  headers: Object[]= [
+    {text:"RSN"  },
+    {text:"Folder#"  },
+    {text:"Type/Sub/Work"},
+    {text:"Status"},
+    {text:"Date Application Received"},
+    {text:"Date Application Issued/Approved"},
+    {text:"Date File Closed"}
+  ];
+  datas: Object[] = []
+    // constructor(private httpService: HttpService, private loaderService: LoaderService, private store: Store<{searchProperties:{ searchProperties : SearchPropertiesI, searchResults: Object[]}}>) {
+
+    // }
+
+    constructor(private httpService: HttpService, private loaderService: LoaderService, private store: Store<any[]>) {
+
+    }
 
   ngOnInit() {
     this.getValidStreetType()
     this.getValidStreetDirections()
     this.getValidStreet()
+
+    // this.store.select('searchProperties').subscribe(todos => {
+    //   console.log("result",todos.searchResults)
+    //   console.log("show",todos.searchResultshow)
+    //  //var prevFromState = todos.searchProperties.value
+    //  this.searchProperties.setValue(todos.searchProperties)
+
+    //  console.log("prop", this.searchProperties)
+
+    // })
+
+    // this.store.select('searchResults').subscribe(todos => { 
+    //   this.searchResults = todos.searchResults
+    //   console.log("result", this.searchResults)
+    // })
+    // this.store.select('searchResultShow').subscribe(todos => {
+    //   if(todos.searchResultShow == undefined){
+    //     this.searchResultshow = false
+    //   }else{
+    //     this.searchResultshow = todos.searchResultShow
+    //   }
+    //   console.log(todos.searchResultShow)
+    // })
+  //  console.log(this.store.select('searchProperties'))
   }
-  getValidStreetType(){
+  getValidStreetType(){ 
     let url = 'getValidStreetTypes'
     let body = {
       "token":"amandaportal", 
@@ -135,6 +180,8 @@ export class SearchPropertiesComponent implements OnInit {
     }else{
       this.loaderService.display(true);
       let url = 'searchProperty'
+
+  //  this.store.dispatch( new SearchPropertiesAction.AddSearchProperties(this.searchProperties.getRawValue()))
       let body = this.modifier(this.searchProperties)
       this.httpService.post(url,body)
         .subscribe(
@@ -142,6 +189,7 @@ export class SearchPropertiesComponent implements OnInit {
             console.log("res",response)
             if(response.status == 200){
               this.searchResultshow = true
+              this.searchForm = false;
               this.msgShow = false
               this.searchResults = response["body"]
               this.searchResultCount = this.searchResults.length
@@ -153,6 +201,8 @@ export class SearchPropertiesComponent implements OnInit {
               else{
                 this.searchResultMsg = "Found "+ this.searchResultCount+" result(s) for "+ this.searchProperties.value.rollNumber
               }
+             // this.store.dispatch( new SearchPropertiesAction.SearchResult(response["body"]))
+            //  this.store.dispatch( new SearchPropertiesAction.SearchResultShow(this.searchResultshow ))
               this.loaderService.display(false);
               console.log(this.searchResults)
             }           
@@ -161,6 +211,34 @@ export class SearchPropertiesComponent implements OnInit {
         );
    }
   }
+
+  searchFolderByProperty(rsn, house, street, city){
+    this.loaderService.display(true);
+    this.approvalsShow = true;
+    this.searchResultshow = false;
+    this.searchForm = false;
+    let url = 'searchFolderByProperty'
+    let body = {
+      "token":"amandaportal", 
+      "lid":"",
+      "propertyRSN": rsn
+    }
+    this.httpService.post(url,body)
+      .subscribe(
+        (response) =>{
+          this.address = house+" "+street+", "+city;
+          this.datas = response["body"]
+          // for(let i = this.datas.length; i > 0; i --){
+          //   this.datas[i]["indate"] = moment( this.datas[i]["indate"]).format("MM/DD/YYYY");
+          // }      
+          console.log(this.datas)
+
+          this.loaderService.display(false);
+        },
+        (error) => console.log(error)
+      );
+  } 
+
   modifier(body){
     let obj = body.value;
     if(this.searchProperties.value.streetType){
@@ -179,11 +257,32 @@ export class SearchPropertiesComponent implements OnInit {
 
   }
   clear(){
- //   this.searchProperties = {};
+     this.searchProperties = new FormGroup({
+      streetNumber: new FormControl(''),
+      streetName: new FormControl(''),
+      streetType: new FormControl(''),
+      streetDirection: new FormControl(''),
+      unitNumber: new FormControl(''),
+      rollNumber: new FormControl(''),
+      token: new FormControl('amandaportal'), 
+      lid:new FormControl(''), 
+      count:new FormControl('0')
+    });
+  }
+
+  backToRslt(){
+    this.searchResultshow = true;
+    this. approvalsShow = false;
+    this.datas = [];
+  }
+  newSearch(){
+    this.approvalsShow = false;
+    this.searchForm = true;
+    this.clear()
   }
   searchShow(){
-    this.searchResultshow = false,
-    this.msgShow = false
+    this.searchResultshow = false
+    this.searchForm = true
   }
   
   displayfilterStreetType(type?: StreetType): string | undefined {

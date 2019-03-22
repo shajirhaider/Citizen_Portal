@@ -4,7 +4,7 @@
   <div class="loading" *ngIf="progress == true">
     <div class="indeterminate"></div>
   </div>
-    <div *ngIf ="searchResultshow == false" >
+    <div *ngIf ="searchForm == true" >
     <h5> <b> Online Permits </b> </h5>
     <div class="card" >
       <h5 class="card-header"> Search Properties</h5>
@@ -18,109 +18,85 @@
 
       <form [formGroup] = "searchProperties">
         <div class="row form-panel mt-2">
-          <div class="col-12 col-md-4 ">
-            
-           <!--  <label > Street Number</label>
-            <input type="text" class="form-control" placeholder="Enter street number" [(ngModel)] = 'searchProperties.streetNumber'> -->
-            <mat-form-field class="col-12">
-                <input matInput placeholder="Street Number" formControlName = 'streetNumber'>
-              </mat-form-field>
+          <div class="col-12 col-md-4 "> 
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Street Number" formControlName = 'streetNumber'>
+            </mat-form-field>
           </div>
           <div class="col-12 col-md-4">
-            <!-- <label > Street Name</label>
-            <ng-select 
-              [items]="streets"
-              bindLabel="propStreet"
-              bindValue="propStreet"
-              placeholder="Select street name"
-              [(ngModel)]="searchProperties.streetName">
-            </ng-select> -->
-
-            <mat-form-field class="col-12">
-                <input type="text" placeholder="Street Name" aria-label="Street Name" matInput formControlName="streetName" [matAutocomplete]="streetName">
-                <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
-                  <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
-                    {{streetName.propStreet}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
+            <mat-form-field class="full-width">
+              <input type="text" placeholder="Street Name" aria-label="Street Name" matInput formControlName="streetName" [matAutocomplete]="streetName">
+              <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
+                <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
+                  {{streetName.propStreet}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
           <div class="col-12 col-md-4">
-             <!-- <label > Street Type</label>
-               <ng-select 
-                [items]="streetTypes"
-                bindLabel="description"
-                bindValue="id"
-                placeholder="Select street type"
-                [(ngModel)]="searchProperties.streetType">
-              </ng-select> -->
-                <mat-form-field class="col-12">
-                  <input type="text" placeholder="Street Type" aria-label="Street Type" matInput formControlName="streetType" [matAutocomplete]="streetType">
-                  <mat-autocomplete #streetType="matAutocomplete" [displayWith]="displayfilterStreetType">
-                    <mat-option *ngFor="let streetType of filteredStreetTypes | async" [value]="streetType">
-                      {{streetType.description}}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-              
+            <mat-form-field class="full-width">
+              <input type="text" placeholder="Street Type" aria-label="Street Type" matInput formControlName="streetType" [matAutocomplete]="streetType">
+              <mat-autocomplete #streetType="matAutocomplete" [displayWith]="displayfilterStreetType">
+                <mat-option *ngFor="let streetType of filteredStreetTypes | async" [value]="streetType">
+                  {{streetType.description}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>    
         </div>
         <div class="row form-panel mt-2">
-            <div class="col-12 col-md-4">
-             <!-- <label > Direction</label>
-               <ng-select 
-                [items]="streetDirection"
-                bindLabel="addressDirection"
-                bindValue="addressDirection"
-                placeholder="Select street direction"
-                [(ngModel)]="searchProperties.streetDirection">
-              </ng-select> -->
-
-              <mat-form-field class="col-12">
-                  <input type="text" placeholder="Direction" aria-label="Direction" matInput formControlName="streetDirection" [matAutocomplete]="streetDirection">
-                  <mat-autocomplete #streetDirection="matAutocomplete" [displayWith]="displayfilterDirection">
-                    <mat-option *ngFor="let streetDirection of filteredstreetDirection | async" [value]="streetDirection">
-                      {{streetDirection.addressDirection}}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
+          <div class="col-12 col-md-4">
+            <mat-form-field class="full-width">
+                <input type="text" placeholder="Direction" aria-label="Direction" matInput formControlName="streetDirection" [matAutocomplete]="streetDirection">
+                <mat-autocomplete #streetDirection="matAutocomplete" [displayWith]="displayfilterDirection">
+                  <mat-option *ngFor="let streetDirection of filteredstreetDirection | async" [value]="streetDirection">
+                    {{streetDirection.addressDirection}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
             </div>
-
             <div class="col-12 col-md-4">
-             <!-- <label > Unit Number</label>
-               <input type="text" class="form-control" placeholder="Enter unit number" [(ngModel)] = 'searchProperties.unitNumber'> -->
-            <mat-form-field class="col-12">
+              <mat-form-field class="full-width">
                 <input matInput placeholder="Unit Number" formControlName = 'unitNumber'>
               </mat-form-field>
-            </div>     
-        </div>
-        <hr>
-        <div class="row form-panel" style="margin-top:-5px">
-          <div class="col-12 col-md-4">
-            <!--  <label > Roll Number</label>  
-               <input type="text" class="form-control" placeholder="Enter digits only" [(ngModel)] = 'searchProperties.rollNumber'> -->
-                <mat-form-field class="col-12">
-                  <input matInput placeholder="Roll Number" formControlName = 'rollNumber'>
-                </mat-form-field>
-            </div>       
-        </div>
-      </form>
-
+            </div>  
+        </div>   
+      <!-- </div> -->
+      <hr>
+      <div class="row form-panel" style="margin-top:-5px">
+        <div class="col-12 col-md-4">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Roll Number" formControlName = 'rollNumber'>
+            <mat-hint align="start"><strong>Enter Digits Only</strong> </mat-hint>
+          </mat-form-field>
+        </div>       
       </div>
+      </form>
     </div>
+  </div>
+  <div style="height:18px" >
+    <div class="text-center text-red" *ngIf="msgShow == true">
+        <b> {{msg}} </b>
+    </div>
+  </div>
 
-    <div style="height:18px" >
-      <div class="text-center text-red" *ngIf="msgShow == true">
-          <b> {{msg}} </b>
+  <div class="mt-1" *ngIf ="searchResultshow == false">
+      <div class="button-panel">
+          <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
+            CLEAR
+          </button>
+          <button class="btn btn-primary btn-sm float-right ripple">
+            <a (click) = searchProperty() > SEARCH </a>
+          </button>
       </div>
     </div>
   </div>
 
-  <div *ngIf ="searchResultshow == true && msgShow == false">
+  <div *ngIf ="searchResultshow == true">
   <h5> {{searchResultMsg}}</h5>
     <div class="card"  >
       <h5 class="card-header"> Search Results</h5>
-      <div class="card-body" *ngFor= "let searchResult of searchResults">
+      <div class="card-body" *ngFor= "let searchResult of searchResults ">
         <div class="row">
           <div class="col-md-5 col-12">
             <div class="card">
@@ -143,11 +119,12 @@
           <div class="col-md-2 col-12">
             <div class="card">
               <div class="card-body result-body text-center">
-                <button class="btn btn-primary btn-sm">
-                    <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN ]" > PERMITS </a>
+                <button class="btn btn-primary ripple btn-sm" (click) = 'searchFolderByProperty(searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity)'>
+                  PERMITS
+                    <!-- <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN ]" >PERMITS</a> -->
                 </button>
-
-                <button class="btn btn-primary btn-sm">
+                
+                <button class="btn btn-primary ripple btn-sm">
                     <a> MAP </a>
                 </button>
               </div>
@@ -156,31 +133,60 @@
         </div>
       </div>
     </div>
+    <div class="button-panel mt-3">
+        <button  class="btn btn-primary btn-sm ripple float-left" (click) = searchShow()>
+          BACK 
+        </button>
+    </div>
   </div>
-    <div class="mt-1" *ngIf ="searchResultshow == false">
-      <div class="button-panel">
-          <button class="btn btn-primary btn-sm float-left" (click) = clear()>
-            CLEAR
-          </button>
-          <button class="btn btn-primary btn-sm float-right">
-            <a (click) = searchProperty() > SEARCH </a>
-          </button>
+<div class="" *ngIf = "approvalsShow == true">
+  <h4> <b> Online Permits </b> </h4> 
+  <div class="card mb-2" >
+    <h5 class="card-header">Property Address</h5>
+    <div class="card-body">
+      {{address}}
+    </div>
+  </div>
+  <div class="card" >
+      <h5 class="card-header">Permits / Site Plan Approvals</h5>
+      <div class="card-body">
+          <table class="table table-hover table-sm table-responsive-sm table-striped">
+              <thead class="bg-primary text-white ">
+                <tr>
+                  <th *ngFor="let header of headers" >{{header.text}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  *ngFor="let data of datas"  >
+                  <td style="width:10; vertical-align:middle">{{data.propertyRSN}}</td>
+                  <td style="width:15%; vertical-align:middle">{{data.folderNumber}}</td>
+                  <td style="width:20%; vertical-align:middle">{{data.folderTypeDesc}}
+                    <hr>  
+                    {{data.subCodeDesc}}
+                    <hr>
+                    {{data.workCodeDesc}}
+                  </td>
+                  <td style="width:10% ; vertical-align:middle">{{data.statusDesc}}</td>
+                  <td style="width:16%; vertical-align:middle">{{data.indate}}</td>
+                  <td style="width:13%; vertical-align:middle">{{data.issueDate}}</td>
+                  <td style="width:13%; vertical-align:middle">{{data.finalDate}}</td>
+                </tr>
+              </tbody>
+            </table>
       </div>
     </div>
-    <div class="mt-3" *ngIf ="searchResultshow == true ">
-      <div class="button-panel">
-          <button class="btn btn-primary btn-sm float-left" (click) = searchShow()>
-            BACK 
+  <div class="mt-3">
+    <div class="button-panel">
+        <button class="btn btn-primary ripple btn-sm float-left" (click) = "backToRslt()">
+          BACK TO SEARCH RESULT
+        </button>
+        <button class="btn btn-primary ripple btn-sm float-right" (click) = "newSearch()">
+            <a routerLink="/search-properties" > NEW SEARCH </a>
           </button>
-      </div>
     </div>
-    <!-- <div class="mt-3" *ngIf ="msgShow == true ">
-      <div class="button-panel">
-          <button class="btn btn-primary btn-sm float-left" (click) = searchShow()>
-            BACK 
-          </button>
-      </div>
-    </div> -->
   </div>
+</div>
+  
+</div>
   
   
