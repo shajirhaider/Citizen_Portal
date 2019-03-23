@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpService} from '../services/http.service'
+import {HttpService} from '../services/http.service';
+import {DateUtilService} from '../services/date.service';
 import { LoaderService } from '../services/loader.service';
 import {SearchPropertiesI} from './store/search-properties.reducers';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -7,7 +8,6 @@ import {Observable, from} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as SearchPropertiesAction from './store/search-properties.actions'
-import * as moment from 'moment'
 export interface StreetType {
   description: string;
   id:string
@@ -65,14 +65,8 @@ export class SearchPropertiesComponent implements OnInit {
     {text:"Date Application Issued/Approved"},
     {text:"Date File Closed"}
   ];
-  datas: Object[] = []
-    // constructor(private httpService: HttpService, private loaderService: LoaderService, private store: Store<{searchProperties:{ searchProperties : SearchPropertiesI, searchResults: Object[]}}>) {
-
-    // }
-
-    constructor(private httpService: HttpService, private loaderService: LoaderService, private store: Store<any[]>) {
-
-    }
+  datas: any[] = []
+  constructor(private httpService: HttpService, private dateUtilService: DateUtilService, private loaderService: LoaderService, private store: Store<any[]>) {}
 
   ngOnInit() {
     this.getValidStreetType()
@@ -228,10 +222,18 @@ export class SearchPropertiesComponent implements OnInit {
         (response) =>{
           this.address = house+" "+street+", "+city;
           this.datas = response["body"]
-          // for(let i = this.datas.length; i > 0; i --){
-          //   this.datas[i]["indate"] = moment( this.datas[i]["indate"]).format("MM/DD/YYYY");
-          // }      
           console.log(this.datas)
+          for(let i = this.datas.length-1; i >=0; i --){
+            if(this.datas[i].indate){
+              this.datas[i].indate = this.dateUtilService.approvalDate(this.datas[i].indate)
+            }  
+            if(this.datas[i].issueDate){
+              this.datas[i].issueDate = this.dateUtilService.approvalDate(this.datas[i].issueDate)
+            }
+            if(this.datas[i].finalDate){
+              this.datas[i].finalDate = this.dateUtilService.approvalDate(this.datas[i].finalDate)
+            }
+          }      
 
           this.loaderService.display(false);
         },
@@ -257,17 +259,12 @@ export class SearchPropertiesComponent implements OnInit {
 
   }
   clear(){
-     this.searchProperties = new FormGroup({
-      streetNumber: new FormControl(''),
-      streetName: new FormControl(''),
-      streetType: new FormControl(''),
-      streetDirection: new FormControl(''),
-      unitNumber: new FormControl(''),
-      rollNumber: new FormControl(''),
-      token: new FormControl('amandaportal'), 
-      lid:new FormControl(''), 
-      count:new FormControl('0')
-    });
+    this.searchProperties.get('streetNumber').setValue("")
+    this.searchProperties.get('streetName').setValue("")
+    this.searchProperties.get('streetType').setValue("")
+    this.searchProperties.get('streetDirection').setValue("")
+    this.searchProperties.get('unitNumber').setValue("")
+    this.searchProperties.get('rollNumber').setValue("")
   }
 
   backToRslt(){

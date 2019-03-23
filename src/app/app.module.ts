@@ -9,6 +9,7 @@ import { MaterialModule } from './app-material.module';
 import { from } from 'rxjs';
 import { HttpService} from './services/http.service'
 import { LoaderService } from './services/loader.service';
+import { DateUtilService } from './services/date.service';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
@@ -44,7 +45,7 @@ import { reducers } from './store/app.reducers';
     
   //  StoreModule.forRoot({searchProperties : SearchPropertiesReducer})
   ],
-  providers: [HttpService, LoaderService],
+  providers: [HttpService, LoaderService, DateUtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
