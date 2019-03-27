@@ -7,7 +7,7 @@ import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-appr
 const routes: Routes = [
   { path: '', component: AgreeComponent},
   { path: 'search-properties', component: SearchPropertiesComponent},
-  { path: 'site-plan-approvals/:id', component: SitePlanApprovalsComponent}
+  { path: 'site-plan-approvals/:rsn/:house/:street/:city', component: SitePlanApprovalsComponent}
 
 ];
 

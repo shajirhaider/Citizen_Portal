@@ -23,14 +23,13 @@
           <b> I Disagree</b>
         </label>
       </div>
-    
-      </span>
-  </div>
+    </span>
 
-  <div class="button-panel" *ngIf = "btnShow == true">
-    <button class="btn btn-primary btn-sm ripple float-right">
-      <a routerLink="search-properties" > CONTINUE</a>
-    </button>
+    <div class="button-panel" *ngIf = "btnShow == true">
+      <button class="btn btn-primary btn-sm ripple float-right mr-2" (click)=localStorageDataRemove()>
+        CONTINUE
+      </button>
+    </div>
   </div>
 
 

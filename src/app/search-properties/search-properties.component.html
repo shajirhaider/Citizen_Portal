@@ -119,13 +119,15 @@
           <div class="col-md-2 col-12">
             <div class="card">
               <div class="card-body result-body text-center">
-                <button class="btn btn-primary ripple btn-sm" (click) = 'searchFolderByProperty(searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity)'>
-                  PERMITS
-                    <!-- <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN ]" >PERMITS</a> -->
+                <button class="btn btn-primary ripple btn-sm">
+
+                <!-- <button class="btn btn-primary ripple btn-sm" (click) = 'searchFolderByProperty(searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity)'> -->
+                  <!-- PERMITS -->
+                  <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >PERMITS</a>
                 </button>
                 
                 <button class="btn btn-primary ripple btn-sm">
-                    <a> MAP </a>
+                  <a> MAP </a>
                 </button>
               </div>
             </div>
@@ -139,53 +141,6 @@
         </button>
     </div>
   </div>
-<div class="" *ngIf = "approvalsShow == true">
-  <h4> <b> Online Permits </b> </h4> 
-  <div class="card mb-2" >
-    <h5 class="card-header">Property Address</h5>
-    <div class="card-body">
-     <h5> {{address}} </h5>
-    </div>
-  </div>
-  <div class="card" >
-      <h5 class="card-header">Permits / Site Plan Approvals</h5>
-      <div class="card-body">
-          <table class="table table-hover table-sm table-responsive-sm table-striped">
-              <thead class="bg-primary text-white ">
-                <tr>
-                  <th *ngFor="let header of headers" >{{header.text}}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr  *ngFor="let data of datas"  >
-                  <td style="width:10; vertical-align:middle">{{data.propertyRSN}}</td>
-                  <td style="width:15%; vertical-align:middle">{{data.folderNumber}}</td>
-                  <td style="width:20%; vertical-align:middle">{{data.folderTypeDesc}}
-                    <hr>  
-                    {{data.subCodeDesc}}
-                    <hr>
-                    {{data.workCodeDesc}}
-                  </td>
-                  <td style="width:10% ; vertical-align:middle">{{data.statusDesc}}</td>
-                  <td style="width:16%; vertical-align:middle">{{data.indate}}</td>
-                  <td style="width:13%; vertical-align:middle">{{data.issueDate}}</td>
-                  <td style="width:13%; vertical-align:middle">{{data.finalDate}}</td>
-                </tr>
-              </tbody>
-            </table>
-      </div>
-    </div>
-  <div class="mt-3">
-    <div class="button-panel">
-        <button class="btn btn-primary ripple btn-sm float-left" (click) = "backToRslt()">
-          BACK TO SEARCH RESULT
-        </button>
-        <button class="btn btn-primary ripple btn-sm float-right" (click) = "newSearch()">
-            <a routerLink="/search-properties" > NEW SEARCH </a>
-        </button>
-    </div>
-  </div>
-</div>
   
 </div>
   

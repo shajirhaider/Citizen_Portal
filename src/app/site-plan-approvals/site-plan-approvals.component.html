@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                   <tr  *ngFor="let data of datas"  >
-                    <td style="width:10; vertical-align:middle">{{data.propertyRSN}}</td>
+                    <td style="width:10; vertical-align:middle">{{data.folderRSN}}</td>
                     <td style="width:15%; vertical-align:middle">{{data.folderNumber}}</td>
                     <td style="width:20%; vertical-align:middle">{{data.folderTypeDesc}}
                       <hr>
@@ -40,8 +40,9 @@
           <button class="btn btn-primary ripple btn-sm float-left">
             <a routerLink="/search-properties" >  BACK TO SEARCH RESULT </a>
           </button>
-          <button class="btn btn-primary ripple btn-sm float-right">
-              <a routerLink="/search-properties" > NEW SEARCH </a>
+          <button class="btn btn-primary ripple btn-sm float-right" (click) = 'localStorageDataChange()'>
+              <!-- <a routerLink="/search-properties" > NEW SEARCH </a> -->
+              NEW SEARCH
             </button>
       </div>
       </div>
