@@ -28,10 +28,15 @@ body {
 .card-header {
   padding: .4rem .7rem !important
 }
-.btn:focus,.btn:active {
+
+button:focus, button:active {
   outline: none !important;
   box-shadow: none !important;
 }
+/* .btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+} */
 .full-width {
   width: 100%;
 }

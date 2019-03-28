@@ -1,3 +1,15 @@
 .table hr{
     margin: 1px !important
 }
+
+.type-sub-work-Bg{
+  border: 1px solid #DFDFDF; 
+  padding: 1px; 
+  border-radius:2px; 
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+.type-sub-work-Bg:last-child{
+  margin-bottom: 2px;
+}
