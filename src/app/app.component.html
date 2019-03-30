@@ -9,7 +9,9 @@
                 <app-sidebar></app-sidebar>
               </div>
               <div class="col-10 col-md-10 main-content">
-                  <router-outlet></router-outlet>
+                  <router-outlet>
+                    <span *ngIf="showLoader" class="loading"></span>
+                  </router-outlet>
               </div>
 
         </div>

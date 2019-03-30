@@ -1,148 +1,157 @@
 
   <div class="">
 
-  <div class="progress" *ngIf="progress == true">
+  <div class="loading" *ngIf="progress == true">
     <div class="indeterminate"></div>
   </div>
-    <div *ngIf ="searchResultshow == false" >
+    <div *ngIf ="searchForm == true" >
     <h5> <b> Online Permits </b> </h5>
     <div class="card" >
       <h5 class="card-header"> Search Properties</h5>
       <div class="card-body">
-          <div class="alert alert-primary" role="alert">
-              <p>
-                Search properties by property address, street or roll number. <br>
-                Please be advised that any building permits issued before  <b> January 1, 2000 </b> may not be available on this database.
-              </p>    
-          </div>
-      <div class="row form-panel mt-2">
-        <div class="col-12 col-md-4 ">
-          <label > Street Number</label>
-          <input type="text" class="form-control" placeholder="Enter street number" [(ngModel)] = 'searchProperties.streetNumber'>
+        <div class="alert alert-primary" role="alert">
+          <p>
+            Search properties by property address, street or roll number. <br>
+            Please be advised that any building permits issued before  <b> January 1, 2000 </b> may not be available on this database.
+          </p>    
         </div>
-        <div class="col-12 col-md-4">
-          <label > Street Name</label>
-          <ng-select 
-            [items]="streets"
-            bindLabel="propStreet"
-            bindValue="propStreet"
-            placeholder="Select street name"
-            [(ngModel)]="searchProperties.streetName">
-          </ng-select>
-        </div>
-        <div class="col-12 col-md-4">
-            <label > Street Type</label>
-            <ng-select 
-              [items]="streetType"
-              bindLabel="description"
-              bindValue="id"
-              placeholder="Select street type"
-              [(ngModel)]="searchProperties.streetType">
-            </ng-select>
-        </div>    
-      </div>
-      <div class="row form-panel mt-2">
-          <div class="col-12 col-md-4">
-            <label > Direction</label>
-            <ng-select 
-              [items]="streetDirection"
-              bindLabel="addressDirection"
-              bindValue="addressDirection"
-              placeholder="Select street direction"
-              [(ngModel)]="searchProperties.streetDirection">
-            </ng-select>
+
+      <form [formGroup] = "searchProperties">
+        <div class="row form-panel mt-2">
+          <div class="col-12 col-md-4 "> 
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Street Number" formControlName = 'streetNumber'>
+            </mat-form-field>
           </div>
           <div class="col-12 col-md-4">
-            <label > Unit Number</label>
-            <input type="text" class="form-control" placeholder="Enter unit number" [(ngModel)] = 'searchProperties.unitNumber'>
-          </div>     
-      </div>
+            <mat-form-field class="full-width">
+              <input type="text" placeholder="Street Name" aria-label="Street Name" matInput formControlName="streetName" [matAutocomplete]="streetName">
+              <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
+                <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
+                  {{streetName.propStreet}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-4">
+            <mat-form-field class="full-width">
+              <input type="text" placeholder="Street Type" aria-label="Street Type" matInput formControlName="streetType" [matAutocomplete]="streetType">
+              <mat-autocomplete #streetType="matAutocomplete" [displayWith]="displayfilterStreetType">
+                <mat-option *ngFor="let streetType of filteredStreetTypes | async" [value]="streetType">
+                  {{streetType.description}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>    
+        </div>
+        <div class="row form-panel mt-2">
+          <div class="col-12 col-md-4">
+            <mat-form-field class="full-width">
+                <input type="text" placeholder="Direction" aria-label="Direction" matInput formControlName="streetDirection" [matAutocomplete]="streetDirection">
+                <mat-autocomplete #streetDirection="matAutocomplete" [displayWith]="displayfilterDirection">
+                  <mat-option *ngFor="let streetDirection of filteredstreetDirection | async" [value]="streetDirection">
+                    {{streetDirection.addressDirection}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Unit Number" formControlName = 'unitNumber'>
+              </mat-form-field>
+            </div>  
+        </div>   
+      <!-- </div> -->
       <hr>
       <div class="row form-panel" style="margin-top:-5px">
         <div class="col-12 col-md-4">
-            <label > Roll Number</label>
-            <input type="text" class="form-control" placeholder="Enter digits only" [(ngModel)] = 'searchProperties.rollNumber'>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Roll Number" formControlName = 'rollNumber'>
+            <mat-hint align="start"><strong>Enter Digits Only</strong> </mat-hint>
+          </mat-form-field>
         </div>       
       </div>
-
-      </div>
+      </form>
     </div>
-
-    <div style="height:18px" >
-      <div class="text-center text-red" *ngIf="msgShow == true">
-          <b> {{msg}} </b>
-      </div>
+  </div>
+  <div style="height:18px" >
+    <div class="text-center text-red" *ngIf="msgShow == true">
+        <b> {{msg}} </b>
     </div>
   </div>
 
-  <div *ngIf ="searchResultshow == true && msgShow == false">
-  <h5> 
-    <b *ngIf = "searchProperties.streetName && !searchProperties.streetNumber"> Found {{searchResultCount}} result(s) for {{searchProperties.streetName}} </b> 
-    <b *ngIf = "searchProperties.streetName && searchProperties.streetNumber"> Found {{searchResultCount}} result(s) for {{searchProperties.streetNumber + addSpacer + searchProperties.streetName}} </b> 
-  </h5>
-    <div class="card"  >
-      <h5 class="card-header"> Search Results</h5>
-      <div class="card-body" *ngFor= "let searchResult of searchResults">
-        <div class="row">
-          <div class="col-md-5 col-12">
-            <div class="card">
-              <div class="card-body result-body">
-                  <p> Address: <b>{{ searchResult.propHouse+ addSpacer + searchResult.propStreet+ addComma +addSpacer +searchResult.propCity }}</b></p>
-                  <p> Roll Number: <b>{{searchResult.propertyRoll}}</b></p>
-                  <p> Legal Description: <b>{{searchResult.legalDesc}}</b></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-5 col-12">
-            <div class="card">
-              <div class="card-body result-body">
-                  <p> Area (acres): <b>{{searchResult.propArea}}</b></p>
-                  <p> Frontage (feet): <b>{{searchResult.propFrontage}}</b></p>
-                  <p> Depth (feet): <b>{{searchResult.propDepth}}</b></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 col-12">
-            <div class="card">
-              <div class="card-body result-body text-center">
-                <button class="btn btn-primary btn-sm">
-                    <a routerLink="/site-plan-approvals" > PERMITS </a>
-                </button>
-
-                <button class="btn btn-primary btn-sm">
-                    <a> MAP </a>
-                </button>
-              </div>
-            </div>
-          </div>        
-        </div>
-      </div>
-    </div>
-  </div>
-    <div class="mt-1" *ngIf ="searchResultshow == false">
+  <div class="mt-1" *ngIf ="searchResultshow == false">
       <div class="button-panel">
-          <button class="btn btn-primary btn-sm float-left" (click) = clear()>
+          <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
             CLEAR
           </button>
-          <button class="btn btn-primary btn-sm float-right">
+          <button class="btn btn-primary btn-sm float-right ripple">
             <a (click) = searchProperty() > SEARCH </a>
           </button>
       </div>
     </div>
-    <div class="mt-3" *ngIf ="searchResultshow == true ">
-      <div class="button-panel">
-          <button class="btn btn-primary btn-sm float-left" (click) = searchShow()>
-            BACK 
-          </button>
-      </div>
-    </div>
-    <!-- <div class="mt-3" *ngIf ="msgShow == true ">
-      <div class="button-panel">
-          <button class="btn btn-primary btn-sm float-left" (click) = searchShow()>
-            BACK 
-          </button>
-      </div>
-    </div> -->
   </div>
+
+  <div *ngIf ="searchResultshow == true">
+  <h5> {{searchResultMsg}}</h5>
+    <div class="card"  >
+      <h5 class="card-header"> Search Results</h5>
+      <div class="mat-elevation-z1 result-table">
+        <table mat-table [dataSource]="dataSource" class="col-12">
+          <ng-container matColumnDef="propertyRoll" >
+            <td mat-cell *matCellDef="let searchResult" style="width:60%">
+              <div class="card m-1">
+                  <div class=" result-body">
+                      <p> Address: <b>{{ searchResult.propHouse+ addSpacer + searchResult.propStreet+ addComma +addSpacer +searchResult.propCity }}</b></p>
+                      <p> Roll Number: <b>{{searchResult.propertyRoll}}</b></p>
+                      <p> Legal Description: <b>{{searchResult.legalDesc}}</b></p>
+                  </div>
+                </div>  
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="propArea"  >
+            <td mat-cell *matCellDef="let searchResult"  style="width:20%"> 
+              <div class="card m-1">
+                <div class="result-body">
+                    <p> Area (acres): <b>{{searchResult.propArea}}</b></p>
+                    <p> Frontage (feet): <b>{{searchResult.propFrontage}}</b></p>
+                    <p> Depth (feet): <b>{{searchResult.propDepth}}</b></p>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="folderTypeDesc">
+            <td mat-cell *matCellDef="let searchResult"  style="width:20%" > 
+                <div class="card m-1">
+                  <div class=" result-body text-center">
+                    <button class="btn btn-primary ripple btn-sm">    
+                      <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >PERMITS</a>
+                    </button>
+                    <br>
+                    <button class="btn btn-primary ripple btn-sm">
+                      <a> MAP </a>
+                    </button>
+                  </div>
+                </div>  
+              
+            </td>
+          </ng-container>
+      
+          <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr> -->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" >
+          </tr>
+        </table>
+        
+        <mat-paginator #paginator (page)="pageEvent($event)" [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
+      </div>        
+    </div>
+    <div class="button-panel mt-3">
+        <button  class="btn btn-primary btn-sm ripple float-left" (click) = searchShow()>
+          BACK TO SEARCH PROPERTIES
+        </button>
+    </div>
+  </div>
+  
+</div>
   
   

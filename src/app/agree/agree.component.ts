@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -8,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgreeComponent implements OnInit {
  btnShow: Boolean = false;
- agree:Boolean = false;
-  constructor() { }
+ agree:Boolean;
+ 
+ constructor( private router: Router) {}
 
   ngOnInit() {
   }
 
+  localStorageDataRemove(){
+    localStorage.removeItem("citizen_searchRslt")
+    localStorage.removeItem("citizen_searchProp")
+    localStorage.removeItem("citizen_search_rslt_msg")
+    this.router.navigate(['search-properties']);
+
+  }
 }
