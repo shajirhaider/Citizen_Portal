@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { UrlService } from '../services/url.service';
 import { LoaderService } from '../services/loader.service';
@@ -6,6 +6,7 @@ import { LocalStorageService } from '../services/local-storage.service'
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 export interface StreetType {
   description: string;
@@ -47,13 +48,19 @@ export class SearchPropertiesComponent implements OnInit {
   filteredstreetDirection: Observable<StreetDirection[]>;
   searchResultshow: boolean = false;
   msgShow: boolean = false;
-  searchResults: Object[] = [];
+  searchResults: any[] = [];
   addSpacer = " ";
   addComma= ","
   searchResultCount:number = 0;
   msg: String ="msg";
   searchResultMsg: string = '';
   address: String = "";
+
+  displayedColumns: string[] = ['propertyRoll', 'propArea', 'folderTypeDesc'];
+  dataSource: MatTableDataSource<any[]>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private httpService: HttpService, private url: UrlService, private loaderService: LoaderService, private storage : LocalStorageService) {
 
     if(this.storage.getItem("citizen_searchProp")){
@@ -65,6 +72,10 @@ export class SearchPropertiesComponent implements OnInit {
       this.searchResultshow = true
       this.searchForm = false
       this.searchResults = JSON.parse(this.storage.getItem("citizen_searchRslt"))
+      this.dataSource = new MatTableDataSource(this.searchResults)
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator
+      }, 200);
       this.searchResultMsg = this.storage.getItem("citizen_search_rslt_msg")
     }
   }
@@ -74,6 +85,9 @@ export class SearchPropertiesComponent implements OnInit {
     this.getValidStreetDirections()
     this.getValidStreet()
   }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator
+  // }
   getValidStreetType(){ 
     let body = {
       "token":"amandaportal", 
@@ -168,7 +182,13 @@ export class SearchPropertiesComponent implements OnInit {
                 this.searchResultMsg = "Found "+ this.searchResultCount+" result(s) for "+ this.searchProperties.value.rollNumber
               }
               this.storage.setItem("citizen_search_rslt_msg", this.searchResultMsg)
+              this.dataSource = new MatTableDataSource(this.searchResults)
+              setTimeout(() => {
+                this.dataSource.paginator = this.paginator
+              }, 200);
               this.loaderService.display(false);
+             
+             
               console.log(this.searchResults)
             }           
           },
@@ -176,6 +196,12 @@ export class SearchPropertiesComponent implements OnInit {
         );
    }
   }
+
+
+  pageEvent(event){
+    //it will run everytime you change paginator
+      this.dataSource.paginator = this.paginator;
+     }
   modifier(body){
     let a = JSON.stringify(body.value)
     this.storage.setItem("citizen_searchProp", a)

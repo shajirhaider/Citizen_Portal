@@ -11,9 +11,14 @@
 }
 
 .result-body{
-    min-height: 130px;
-    display: table-cell;
-    vertical-align: middle
+    min-height: 120px;
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center; */
+    display: table-cell; 
+    vertical-align: middle;
+    padding:5px;
   }
   
 .result-body p {
@@ -27,4 +32,16 @@
 
 .table hr{
     margin: 0px !important
+}
+
+.result-table td.mat-cell{
+    border-style: none !important;
+}
+
+td.mat-cell:last-of-type{
+    padding-right: 5px !important
+}
+td.mat-cell:first-of-type{
+    padding-left: 5px !important;
+
 }

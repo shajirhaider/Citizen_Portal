@@ -15,7 +15,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 export class SitePlanApprovalsComponent implements OnInit{
 
   address: string;
-  datas: any [] =[]
+  datas: any [] =[];
   displayedColumns: string[] = ['folderRSN', 'folderNumber', 'folderTypeDesc', 'statusDesc', 'indate', 'issueDate', 'finalDate'];
   dataSource: MatTableDataSource<any[]>;
 
@@ -66,7 +66,9 @@ export class SitePlanApprovalsComponent implements OnInit{
         (error) => console.log(error)
       );
   } 
- 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   localStorageDataChange(){
     this.storage.removeItem("citizen_searchRslt")
     this.storage.removeItem("citizen_searchProp")
