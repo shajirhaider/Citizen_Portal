@@ -85,9 +85,6 @@ export class SearchPropertiesComponent implements OnInit {
     this.getValidStreetDirections()
     this.getValidStreet()
   }
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator
-  // }
   getValidStreetType(){ 
     let body = {
       "token":"amandaportal", 
@@ -144,7 +141,7 @@ export class SearchPropertiesComponent implements OnInit {
             map(name => name ? this._filterStreetName(name) : this.streetNames.slice())
           );
           console.log(this.streetNames)
-        this.loaderService.display(false);
+       this.loaderService.display(false);
         },
         (error) => console.log(error)
     );

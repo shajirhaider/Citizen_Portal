@@ -1,6 +1,6 @@
 
 <div class="">
-    <h4> <b> Online Permits </b> </h4> 
+    <h5> <b> Online Permits </b> </h5> 
     <div class="card mb-2" >
       <h5 class="card-header">Property Address</h5>
       <div class="card-body">
@@ -8,10 +8,18 @@
       </div>
     </div>
     <div class="card" >
-        <div class="card-header ">
-         <span style="font-size:20px; vertical-align:middle"> Permits / Site Plan Approvals</span>
-          <input class="form-control col-md-5 col-12 float-right" (keyup)="applyFilter($event.target.value)" placeholder="Search">     
-        </div>
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-7 col-12">
+              <span style="font-size:20px; vertical-align:middle"> Permits / Site Plan Approvals</span>         
+
+            </div>
+            <div class="col-md-5 col-12">
+                <input class="form-control float-right" (keyup)="applyFilter($event.target.value)" placeholder="Search">     
+            </div>
+          </div>
+  
+       </div>
         <div class="card-body"> 
           <div class="mat-elevation-z1">
             <table mat-table [dataSource]="dataSource" matSort>
