@@ -61,7 +61,6 @@
               </mat-form-field>
             </div>  
         </div>   
-      <!-- </div> -->
       <hr>
       <div class="row form-panel" style="margin-top:-5px">
         <div class="col-12 col-md-4">
@@ -97,31 +96,33 @@
     <div class="card"  >
       <h5 class="card-header"> Search Results</h5>
       <div class="mat-elevation-z1 result-table">
-        <table mat-table [dataSource]="dataSource" class="col-12">
-          <ng-container matColumnDef="propertyRoll" >
-            <td mat-cell *matCellDef="let searchResult" style="width:60%">
+          <div class="responsive_table">
+<!--         
+          <table mat-table [dataSource]="dataSource" class="col-12" >
+          <ng-container matColumnDef="propertyRoll"   class="col-md-7 col-12" >
+            <td mat-cell *matCellDef="let searchResult"  >
               <div class="card m-1">
-                  <div class=" result-body">
-                      <p> Address: <b>{{ searchResult.propHouse+ addSpacer + searchResult.propStreet+ addComma +addSpacer +searchResult.propCity }}</b></p>
-                      <p> Roll Number: <b>{{searchResult.propertyRoll}}</b></p>
-                      <p> Legal Description: <b>{{searchResult.legalDesc}}</b></p>
-                  </div>
-                </div>  
+                <div class=" result-body">
+                    <p> <i class="fas fa-home"></i> <span> Address: </span> <b>{{ searchResult.propHouse+ addSpacer + searchResult.propStreet+ addComma +addSpacer +searchResult.propCity }}</b></p>
+                    <p> <i class="fas fa-sort-numeric-up"></i> <span> Roll Number: </span> <b>{{searchResult.propertyRoll}}</b></p>
+                    <p> <i class="fas fa-book-open"></i> <span> Legal Description: </span> <b>{{searchResult.legalDesc}}</b></p>
+                </div>
+              </div>  
             </td>
           </ng-container>
-          <ng-container matColumnDef="propArea"  >
-            <td mat-cell *matCellDef="let searchResult"  style="width:20%"> 
+          <ng-container matColumnDef="propArea"  class="col-md-3 col-12" >
+            <td mat-cell *matCellDef="let searchResult" > 
               <div class="card m-1">
                 <div class="result-body">
-                    <p> Area (acres): <b>{{searchResult.propArea}}</b></p>
-                    <p> Frontage (feet): <b>{{searchResult.propFrontage}}</b></p>
-                    <p> Depth (feet): <b>{{searchResult.propDepth}}</b></p>
+                    <p> <i class="fas fa-vector-square"></i> <span> Area (acres):</span> <b>{{searchResult.propArea}}</b></p>
+                    <p> <i class="fas fa-campground"></i> <span> Frontage (feet): </span> <b>{{searchResult.propFrontage}}</b></p>
+                    <p> <i class="fas fa-ruler-combined"></i> <span> Depth (feet): </span> <b>{{searchResult.propDepth}}</b></p>
                 </div>
               </div>
             </td>
           </ng-container>
-          <ng-container matColumnDef="folderTypeDesc">
-            <td mat-cell *matCellDef="let searchResult"  style="width:20%" > 
+          <ng-container matColumnDef="folderTypeDesc"  class=" col-md-2 col-12">
+            <td mat-cell *matCellDef="let searchResult"  > 
                 <div class="card m-1">
                   <div class=" result-body text-center">
                     <button class="btn btn-primary ripple btn-sm">    
@@ -136,13 +137,79 @@
               
             </td>
           </ng-container>
-      
-          <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr> -->
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" >
           </tr>
-        </table>
-        
+        </table> -->
+        <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" class="result-table">
+          <ng-container matColumnDef="propertyRoll" >
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let searchResult" class="col-md-7 col-12"> 
+              <div class="card m-1 full-width" >
+                <div class=" result-body">
+                    <p > 
+                      <span> <i class="fas fa-home"></i> <span > Address: </span> </span>
+                      <span >
+                        <b>{{ searchResult.propHouse+ addSpacer + searchResult.propStreet+ addComma +addSpacer +searchResult.propCity }}</b>
+                      </span>
+                    </p>
+                    <p> 
+                      <span> <i class="fas fa-sort-numeric-up"></i> <span > Roll Number: </span> </span>
+                      <span > <b>{{searchResult.propertyRoll}}</b> </span>
+                    </p>
+                    <p > 
+                      <span > <i class="fas fa-book-open"></i> <span > Legal Description: </span> </span> 
+                      <span > <b>{{searchResult.legalDesc}}</b></span>
+                    </p>
+                </div>
+              </div> 
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="propArea" >
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let searchResult" class="col-md-3 col-12"> 
+              <div class="card m-1 full-width">
+                <div class="result-body">
+                    <p>  
+                      <span> <i class="fas fa-vector-square"></i> <span> Area (acres): </span> </span> 
+                      <span><b>{{searchResult.propArea}}</b> </span> 
+                    </p>
+                    <p> 
+                      <span> <i class="fas fa-campground"></i> <span> Frontage (feet): </span> </span>
+                      <span> <b>{{searchResult.propFrontage}}</b> </span>
+                    </p>
+
+                    <p> 
+                      <span> <i class="fas fa-ruler-combined"></i> <span> Depth (feet): </span> </span>
+                      <span> <b>{{searchResult.propDepth}}</b> </span>
+                    </p>
+                </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="folderTypeDesc" >
+            <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+            <mat-cell *matCellDef="let searchResult" class="col-md-2 col-12"> 
+              <div class="card m-1 full-width">
+                <div class=" result-body text-center">
+                  <button class="btn btn-primary ripple btn-sm">    
+                    <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >PERMITS</a>
+                  </button>
+                  <br>
+                  <button class="btn btn-primary ripple btn-sm">
+                    <a> MAP </a>
+                  </button>
+                </div>
+              </div> 
+            </mat-cell>
+          </ng-container>
+      
+          <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> -->
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      
+      </div>  
         <mat-paginator #paginator (page)="pageEvent($event)" [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
+      
       </div>        
     </div>
     <div class="button-panel mt-3">
