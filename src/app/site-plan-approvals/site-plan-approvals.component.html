@@ -22,7 +22,7 @@
        </div>
         <div class="card-body"> 
           <div class="mat-elevation-z1">
-            <table mat-table [dataSource]="dataSource" matSort>
+            <!-- <table mat-table [dataSource]="dataSource" matSort>
               <ng-container matColumnDef="folderRSN" >
                 <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%"> RSN </th>
                 <td mat-cell *matCellDef="let row" style="width:10%"> {{row.folderRSN}} </td>
@@ -66,8 +66,80 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;" >
               </tr>
-            </table>
+            </table> -->
             
+        <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" class="result-table" matSort>
+          <ng-container matColumnDef="folderRSN" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-1"> RSN </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="col-md-1 col-12"> 
+              <span class="mobile-label">RSN:</span>
+              {{element.folderRSN}} 
+            </mat-cell>
+          </ng-container>  
+          <ng-container matColumnDef="folderNumber">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-2"> Folder# </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="col-md-2 col-12"> 
+              <span class="mobile-label">Folder#:</span>
+              {{element.folderNumber}} 
+            </mat-cell>
+          </ng-container>  
+          <ng-container matColumnDef="folderTypeDesc">
+            <mat-header-cell *matHeaderCellDef mat-sort-header  class="col-md-3" > 
+             <span class="header-name-type"> Type </span> /
+             <span class="header-name-sub"> Sub </span> /
+             <span class="header-name-work"> Work </span>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"  class="col-md-3 col-12"> 
+              <span class="mobile-label">Type/ Sub/ Work</span> 
+
+              <!-- {{row.folderTypeDesc}} <br>
+              {{row.subCodeDesc}} <br>
+              {{row.workCodeDesc}} -->
+              <span  class="type-sub-work-Bg">
+              <p class="row-name-type">
+                  {{row.folderTypeDesc}}
+              </p>
+              <p class="row-name-sub">
+                {{row.subCodeDesc}}
+              </p>
+              <p class="row-name-work">
+                {{row.workCodeDesc}}
+              </p>
+            </span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="statusDesc" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-1"> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="col-md-1 col-12" > 
+              <span class="mobile-label">Status:</span>
+              {{element.statusDesc}} 
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="indate" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header  class="width-14"> Date Application Received </mat-header-cell>
+            <mat-cell *matCellDef="let element"  class="width-14 " > 
+              <span class="mobile-label">Date Application Received:</span>
+              {{element.indate}} 
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="issueDate" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header  class="width-14"> Date Application Issued /Approved </mat-header-cell>
+            <mat-cell *matCellDef="let element"  class="width-14" > 
+              <span class="mobile-label">Date Application Issued /Approved:</span>
+              {{element.issueDate}} 
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="finalDate" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header  class="width-14"> Date File Closed </mat-header-cell>
+            <mat-cell *matCellDef="let element"  class="width-14" > 
+              <span class="mobile-label">Date File Closed:</span>
+              {{element.finalDate}} 
+            </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
             <mat-paginator [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
           </div>
         </div>

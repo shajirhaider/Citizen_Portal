@@ -7,7 +7,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-
 import {CdkTableModule} from '@angular/cdk/table';
 
 export interface StreetType {

@@ -96,50 +96,7 @@
     <div class="card"  >
       <h5 class="card-header"> Search Results</h5>
       <div class="mat-elevation-z1 result-table">
-          <div class="responsive_table">
-<!--         
-          <table mat-table [dataSource]="dataSource" class="col-12" >
-          <ng-container matColumnDef="propertyRoll"   class="col-md-7 col-12" >
-            <td mat-cell *matCellDef="let searchResult"  >
-              <div class="card m-1">
-                <div class=" result-body">
-                    <p> <i class="fas fa-home"></i> <span> Address: </span> <b>{{ searchResult.propHouse+ addSpacer + searchResult.propStreet+ addComma +addSpacer +searchResult.propCity }}</b></p>
-                    <p> <i class="fas fa-sort-numeric-up"></i> <span> Roll Number: </span> <b>{{searchResult.propertyRoll}}</b></p>
-                    <p> <i class="fas fa-book-open"></i> <span> Legal Description: </span> <b>{{searchResult.legalDesc}}</b></p>
-                </div>
-              </div>  
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="propArea"  class="col-md-3 col-12" >
-            <td mat-cell *matCellDef="let searchResult" > 
-              <div class="card m-1">
-                <div class="result-body">
-                    <p> <i class="fas fa-vector-square"></i> <span> Area (acres):</span> <b>{{searchResult.propArea}}</b></p>
-                    <p> <i class="fas fa-campground"></i> <span> Frontage (feet): </span> <b>{{searchResult.propFrontage}}</b></p>
-                    <p> <i class="fas fa-ruler-combined"></i> <span> Depth (feet): </span> <b>{{searchResult.propDepth}}</b></p>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="folderTypeDesc"  class=" col-md-2 col-12">
-            <td mat-cell *matCellDef="let searchResult"  > 
-                <div class="card m-1">
-                  <div class=" result-body text-center">
-                    <button class="btn btn-primary ripple btn-sm">    
-                      <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >PERMITS</a>
-                    </button>
-                    <br>
-                    <button class="btn btn-primary ripple btn-sm">
-                      <a> MAP </a>
-                    </button>
-                  </div>
-                </div>  
-              
-            </td>
-          </ng-container>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" >
-          </tr>
-        </table> -->
+        <div class="responsive_table">
         <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" class="result-table">
           <ng-container matColumnDef="propertyRoll" >
             <mat-header-cell *matHeaderCellDef></mat-header-cell>

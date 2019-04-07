@@ -1,15 +1,140 @@
-.table hr{
-    margin: 1px !important
+.mat-row:nth-child(odd) .card {
+  background-color:#eee;
+}
+.mat-row:nth-child(even) .card {
+  background-color:#fff;
 }
 
-.type-sub-work-Bg{
-  border: 1px solid #DFDFDF; 
-  padding: 1px; 
+.type-sub-work-Bg p{
+  /* border: 1px solid #DFDFDF;  */
+  /* padding: 1px;  */
   border-radius:2px; 
-  margin-right: 10px;
-  margin-top: 2px;
+  /* margin-right: 10px;
+  margin-top: 2px; */
+}
+.type-sub-work-Bg{
+  width: 100% !important;
 }
 
 .type-sub-work-Bg:last-child{
   margin-bottom: 2px;
+}
+
+.header-name-type{
+  color: green
+}
+.row-name-type{
+  background: green;
+  color: white;
+  padding: 1px 2px;
+}
+.header-name-sub{
+  color: blue
+}
+
+.row-name-sub{
+  background: blue;
+  color: white;
+  padding: 1px 2px;
+}
+.header-name-work{
+  color: red
+}
+
+.row-name-work{
+  background: red;
+  color: white;
+  padding: 1px 2px;
+}
+
+.type-sub-work-Bg .row-name-sub{
+  margin-left: 15px !important;
+}
+.type-sub-work-Bg .row-name-work{
+  margin-left: 30px !important
+}
+
+/* .example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+} */
+.mat-table {
+  overflow: auto;
+  /* max-height: 500px; */
+}
+
+.mobile-label {
+  display: none;
+}
+.width-14{
+  width: 12%
+}
+ @media(max-width: 768px) {
+  .mobile-label {
+    width: 150px;
+    display: inline-block;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 5px;
+  }
+  .mat-row { 
+    flex-direction: column;
+    align-items: start;
+    padding: 5px 5px;
+    min-height: auto !important;
+    border-style: solid !important;
+}
+  .mat-header-row {
+    display: none;
+  }
+
+  .width-14{
+    width: 100% !important;
+  }
+
+  .result-table [class*="col-"] {
+    padding: 0px ;
+  }
+
+  .type-sub-work-Bg{
+    width: 100% !important;
+  }
+  [class*="col-"] {
+    width: 100% !important
+  }
+} 
+
+@media(max-width: 600px) {
+  /* .mobile-label {
+    width: 70px;
+    display: inline-block;
+    font-weight: bold;
+  } */
+  .mobile-label{
+    display: none
+  }
+  .mat-row { 
+    flex-direction: column;
+    align-items: start;
+    padding: 5px 5px;
+    min-height: auto !important;
+    border-style: solid !important;
+}
+  .mat-header-row {
+    display: none;
+  }
+
+  .width-14{
+    width: 100% !important;
+  }
+
+  .result-table [class*="col-"] {
+    padding: 0px ;
+  }
+
+  .type-sub-work-Bg{
+    width: 100% !important;
+  }
 }

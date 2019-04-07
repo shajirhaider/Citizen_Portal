@@ -6,6 +6,8 @@ import { UrlService } from '../services/url.service';
 import { LocalStorageService } from '../services/local-storage.service'
 import { DateUtilService } from '../services/date.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import {CdkTableModule} from '@angular/cdk/table';
+
 
 @Component({
   selector: 'app-site-plan-approvals',
