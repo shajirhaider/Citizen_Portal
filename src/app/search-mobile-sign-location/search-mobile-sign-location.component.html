@@ -1,0 +1,130 @@
+
+  <div class="">
+
+    <div class="loading" *ngIf="progress == true">
+      <div class="indeterminate"></div>
+    </div>
+      <div *ngIf ="searchForm == true" >
+      <h5> <b> Online Permits </b> </h5>
+      <div class="card" >
+        <h5 class="card-header">Search Mobile Sign Locations</h5>
+        <div class="card-body">
+          <div class="alert alert-primary" role="alert">
+            <p>
+                Enter all or some of the fields below to search for the property.
+            </p>    
+          </div>
+  
+        <form [formGroup] = "searchProperties">
+          <div class="row form-panel mt-2">
+            <div class="col-12 col-md-3 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Street Number" formControlName = 'streetNumber'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                <input type="text" placeholder="Street Name" aria-label="Street Name" matInput formControlName="streetName" [matAutocomplete]="streetName">
+                <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
+                  <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
+                    {{streetName.propStreet}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                <input type="text" placeholder="Street Type" aria-label="Street Type" matInput formControlName="streetType" [matAutocomplete]="streetType">
+                <mat-autocomplete #streetType="matAutocomplete" [displayWith]="displayfilterStreetType">
+                  <mat-option *ngFor="let streetType of filteredStreetTypes | async" [value]="streetType">
+                    {{streetType.description}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>  
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                  <input type="text" placeholder="Direction" aria-label="Direction" matInput formControlName="streetDirection" [matAutocomplete]="streetDirection">
+                  <mat-autocomplete #streetDirection="matAutocomplete" [displayWith]="displayfilterDirection">
+                    <mat-option *ngFor="let streetDirection of filteredstreetDirection | async" [value]="streetDirection">
+                      {{streetDirection.addressDirection}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+            </div>   
+          </div>  
+        <hr>
+        <div class="row form-panel" style="margin-top:-5px">
+          <div class="col-12 col-md-3">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Postal Code" formControlName = 'postalCode'>
+              <mat-hint align="start"><strong>Enter Digits Only</strong> </mat-hint>
+            </mat-form-field>
+          </div>       
+        </div>
+        </form>
+      </div>
+    </div>
+    <div style="height:18px" >
+      <div class="text-center text-red" *ngIf="msgShow == true">
+          <b> {{msg}} </b>
+      </div>
+    </div>
+  
+    <div class="mt-1" *ngIf ="searchResultshow == false">
+        <div class="button-panel">
+            <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
+              CLEAR
+            </button>
+            <button class="btn btn-primary btn-sm float-right ripple">
+              <a (click) = searchProperty() > SEARCH FOR ADDRESS </a>
+            </button>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf ="searchResultshow == true">
+    <h5> {{searchResultMsg}}</h5>
+      <div class="card"  >
+        <h5 class="card-header"> Search Results</h5>
+        <div class="mat-elevation-z1">    
+          <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" class="result-table" matSort>
+            <ng-container matColumnDef="streetAddress" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-1"> Street Address</mat-header-cell>
+              <mat-cell *matCellDef="let element" class="col-md-1 col-12"> 
+                <span class="mobile-label">Street Address:</span>
+                {{element.folderRSN}} 
+              </mat-cell>
+            </ng-container>  
+            <ng-container matColumnDef="location">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-2"> Location </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="col-md-2 col-12"> 
+                <span class="mobile-label">Location:</span>
+                {{element.folderNumber}} 
+              </mat-cell>
+            </ng-container> 
+            <ng-container matColumnDef="statusDesc" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-1"> Available After </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="col-md-1 col-12" > 
+                <span class="mobile-label">Available After:</span>
+                {{element.statusDesc}} 
+              </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
+        </div>       
+      </div>
+      <div class="button-panel mt-3">
+          <button  class="btn btn-primary btn-sm ripple float-left" (click) = searchShow()>
+            <span class="button-mobile-label"><i class="fas fa-arrow-left"></i></span>
+            <span class="button-label"> Previous</span> 
+          </button>
+      </div>
+    </div>
+    
+  </div>
+    
+    

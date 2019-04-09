@@ -20,6 +20,7 @@ import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-appr
 import { StoreModule } from '@ngrx/store';
 // import { SearchPropertiesReducer } from './search-properties/store/search-properties.reducers';
 import { reducers } from './store/app.reducers';
+import { SearchMobileSignLocationComponent } from './search-mobile-sign-location/search-mobile-sign-location.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { reducers } from './store/app.reducers';
     SidebarComponent,
     AgreeComponent,
     SearchPropertiesComponent,
-    SitePlanApprovalsComponent
+    SitePlanApprovalsComponent,
+    SearchMobileSignLocationComponent
   ],
   imports: [
     BrowserModule,
