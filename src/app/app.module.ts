@@ -21,6 +21,7 @@ import { StoreModule } from '@ngrx/store';
 // import { SearchPropertiesReducer } from './search-properties/store/search-properties.reducers';
 import { reducers } from './store/app.reducers';
 import { SearchMobileSignLocationComponent } from './search-mobile-sign-location/search-mobile-sign-location.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SearchMobileSignLocationComponent } from './search-mobile-sign-location
     AgreeComponent,
     SearchPropertiesComponent,
     SitePlanApprovalsComponent,
-    SearchMobileSignLocationComponent
+    SearchMobileSignLocationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

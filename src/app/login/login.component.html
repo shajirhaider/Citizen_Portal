@@ -1,0 +1,32 @@
+
+  <div>
+    <h5> <b> Online Permits </b> </h5>
+    <div class="card" >
+      <h5 class="card-header"> Login</h5>
+      <div class="card-body">  
+        <form [formGroup] = "loginForm">
+          <div class="row form-panel mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Username" formControlName = 'username'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Password" formControlName = 'password'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="">
+                <div class="button-panel">
+                    <button class="btn btn-primary btn-sm float-left ripple" (click)="authenticatePublicUser()">
+                      LOGIN
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
