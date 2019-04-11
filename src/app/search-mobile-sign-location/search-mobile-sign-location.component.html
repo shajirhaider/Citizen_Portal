@@ -76,8 +76,8 @@
             <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
               CLEAR
             </button>
-            <button class="btn btn-primary btn-sm float-right ripple">
-              <a (click) = searchProperty() > SEARCH FOR ADDRESS </a>
+            <button class="btn btn-primary btn-sm float-right ripple" (click) = searchMobileSign()>
+               SEARCH FOR ADDRESS 
             </button>
         </div>
       </div>
@@ -89,25 +89,25 @@
         <h5 class="card-header"> Search Results</h5>
         <div class="mat-elevation-z1">    
           <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" class="result-table" matSort>
-            <ng-container matColumnDef="streetAddress" >
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-1"> Street Address</mat-header-cell>
-              <mat-cell *matCellDef="let element" class="col-md-1 col-12"> 
+            <ng-container matColumnDef="address" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-4"> Street Address</mat-header-cell>
+              <mat-cell *matCellDef="let element" class="col-md-4 col-12"> 
                 <span class="mobile-label">Street Address:</span>
-                {{element.folderRSN}} 
+                {{element.address}} 
               </mat-cell>
             </ng-container>  
             <ng-container matColumnDef="location">
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-2"> Location </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="col-md-2 col-12"> 
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-4"> Location </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="col-md-4 col-12"> 
                 <span class="mobile-label">Location:</span>
-                {{element.folderNumber}} 
+                {{element.location}} 
               </mat-cell>
             </ng-container> 
-            <ng-container matColumnDef="statusDesc" >
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-1"> Available After </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="col-md-1 col-12" > 
+            <ng-container matColumnDef="availableAfter" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-4"> Available After </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="col-md-4 col-12" > 
                 <span class="mobile-label">Available After:</span>
-                {{element.statusDesc}} 
+                {{element.validAfter}} 
               </mat-cell>
             </ng-container>
         

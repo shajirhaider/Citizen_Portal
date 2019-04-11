@@ -54,7 +54,7 @@ export class SearchMobileSignLocationComponent implements OnInit {
   searchResultMsg: string = '';
   address: String = "";
 
-  displayedColumns: string[] = ['streetAddress', 'location', 'availableAfter'];
+  displayedColumns: string[] = ['address', 'location', 'availableAfter'];
   dataSource: MatTableDataSource<any[]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -62,21 +62,22 @@ export class SearchMobileSignLocationComponent implements OnInit {
 
   constructor(private httpService: HttpService, private url: UrlService, private loaderService: LoaderService, private storage : LocalStorageService) {
 
-    // if(this.storage.getItem("citizen_searchProp")){
-    //   let a = JSON.parse(this.storage.getItem("citizen_searchProp"))
-    //   this.searchProperties.setValue(a)
-    // }
+    if(this.storage.getItem("Search_Mobile_Sign")){
+      let a = JSON.parse(this.storage.getItem("Search_Mobile_Sign"))
+      this.searchProperties.setValue(a)
+    }
 
-    // if(this.storage.getItem("citizen_searchRslt")){
-    //   this.searchResultshow = true
-    //   this.searchForm = false
-    //   this.searchResults = JSON.parse(this.storage.getItem("citizen_searchRslt"))
-    //   this.dataSource = new MatTableDataSource(this.searchResults)
-    //   setTimeout(() => {
-    //     this.dataSource.paginator = this.paginator
-    //   }, 200);
-    //   this.searchResultMsg = this.storage.getItem("citizen_search_rslt_msg")
-    // }
+    if(this.storage.getItem("citizen_search_mobile_rslt")){
+      this.searchResultshow = true
+      this.searchForm = false
+      this.searchResults = JSON.parse(this.storage.getItem("citizen_search_mobile_rslt"))
+      this.dataSource = new MatTableDataSource(this.searchResults)
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator
+        this.dataSource.sort = this.sort
+      }, 200);
+      this.searchResultMsg = this.storage.getItem("citizen_search_mobile_rslt_msg")
+    }
   }
 
   ngOnInit() {
@@ -145,20 +146,17 @@ export class SearchMobileSignLocationComponent implements OnInit {
         (error) => console.log(error)
     );
   }
-  searchProperty(){
+  searchMobileSign(){
     if( !this.searchProperties.value.streetName){
       this.msgShow = true;
       this.searchResultshow = false;
       this.msg = "Street Name is mandatory."
 
-    }else if(this.searchProperties.value.streetName){
-      this.msgShow = true;
-      this.searchResultshow = false;
-      this.msg = "Please enter either Street Name "
-    }else{
+    }
+    else{
       this.loaderService.display(true);
       let body = this.modifier(this.searchProperties)
-      this.httpService.post(this.url.Search_Property, body)
+      this.httpService.post(this.url.Search_Mobile_Sign, body)
         .subscribe(
           (response) =>{
             console.log("res",response)
@@ -167,7 +165,7 @@ export class SearchMobileSignLocationComponent implements OnInit {
               this.searchForm = false;
               this.msgShow = false
               this.searchResults = response["body"]
-              this.storage.setItem("citizen_searchRslt", JSON.stringify(this.searchResults))
+              this.storage.setItem("citizen_search_mobile_rslt", JSON.stringify(this.searchResults))
               this.searchResultCount = this.searchResults.length
               if(this.searchProperties.value.streetName && this. searchProperties.value.streetNumber){
                 this.searchResultMsg = "Found "+ this.searchResultCount+" result(s) for "+ this.searchProperties.value.streetNumber + " " + this.searchProperties.value.streetName
@@ -177,15 +175,13 @@ export class SearchMobileSignLocationComponent implements OnInit {
               else{
                 this.searchResultMsg = "Found "+ this.searchResultCount+" result(s) for "+ this.searchProperties.value.postalCode
               }
-              this.storage.setItem("citizen_search_rslt_msg", this.searchResultMsg)
+              this.storage.setItem("citizen_search_mobile_rslt_msg", this.searchResultMsg)
               this.dataSource = new MatTableDataSource(this.searchResults)
               setTimeout(() => {
                 this.dataSource.paginator = this.paginator
                 this.dataSource.sort = this.sort
               }, 200);
               this.loaderService.display(false);
-             
-             
               console.log(this.searchResults)
             }           
           },
@@ -196,7 +192,7 @@ export class SearchMobileSignLocationComponent implements OnInit {
 
   modifier(body){
     let a = JSON.stringify(body.value)
-    this.storage.setItem("citizen_searchProp", a)
+    this.storage.setItem("Search_Mobile_Sign", a)
     let obj = body.value;
     if(this.searchProperties.value.streetType){
       obj.streetType = obj.streetType.id;
@@ -219,13 +215,13 @@ export class SearchMobileSignLocationComponent implements OnInit {
     this.searchProperties.get('streetType').setValue("")
     this.searchProperties.get('streetDirection').setValue("")
     this.searchProperties.get('postalCode').setValue("")
-    this.storage.removeItem("citizen_searchProp")
+    this.storage.removeItem("Search_Mobile_Sign")
   }
   searchShow(){
     this.searchResultshow = false
     this.searchForm = true
-    this.storage.removeItem("citizen_searchRslt")
-    this.storage.removeItem("citizen_search_rslt_msg")
+    this.storage.removeItem("citizen_search_mobile_rslt")
+    this.storage.removeItem("citizen_search_mobile_rslt_msg")
   }
   displayfilterStreetType(type?: StreetType): string | undefined {
     return type ? type.description : undefined;
