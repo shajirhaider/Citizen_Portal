@@ -13,7 +13,7 @@ export class AgreeComponent implements OnInit {
  constructor( private router: Router) {}
 
   ngOnInit() {
-  }ymbol: string;
+  }
   
   localStorageDataRemove(){
     localStorage.removeItem("citizen_searchRslt")

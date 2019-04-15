@@ -36,9 +36,6 @@ export class SearchPropertiesComponent implements OnInit {
     streetDirection: new FormControl(''),
     unitNumber: new FormControl(''),
     rollNumber: new FormControl(''),
-    token: new FormControl('amandaportal'), 
-    lid:new FormControl(''), 
-    count:new FormControl('0')
   });
   searchForm: Boolean = true;
   streetTypes : StreetType[];
@@ -86,10 +83,17 @@ export class SearchPropertiesComponent implements OnInit {
     this.getValidStreetDirections()
     this.getValidStreet()
   }
-  getValidStreetType(){ 
+  getValidStreetType(){     
+    let lid = "";
+    if(this.storage.getItem("lid")){
+      lid = this.storage.getItem("lid")
+    }
+    else{
+      lid = ""
+    }
     let body = {
       "token":"amandaportal", 
-      "lid":""
+      "lid":lid
     }
     this.httpService.post(this.url.Get_Valid_Street_Types, body)
       .subscribe(
@@ -107,9 +111,16 @@ export class SearchPropertiesComponent implements OnInit {
       );
   }
   getValidStreetDirections(){
+    let lid = "";
+    if(this.storage.getItem("lid")){
+      lid = this.storage.getItem("lid")
+    }
+    else{
+      lid = ""
+    }
     let body = {
       "token":"amandaportal", 
-      "lid":""
+      "lid":lid
     }
     this.httpService.post(this.url.Get_Valid_Street_Directions, body)
       .subscribe(
@@ -126,11 +137,19 @@ export class SearchPropertiesComponent implements OnInit {
       );
   } 
   getValidStreet(){
-    this.loaderService.display(true);
+    this.loaderService.display(true);   
+    let lid = "";
+    if(this.storage.getItem("lid")){
+      lid = this.storage.getItem("lid")
+    }
+    else{
+      lid = ""
+    }
     let body = {
       "token":"amandaportal", 
-      "lid":""
+      "lid":lid
     }
+    console.log("body",body)
     this.httpService.post(this.url.Get_Valid_Street, body)
       .subscribe(
         (response) =>{
@@ -195,11 +214,6 @@ export class SearchPropertiesComponent implements OnInit {
    }
   }
 
-
-  pageEvent(event){
-    //it will run everytime you change paginator
-      this.dataSource.paginator = this.paginator;
-     }
   modifier(body){
     let a = JSON.stringify(body.value)
     this.storage.setItem("citizen_searchProp", a)
@@ -215,6 +229,14 @@ export class SearchPropertiesComponent implements OnInit {
     if(this.searchProperties.value.streetName){
       obj.streetName = obj.streetName.propStreet;
     }
+
+    if (this.storage.getItem("lid")){
+      obj.lid= this.storage.getItem("lid");
+    } else{
+      obj.lid = ""
+    }
+    obj.token = 'amandaportal';
+    obj.count='0';
     console.log(obj)
     return obj;
 

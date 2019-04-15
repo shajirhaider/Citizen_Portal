@@ -6,19 +6,23 @@
   }
   
   .vertical-menu a {
-    background-color: rgb(255, 255, 255);
-    color: black;
+    color: rgb(51, 114, 233);
     display: block;
     padding: 12px;
     text-decoration: none;
+    cursor: pointer
   }
   
   .vertical-menu a:hover {
-    background-color: rgb(20, 20, 20);
+    background-color: #3895ec;
     color: white
   }
   
   .vertical-menu a.active {
-    background-color: rgb(56, 149, 236);
+    background-color: #3895ec;
     color: white;
+  }
+
+  .child-menu{
+    background-color: rgb(233, 233, 233);
   }

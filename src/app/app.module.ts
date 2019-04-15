@@ -9,6 +9,7 @@ import { MaterialModule } from './app-material.module';
 import { from } from 'rxjs';
 import { HttpService} from './services/http.service'
 import { LoaderService } from './services/loader.service';
+import { AuthService } from './services/auth.service';
 import { DateUtilService } from './services/date.service';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,7 +19,6 @@ import { AgreeComponent } from './agree/agree.component';
 import { SearchPropertiesComponent } from './search-properties/search-properties.component';
 import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-approvals.component';
 import { StoreModule } from '@ngrx/store';
-// import { SearchPropertiesReducer } from './search-properties/store/search-properties.reducers';
 import { reducers } from './store/app.reducers';
 import { SearchMobileSignLocationComponent } from './search-mobile-sign-location/search-mobile-sign-location.component';
 import { LoginComponent } from './login/login.component';
@@ -46,10 +46,8 @@ import { LoginComponent } from './login/login.component';
     MaterialModule,
     NgSelectModule,
     StoreModule.forRoot(reducers)
-    
-  //  StoreModule.forRoot({searchProperties : SearchPropertiesReducer})
   ],
-  providers: [HttpService, LoaderService, DateUtilService],
+  providers: [HttpService, LoaderService, DateUtilService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

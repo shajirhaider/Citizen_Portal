@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../services/http.service';
 import { UrlService } from '../services/url.service';
 import { LocalStorageService } from '../services/local-storage.service'
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +19,25 @@ export class LoginComponent implements OnInit {
     token: new FormControl('amandaportal')
 });
 
-constructor(private httpService: HttpService, private url: UrlService, private storage : LocalStorageService) {}
-  ngOnInit() {
-  }
+constructor(
+            private httpService: HttpService, 
+            private url: UrlService, 
+            private storage : LocalStorageService, 
+            private authService: AuthService,
+            private router: Router
+          ) {}
+  ngOnInit() {}
 
   authenticatePublicUser(){
     this.httpService.post(this.url.LOGIN, this.loginForm.value)
       .subscribe(
-        (response) =>{
-          this.storage.setItem('lid', response.body.lid)
-          console.log(response)
+        (response) =>{   
+          if(response.status == 200){
+            this.storage.setItem('lid', response.body.lid)
+            this.authService.display(true);
+            this.router.navigate(['/']);
+            
+          }
         },
         (error) => console.log(error)
       );

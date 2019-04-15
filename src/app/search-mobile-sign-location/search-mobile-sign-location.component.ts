@@ -34,10 +34,7 @@ export class SearchMobileSignLocationComponent implements OnInit {
     streetName: new FormControl(''),
     streetType: new FormControl(''),
     streetDirection: new FormControl(''),
-    postalCode: new FormControl(''),
-    token: new FormControl('amandaportal'), 
-    lid:new FormControl(''), 
-    count:new FormControl('0')
+    postalCode: new FormControl('')
   });
   searchForm: Boolean = true;
   streetTypes : StreetType[];
@@ -86,9 +83,16 @@ export class SearchMobileSignLocationComponent implements OnInit {
     this.getValidStreet()
   }
   getValidStreetType(){ 
+    let lid = "";
+    if(this.storage.getItem("lid")){
+      lid = this.storage.getItem("lid")
+    }
+    else{
+      lid = ""
+    }
     let body = {
       "token":"amandaportal", 
-      "lid":""
+      "lid":lid
     }
     this.httpService.post(this.url.Get_Valid_Street_Types, body)
       .subscribe(
@@ -106,9 +110,16 @@ export class SearchMobileSignLocationComponent implements OnInit {
       );
   }
   getValidStreetDirections(){
+    let lid = "";
+    if(this.storage.getItem("lid")){
+      lid = this.storage.getItem("lid")
+    }
+    else{
+      lid = ""
+    }
     let body = {
       "token":"amandaportal", 
-      "lid":""
+      "lid":lid
     }
     this.httpService.post(this.url.Get_Valid_Street_Directions, body)
       .subscribe(
@@ -126,9 +137,16 @@ export class SearchMobileSignLocationComponent implements OnInit {
   } 
   getValidStreet(){
     this.loaderService.display(true);
+    let lid = "";
+    if(this.storage.getItem("lid")){
+      lid = this.storage.getItem("lid")
+    }
+    else{
+      lid = ""
+    }
     let body = {
       "token":"amandaportal", 
-      "lid":""
+      "lid":lid
     }
     this.httpService.post(this.url.Get_Valid_Street, body)
       .subscribe(
@@ -205,6 +223,13 @@ export class SearchMobileSignLocationComponent implements OnInit {
     if(this.searchProperties.value.streetName){
       obj.streetName = obj.streetName.propStreet;
     }
+    if (this.storage.getItem("lid")){
+      obj.lid= this.storage.getItem("lid");
+    } else{
+      obj.lid = ""
+    }
+    obj.token = 'amandaportal';
+    obj.count='0';
     console.log(obj)
     return obj;
 

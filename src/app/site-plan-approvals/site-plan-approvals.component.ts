@@ -38,9 +38,16 @@ export class SitePlanApprovalsComponent implements OnInit{
 
   searchFolderByProperty(){
     this.loaderService.display(true);
+    let lid = "";
+    if(this.storage.getItem("lid")){
+      lid = this.storage.getItem("lid")
+    }
+    else{
+      lid = ""
+    }
     let body = {
       "token":"amandaportal", 
-      "lid":"",
+      "lid":lid,
       "propertyRSN": +this.route.snapshot.params["rsn"]
     }
     this.httpService.post(this.url.Search_Folder_By_Property,body)
