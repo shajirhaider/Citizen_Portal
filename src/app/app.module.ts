@@ -21,7 +21,9 @@ import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-appr
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducers';
 import { SearchMobileSignLocationComponent } from './search-mobile-sign-location/search-mobile-sign-location.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.component';
+import { UpdatePasswordComponent } from './auth/update-password/update-password.component';
+import { UpdatePersonalInfoComponent } from './auth/update-personal-info/update-personal-info.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { LoginComponent } from './login/login.component';
     SearchPropertiesComponent,
     SitePlanApprovalsComponent,
     SearchMobileSignLocationComponent,
-    LoginComponent
+    LoginComponent,
+    UpdatePasswordComponent,
+    UpdatePersonalInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,174 @@
+
+  <div class="">
+
+    <div class="loading" *ngIf="progress == true">
+      <div class="indeterminate"></div>
+    </div>
+      <div >
+      <h5> <b> Online Permits </b> </h5>
+      <div class="card" >
+        <h5 class="card-header">Search Mobile Sign Locations</h5>
+        <div class="card-body">
+  
+        <form [formGroup] = "updateInfo">
+          <div class="row form-panel mt-2">
+            <div class="col-12">
+              <div class="card-header alert-primary">
+                  Address
+              </div>
+            </div>
+            <div class="col-12 col-md-12 mt-2 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Addr Prefix" formControlName = 'addrPrefix'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Street Number" formControlName = 'addrHouse'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                <input type="text" placeholder="Street Name" aria-label="Street Name" matInput formControlName="addrStreet" [matAutocomplete]="streetName">
+                <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
+                  <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
+                    {{streetName.propStreet}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                <input type="text" placeholder="Unit Type" aria-label="Street Name" matInput formControlName="addrUnitType" [matAutocomplete]="unitType">
+                <mat-autocomplete #unitType="matAutocomplete" [displayWith]="displayfilterUnitType">
+                  <mat-option *ngFor="let streetName of filteredUnitTypes | async" [value]="streetName">
+                    {{streetName.addressUnitTypeDesc}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Unit Number" formControlName = 'addrUnit'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Prefix" formControlName = 'addrStreetPrefix'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                <input type="text" placeholder="Street Type" aria-label="Street Type" matInput formControlName="addrStreetType" [matAutocomplete]="streetType">
+                <mat-autocomplete #streetType="matAutocomplete" [displayWith]="displayfilterStreetType">
+                  <mat-option *ngFor="let streetType of filteredStreetTypes | async" [value]="streetType">
+                    {{streetType.description}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>  
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                  <input type="text" placeholder="Direction" aria-label="Direction" matInput formControlName="addrStreetDirection" [matAutocomplete]="streetDirection">
+                  <mat-autocomplete #streetDirection="matAutocomplete" [displayWith]="displayfilterDirection">
+                    <mat-option *ngFor="let streetDirection of filteredstreetDirection | async" [value]="streetDirection">
+                      {{streetDirection.addressDirection}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+            </div>    
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                  <input type="text" placeholder="City" aria-label="Direction" matInput formControlName="addrCity" [matAutocomplete]="city">
+                  <mat-autocomplete #city="matAutocomplete" [displayWith]="displayfilterCity">
+                    <mat-option *ngFor="let streetDirection of filteredCity | async" [value]="streetDirection">
+                      {{streetDirection.city}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+            </div> 
+            <div class="col-12 col-md-3 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="County">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Community" formControlName = 'community'>
+              </mat-form-field>
+            </div> 
+            <div class="col-12 col-md-3 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Internet Access" formControlName = 'internetAccess'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Postal Code" formControlName = 'addrPostal'>
+              </mat-form-field>
+            </div> 
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                  <input type="text" placeholder="Province" aria-label="Direction" matInput formControlName="addrProvince" [matAutocomplete]="addrProvince">
+                  <mat-autocomplete #addrProvince="matAutocomplete" [displayWith]="displayfilterProvince">
+                    <mat-option *ngFor="let streetDirection of filteredProvince | async" [value]="streetDirection">
+                      {{streetDirection.provinceName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+            </div> 
+            <div class="col-12 col-md-3">
+              <mat-form-field class="full-width">
+                  <input type="text" placeholder="Country" aria-label="Direction" matInput formControlName="addrCountry" [matAutocomplete]="country">
+                  <mat-autocomplete #country="matAutocomplete" [displayWith]="displayfilterCountry">
+                    <mat-option *ngFor="let streetDirection of filteredCountry | async" [value]="streetDirection">
+                      {{streetDirection.countryName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+            </div>
+
+            <div class="col-12">
+              <div class="card-header alert-primary">
+                  Free Form Address
+              </div>
+            </div>
+            <div class="col-12 mt-2"> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Line 1" formControlName = 'addressLine1'>
+              </mat-form-field>
+            </div> 
+            <div class="col-12"> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Line 2" formControlName = 'addressLine2'>
+              </mat-form-field>
+            </div> 
+            <div class="col-12"> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Line 3" formControlName = 'addressLine3'>
+              </mat-form-field>
+            </div> 
+            <div class="col-12"> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Line 4" formControlName = 'addressLine4'>
+              </mat-form-field>
+            </div> 
+            <div class="col-12"> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Line 5" formControlName = 'addressLine5'>
+              </mat-form-field>
+            </div> 
+            <div class="col-12"> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Line 6" formControlName = 'addressLine6' >
+              </mat-form-field>
+            </div> 
+          </div> 
+        </form>
+      </div>
+    </div>
+    </div>
+    
+  </div>
+    
+    

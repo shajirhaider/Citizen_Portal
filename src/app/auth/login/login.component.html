@@ -3,7 +3,12 @@
     <h5> <b> Online Permits </b> </h5>
     <div class="card" >
       <h5 class="card-header"> Login</h5>
-      <div class="card-body">  
+      <div class="card-body">
+        <div class="alert alert-danger" role="alert" *ngIf="errorShow == true">
+          <p>
+            Wrong Username or Password 
+          </p>    
+        </div>  
         <form [formGroup] = "loginForm">
           <div class="row form-panel mt-2">
             <div class="col-12 col-md-4 "> 

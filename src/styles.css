@@ -235,6 +235,12 @@ label {
   border-color: #b8daff;
 }
 
+.alert-danger {
+  color: #8A3A45;
+  background-color: #F8D7DA;
+  border-color: #b8daff;
+}
+
 .alert {
   position: relative;
   padding: .75rem 1.25rem;

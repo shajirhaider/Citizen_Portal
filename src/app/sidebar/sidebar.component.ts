@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
       child:[ 
         {
           text:"Update Personal Information",
-          url:"/update-information"
+          url:"/update-personal-info"
         },  
         {
           text:"Update Password",
