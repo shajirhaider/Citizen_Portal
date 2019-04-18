@@ -19,6 +19,9 @@ export class UrlService {
   public Get_Valid_Provinces ='getValidProvinces'
   public Get_Valid_Communities ='getValidCommunities'
   public Get_Valid_County = 'getValidCounty'
+  public Get_Valid_Countries ='getValidCountries'
+  public Update_People = 'updatePeople'
+
 
   constructor() { }
 

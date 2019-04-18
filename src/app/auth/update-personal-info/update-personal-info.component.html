@@ -9,6 +9,37 @@
       <div class="card" >
         <h5 class="card-header">Search Mobile Sign Locations</h5>
         <div class="card-body">
+          <div class="row">
+          <div class="col-12">
+            <div class="card-header alert-primary">
+              {{organizationName}} <span>(</span> {{name}} <span>)</span>
+            </div>
+            <div class="card-body">
+              <div class="row">
+              <div class="col-12 col-md-6">
+                <span> 
+                <b>Contact:</b> {{name}}   
+                </span>
+              </div>
+              <div class="col-12 col-md-6">
+                <span> 
+                <b>Organization:</b> {{organizationName}}   
+                </span>
+              </div>
+              <div class="col-12 col-md-6">
+                <span> 
+                <b>Email Address:</b> {{emailAddress}}   
+                </span>
+              </div>
+              <div class="col-12 col-md-6">
+                <span> 
+                <b>Phone:</b> {{phone1}}   
+                </span>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
   
         <form [formGroup] = "updateInfo">
           <div class="row form-panel mt-2">
@@ -168,7 +199,13 @@
       </div>
     </div>
     </div>
-    
+    <div class="row">
+      <div class="col-12">
+        <button class="float-right ripple btn btn-primary btn-sm" (click)='updatePeople()'>
+          UPDATE
+        </button>
+      </div>
+    </div>
   </div>
     
     

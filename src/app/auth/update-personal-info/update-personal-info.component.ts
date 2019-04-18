@@ -28,7 +28,6 @@ export interface StreetDirection {
 export class UpdatePersonalInfoComponent implements OnInit {
 
   updateInfo = new FormGroup({
-  //  streetNumber: new FormControl({value: '', disabled: true}),
     addrStreet: new FormControl(''),
     addrStreetType: new FormControl(''),
     addrStreetDirection: new FormControl(''),
@@ -49,14 +48,12 @@ export class UpdatePersonalInfoComponent implements OnInit {
     addressLine6: new FormControl(''),
     community: new FormControl(''),
     internetAccess: new FormControl(''),
-    aliasRSN: new FormControl('')
   });
   organizationName: String;
-  nameFirst: String;
-  nameLast: String;
-  nameMiddle: String;
+  name: String;
   phone1: String;
   emailAddress: String;
+  peopleData:any[];
 
   streetTypes : StreetType[];
   filteredStreetTypes: Observable<StreetType[]>;
@@ -74,10 +71,7 @@ export class UpdatePersonalInfoComponent implements OnInit {
   filteredCounty: Observable<any[]>;
   community : any[];
   filteredCommunity: Observable<any[]>;
-  countryList: any[] = [
-    {"countryName":'CAN'},
-    {"countryName":"USA"}
-  ]
+  countryList: any[] = [ ]
   filteredCountry: Observable<any[]>;
   
 
@@ -92,9 +86,10 @@ export class UpdatePersonalInfoComponent implements OnInit {
     this.getVaildProvince()
     this.getVaildCounty()
     this.getVaildCommutinites()
-    // this.getPeople()
+    this.getValidCountry()
   }
   getValidStreetType(){ 
+    this.loaderService.display(true);
     let lid = "";
     if(this.storage.getItem("lid")){
       lid = this.storage.getItem("lid")
@@ -148,7 +143,6 @@ export class UpdatePersonalInfoComponent implements OnInit {
       );
   } 
   getValidStreet(){
-    this.loaderService.display(true);
     let lid = "";
     if(this.storage.getItem("lid")){
       lid = this.storage.getItem("lid")
@@ -172,13 +166,11 @@ export class UpdatePersonalInfoComponent implements OnInit {
           );
           console.log(this.streetNames)
           this.getPeople()
-       this.loaderService.display(false);
         },
         (error) => console.log(error)
     );
   }
   getValidUnitTypes(){
-    this.loaderService.display(true);
     let lid = "";
     if(this.storage.getItem("lid")){
       lid = this.storage.getItem("lid")
@@ -200,14 +192,12 @@ export class UpdatePersonalInfoComponent implements OnInit {
             map(value => typeof value === 'string' ? value : value.addressUnitType),
             map(name => name ? this._filterUnitType(name) : this.unitTypes.slice())
           );
-       this.loaderService.display(false);
         },
         (error) => console.log(error)
     );
   }
 
   getVaildCity(){
-    this.loaderService.display(true);
     let lid = "";
     if(this.storage.getItem("lid")){
       lid = this.storage.getItem("lid")
@@ -229,14 +219,12 @@ export class UpdatePersonalInfoComponent implements OnInit {
             map(value => typeof value === 'string' ? value : value.city),
             map(name => name ? this._filterCity(name) : this.city.slice())
           );
-       this.loaderService.display(false);
         },
         (error) => console.log(error)
     );
   }
 
   getVaildProvince(){
-    this.loaderService.display(true);
     let lid = "";
     if(this.storage.getItem("lid")){
       lid = this.storage.getItem("lid")
@@ -258,14 +246,12 @@ export class UpdatePersonalInfoComponent implements OnInit {
             map(value => typeof value === 'string' ? value : value.provinceName),
             map(name => name ? this._filterProvince(name) : this.province.slice())
           );
-       this.loaderService.display(false);
         },
         (error) => console.log(error)
     );
   }
 
   getVaildCounty(){
-    this.loaderService.display(true);
     let lid = "";
     if(this.storage.getItem("lid")){
       lid = this.storage.getItem("lid")
@@ -288,14 +274,12 @@ export class UpdatePersonalInfoComponent implements OnInit {
             map(value => typeof value === 'string' ? value : value.provinceName),
             map(name => name ? this._filterProvince(name) : this.province.slice())
           );
-       this.loaderService.display(false);
         },
         (error) => console.log(error)
     );
   }
 
   getVaildCommutinites(){
-    this.loaderService.display(true);
     let lid = "";
     if(this.storage.getItem("lid")){
       lid = this.storage.getItem("lid")
@@ -318,7 +302,6 @@ export class UpdatePersonalInfoComponent implements OnInit {
             map(value => typeof value === 'string' ? value : value.provinceName),
             map(name => name ? this._filterProvince(name) : this.province.slice())
           );
-       this.loaderService.display(false);
         },
         (error) => console.log(error)
     );
@@ -341,27 +324,92 @@ export class UpdatePersonalInfoComponent implements OnInit {
         (response) =>{
           console.log(response)
           this.updateInfo.patchValue(response["body"])
+          this.peopleData = response["body"]
           this.streetNameObj(response["body"]["addrStreet"])
           this.streetTypeObj(response["body"]["addrStreetType"])
           this.streetDirectionObj(response["body"]["addrStreetDirection"])
           this.cityObj(response["body"]["addrCity"])
           this.provinceObj(response["body"]["addrProvince"])
           this.countryObj(response["body"]["addrCountry"])
+          this.organizationName = response["body"]["organizationName"];
+          this.name = response["body"]["nameFirst"]+" "+response["body"]["nameMiddle"]+" "+response["body"]["nameLast"];
+          this.phone1 = response["body"]["phone1"];
+          this.emailAddress = response["body"]["emailAddress"]
+          this.loaderService.display(false);
         },
         (error) => console.log(error)
       );
   }
-  getCountry(){
+  getValidCountry(){
+    let lid = "";
+    if(this.storage.getItem("lid")){
+      lid = this.storage.getItem("lid")
+    }
+    else{
+      lid = ""
+    }
+    let body = {
+      "token":"amandaportal", 
+      "lid":lid
+    }
+    this.httpService.post(this.url.Get_Valid_Countries, body)
+      .subscribe(
+        (response) =>{
+          this.countryList = response["body"]
+          console.log("community", response)
           this.filteredCountry = this.updateInfo.get('addrCountry').valueChanges
           .pipe(
             startWith<string | any>(''),
             map(value => typeof value === 'string' ? value : value.countryName),
             map(name => name ? this._filterCountry(name) : this.countryList.slice())
           );
-       this.loaderService.display(false);
+      },
+        (error) => console.log(error)
+    );
         
   }
+  updatePeople(){
+    this.loaderService.display(true);
+    let body = this.modifier(this.updateInfo)
+    console.log("body",body)
+    this.httpService.post(this.url.Update_People, body)
+      .subscribe(
+        (response) =>{   
+          console.log(response)
+        
+          this.loaderService.display(false);      
+        },
+        (error) => console.log(error)
+      );
+  }
+  modifier(body){
+    let obj = body.value;
+    if(this.updateInfo.value.addrCity){
+      obj.addrCity = obj.addrCity.city;
+    }
 
+    if(this.updateInfo.value.addrCountry){
+      obj.addrCountry = obj.addrCountry.countryCode;
+    }
+
+    if(this.updateInfo.value.addrProvince){
+      obj.addrProvince = obj.addrProvince.provinceType;
+    }
+    if(this.updateInfo.value.addrStreet){
+      obj.addrStreet = obj.addrStreet.propStreet;
+    }
+    if(this.updateInfo.value.addrStreetDirection){
+      obj.addrStreetDirection = obj.addrStreetDirection.addressDirection;
+    }
+
+    if(this.updateInfo.value.addrStreetType){
+      obj.addrStreetType = obj.addrStreetType.id;
+    }
+    obj.lid= this.storage.getItem("lid");
+    obj.token = 'amandaportal';
+    return obj;
+
+  }
   streetNameObj(val) {
     this.streetNames.forEach((iter) => {
     if (iter.propStreet === val){     
@@ -408,7 +456,7 @@ export class UpdatePersonalInfoComponent implements OnInit {
 
   countryObj(val) {
     this.countryList.forEach((iter) => {
-    if (iter.countryName === val){     
+    if (iter.countryCode === val){     
       this.updateInfo.get("addrCountry").setValue(iter)
       return;
     }
