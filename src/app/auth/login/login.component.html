@@ -10,22 +10,34 @@
           </p>    
         </div>  
         <form [formGroup] = "loginForm">
-          <div class="row form-panel mt-2">
+          <div class="row mt-2">
             <div class="col-12 col-md-4 "> 
               <mat-form-field class="full-width">
-                <input matInput placeholder="Username" formControlName = 'username'>
+                <input matInput placeholder="Username" formControlName = 'username' type="text">
               </mat-form-field>
             </div>
+          </div >
+            <div class="row">
             <div class="col-12 col-md-4">
               <mat-form-field class="full-width">
-                <input matInput placeholder="Password" formControlName = 'password'>
+                <input matInput placeholder="Password" formControlName = 'password' type="password">
               </mat-form-field>
             </div>
+          </div>
+            <div class="row">
             <div class="col-12 col-md-4">
-              <div class="">
+
+                <div class="float-left">
+                    <div class="button-panel">
+                        <button class="btn btn-primary btn-sm float-left ripple" (click)="authenticatePublicUser()">
+                          LOGIN
+                        </button>
+                    </div>
+                  </div>
+              <div class="float-right">
                 <div class="button-panel">
                     <button class="btn btn-primary btn-sm float-left ripple" (click)="authenticatePublicUser()">
-                      LOGIN
+                      FORGOT PASSWORD
                     </button>
                 </div>
               </div>

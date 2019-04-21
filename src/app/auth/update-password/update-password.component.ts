@@ -15,6 +15,8 @@ import { AuthService } from './../../services/auth.service';
 export class UpdatePasswordComponent implements OnInit {  
   UpdatePassword = new FormGroup({
     internetPassword: new FormControl(''),
+    oldPassword: new FormControl(''),
+    retypePassword: new FormControl(''),
   });
 
   constructor(

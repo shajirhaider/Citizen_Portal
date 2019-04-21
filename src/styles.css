@@ -267,8 +267,7 @@ label {
 }
 .btn-group-sm>.btn, .btn-sm {
     padding: .25rem .5rem;
-    font-size: .875rem;
-    line-height: 1.5;
+    font-size: 13px;
     border-radius: .2rem;
 }
 .btn-primary {
@@ -288,8 +287,8 @@ label {
     border: 1px solid transparent;
     padding: .375rem .5rem;
     /* font-size: 1rem; */
-    line-height: 1.5;
-    border-radius: .25rem;
+    line-height: 1;
+    border-radius: .20rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 [type=button], [type=reset], [type=submit], button {

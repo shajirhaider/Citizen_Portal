@@ -267,7 +267,6 @@ export class UpdatePersonalInfoComponent implements OnInit {
       .subscribe(
         (response) =>{
           this.county = response["body"]
-          console.log("county", response)
           this.filteredCounty = this.updateInfo.get('addrProvince').valueChanges
           .pipe(
             startWith<string | any>(''),
@@ -295,7 +294,6 @@ export class UpdatePersonalInfoComponent implements OnInit {
       .subscribe(
         (response) =>{
           this.community = response["body"]
-          console.log("community", response)
           this.filteredCommunity = this.updateInfo.get('addrProvince').valueChanges
           .pipe(
             startWith<string | any>(''),
@@ -322,7 +320,6 @@ export class UpdatePersonalInfoComponent implements OnInit {
     this.httpService.post(this.url.Get_People, body)
       .subscribe(
         (response) =>{
-          console.log(response)
           this.updateInfo.patchValue(response["body"])
           this.peopleData = response["body"]
           this.streetNameObj(response["body"]["addrStreet"])
@@ -356,7 +353,6 @@ export class UpdatePersonalInfoComponent implements OnInit {
       .subscribe(
         (response) =>{
           this.countryList = response["body"]
-          console.log("community", response)
           this.filteredCountry = this.updateInfo.get('addrCountry').valueChanges
           .pipe(
             startWith<string | any>(''),
@@ -382,32 +378,35 @@ export class UpdatePersonalInfoComponent implements OnInit {
         (error) => console.log(error)
       );
   }
-  modifier(body){
-    let obj = body.value;
-    if(this.updateInfo.value.addrCity){
-      obj.addrCity = obj.addrCity.city;
-    }
+  modifier(data){
 
-    if(this.updateInfo.value.addrCountry){
-      obj.addrCountry = obj.addrCountry.countryCode;
+    let obj = data.value;
+    this.peopleData["addrStreet"] = obj.addrStreet.propStreet,
+    this.peopleData["addrStreetType"] = obj.addrStreetType.id,
+    this.peopleData["addrStreetDirection"] = obj.addrStreetDirection.addressDirection,
+    this.peopleData["addrStreetPrefix"] = obj.addrStreetPrefix,
+    this.peopleData["addrPrefix"] = obj.addrPrefix,
+    this.peopleData["addrCity"] = obj.addrCity.city,
+    this.peopleData["addrCountry"] = obj.addrCountry.countryCode,
+    this.peopleData["addrProvince"] = obj.addrProvince.provinceType,
+    this.peopleData["addrHouse"] = obj.addrHouse,
+    this.peopleData["addrPostal"] = obj.addrPostal,
+    this.peopleData["addrUnit"] = obj.addrUnit,
+    this.peopleData["addrUnitType"] = obj.addrUnitType,
+    this.peopleData["addressLine1"] = obj.addressLine1,
+    this.peopleData["addressLine2"] = obj.addressLine2,
+    this.peopleData["addressLine3"] = obj.addressLine3,
+    this.peopleData["addressLine4"] = obj.addressLine4,
+    this.peopleData["addressLine5"] = obj.addressLine5,
+    this.peopleData["addressLine6"] = obj.addressLine6,
+    this.peopleData["community"] = obj.community,
+    this.peopleData["internetAccess"] = obj.internetAccess
+    let body ={
+      "lid": this.storage.getItem("lid"),
+      "token": 'amandaportal',
+      "data":this.peopleData
     }
-
-    if(this.updateInfo.value.addrProvince){
-      obj.addrProvince = obj.addrProvince.provinceType;
-    }
-    if(this.updateInfo.value.addrStreet){
-      obj.addrStreet = obj.addrStreet.propStreet;
-    }
-    if(this.updateInfo.value.addrStreetDirection){
-      obj.addrStreetDirection = obj.addrStreetDirection.addressDirection;
-    }
-
-    if(this.updateInfo.value.addrStreetType){
-      obj.addrStreetType = obj.addrStreetType.id;
-    }
-    obj.lid= this.storage.getItem("lid");
-    obj.token = 'amandaportal';
-    return obj;
+    return body;
 
   }
   streetNameObj(val) {
