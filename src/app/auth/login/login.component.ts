@@ -53,4 +53,8 @@ constructor(
 
   }
 
+  register(){
+    this.router.navigate(['register']);
+  }
+
 }

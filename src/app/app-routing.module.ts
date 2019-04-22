@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AgreeComponent } from './agree/agree.component';
 import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { UpdatePersonalInfoComponent } from './auth/update-personal-info/update-personal-info.component';
 import { UpdatePasswordComponent } from './auth/update-password/update-password.component';
 import { SearchPropertiesComponent } from './search-properties/search-properties.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'search-mobile-sign-location', component: SearchMobileSignLocationComponent},
   { path: 'login', component: LoginComponent},
   { path: 'update-password', component: UpdatePasswordComponent},
-  { path: 'update-personal-info', component: UpdatePersonalInfoComponent}
+  { path: 'update-personal-info', component: UpdatePersonalInfoComponent},
+  { path: 'register', component: RegisterComponent}
 
 
 ];

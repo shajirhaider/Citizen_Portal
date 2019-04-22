@@ -82,10 +82,10 @@
   <div class="mt-1" *ngIf ="searchResultshow == false">
       <div class="button-panel">
           <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
-            CLEAR
+            Clear
           </button>
           <button class="btn btn-primary btn-sm float-right ripple">
-            <a (click) = searchProperty() > SEARCH </a>
+            <a (click) = searchProperty() > Search </a>
           </button>
       </div>
     </div>
@@ -149,11 +149,13 @@
               <div class="card m-1 full-width">
                 <div class=" result-body text-center">
                   <button class="btn btn-primary ripple btn-sm">    
-                    <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >PERMITS</a>
+                    <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >
+                      Permits
+                    </a>
                   </button>
                   <br>
                   <button class="btn btn-primary ripple btn-sm">
-                    <a> MAP </a>
+                    <a> Map </a>
                   </button>
                 </div>
               </div> 
@@ -172,7 +174,7 @@
     <div class="button-panel mt-3">
         <button  class="btn btn-primary btn-sm ripple float-left" (click) = searchShow()>
           <span class="button-mobile-label"><i class="fas fa-arrow-left"></i></span>
-          <span class="button-label"> BACK TO SEARCH PROPERTIES</span> 
+          <span class="button-label"> Back to Search Properties</span> 
         </button>
     </div>
   </div>

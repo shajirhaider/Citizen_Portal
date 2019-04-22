@@ -24,6 +24,7 @@ import { SearchMobileSignLocationComponent } from './search-mobile-sign-location
 import { LoginComponent } from './auth/login/login.component';
 import { UpdatePasswordComponent } from './auth/update-password/update-password.component';
 import { UpdatePersonalInfoComponent } from './auth/update-personal-info/update-personal-info.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { UpdatePersonalInfoComponent } from './auth/update-personal-info/update-
     SearchMobileSignLocationComponent,
     LoginComponent,
     UpdatePasswordComponent,
-    UpdatePersonalInfoComponent
+    UpdatePersonalInfoComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

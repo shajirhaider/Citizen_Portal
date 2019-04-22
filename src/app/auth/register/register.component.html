@@ -1,0 +1,85 @@
+
+  <div>
+      <h5> <b> Online Permits </b> </h5>
+      <div class="card" >
+        <h5 class="card-header"> Register</h5>
+        <div class="card-body" *ngIf = 'askPin'>  
+
+          <div class="alert alert-primary">
+              Your PIN confirms your identity with the City of Cambridge and may have been provided to you in person or by email.
+          </div>
+          <p>
+              Do you have a PIN?
+          </p>
+            <div class="agree-button mt-3">
+                <span class="mr-5">     
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [(ngModel)] = "isPIN" [value]="true" (input) ="btnShow = true">
+                    <label class="form-check-label">
+                      <b> Yes</b>
+                    </label>
+                  </div>
+                </span>
+                <span> 
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [(ngModel)] = "isPIN" [value]="false" (input) ="btnShow = true">
+                    <label class="form-check-label">
+                      <b> No</b>
+                    </label>
+                  </div>
+                </span>
+              </div>
+        </div>
+        <div  *ngIf = 'pinYes'>
+          
+        <div class="card-body">
+
+        <form [formGroup] = "regForm">
+            <div class="row mt-2">
+              <div class="col-12 col-md-4 "> 
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="PIN" formControlName = 'pin' type="text">
+                </mat-form-field>
+              </div>
+            </div >
+              <div class="row">
+              <div class="col-12 col-md-4">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Email Address" formControlName = 'email' type="text">
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>  
+            
+      <div class="button-panel mt-3"  *ngIf = 'askPin' >
+          <button class="btn btn-primary btn-sm ripple float-left" (click)=localStorageDataRemove()>
+            <span class="button-label">Previous</span>
+          </button>
+        <button *ngIf = "btnShow == true" class="btn btn-primary btn-sm ripple float-right mr-2" (click)=next()>
+          <span class="button-label">Next</span>
+        </button>
+      </div>
+
+      <div class="row mt-3"  *ngIf = 'pinYes'>
+          <div class="col-12">
+
+              <div class="float-left">
+                  <div class="button-panel">
+                      <button class="btn btn-primary btn-sm float-left ripple" (click)="authenticatePublicUser()">
+                        Previous
+                      </button>
+                  </div>
+                </div>
+            <div class="float-right">
+              <div class="button-panel">
+                  <button class="btn btn-primary btn-sm float-left ripple" (click)="authenticatePublicUser()">
+                    Proceed With Register
+                  </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
