@@ -11,7 +11,7 @@ export class SidebarComponent implements OnInit {
   items = [
     {
       text:"Home", 
-      url:"*" 
+      url:"/home" 
     },
     {
       text:"Search", 
@@ -56,7 +56,11 @@ export class SidebarComponent implements OnInit {
           url:"/shopping-cart"
         }
       ]
-    }
+    },
+    {
+      text:"Logout", 
+      url:"/logout" 
+    },
   ]
   constructor(private authService: AuthService, private cdr: ChangeDetectorRef) {}
 

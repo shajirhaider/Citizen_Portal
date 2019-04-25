@@ -1,6 +1,6 @@
 <div class="vertical-menu">
   <div *ngIf='showLoader == false'>
-    <a href="#" routerLinkActive="active">Home</a>
+    <a  [routerLink]="['/home']" routerLinkActive="active">Home</a>
     <a [routerLink]="['/search-properties']" routerLinkActive="active">Search</a>
     <a [routerLink]="['/search-mobile-sign-location']" routerLinkActive="active" >Search Mobile Sign Locations</a>
     <a href="#" routerLinkActive="active">Public Payment Page</a>

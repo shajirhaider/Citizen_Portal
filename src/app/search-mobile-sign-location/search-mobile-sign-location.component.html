@@ -1,11 +1,10 @@
 
   <div class="">
-
+<!-- 
     <div class="loading" *ngIf="progress == true">
       <div class="indeterminate"></div>
-    </div>
+    </div> -->
       <div *ngIf ="searchForm == true" >
-      <h5> <b> Online Permits </b> </h5>
       <div class="card" >
         <h5 class="card-header">Search Mobile Sign Locations</h5>
         <div class="card-body">
@@ -84,7 +83,7 @@
     </div>
   
     <div *ngIf ="searchResultshow == true">
-    <h5> {{searchResultMsg}}</h5>
+    <div> {{searchResultMsg}}</div>
       <div class="card"  >
         <h5 class="card-header"> Search Results</h5>
         <div class="mat-elevation-z1">    

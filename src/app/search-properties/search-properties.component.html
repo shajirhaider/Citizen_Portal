@@ -1,182 +1,220 @@
 
-  <div class="">
+<div class="">
 
-  <div class="loading" *ngIf="progress == true">
+  <!-- <div class="loading" *ngIf="progress == true">
     <div class="indeterminate"></div>
+  </div> -->
+  <div>
+    <div class="agree-content" *ngIf="agreeContent == true">
+      <h5 class=""> <b> Terms of Use Agreement </b>  </h5>
+          The City of Cambridge maintains this website as a service to members of the public for the purpose of providing on-line information about building application status within the City of Cambridge. By using this site, you are agreeing to comply with, and be bound by, the following terms of use. 
+          <a href="">
+            Please review the following terms carefully.
+          </a> 
+       
+      <div class="agree-button text-center mt-3">
+        <span class="mr-5">     
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" [(ngModel)] = "agree" [value]="true" (input) ="btnShow = true">
+            <label class="form-check-label">
+              <b> I Agree</b>
+            </label>
+          </div>
+        </span>
+        <span> 
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" [(ngModel)] = "agree" [value]="false" (input) ="btnShow = false">
+            <label class="form-check-label">
+              <b> I Disagree</b>
+            </label>
+          </div>
+        </span>
+    
+        <div class="button-panel mt-3" *ngIf = "btnShow == true">
+          <button class="btn btn-primary btn-sm ripple float-right mr-2" (click)=localStorageDataRemove()>
+            <!-- <span class="mobile-label"><i class="fas fa-arrow-right"></i></span> -->
+            <span class="button-label">Countinue</span>
+          </button>
+        </div>
+      </div>
+    
+    </div>
   </div>
-    <div *ngIf ="searchForm == true" >
-    <h5> <b> Online Permits </b> </h5>
-    <div class="card" >
-      <h5 class="card-header"> Search Properties</h5>
-      <div class="card-body">
-        <div class="alert alert-primary" role="alert">
-          <p>
-            Search properties by property address, street or roll number. <br>
-            Please be advised that any building permits issued before  <b> January 1, 2000 </b> may not be available on this database.
-          </p>    
-        </div>
+  <div *ngIf="agreeContent == false">
 
-      <form [formGroup] = "searchProperties">
-        <div class="row form-panel mt-2">
-          <div class="col-12 col-md-4 "> 
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Street Number" formControlName = 'streetNumber'>
-            </mat-form-field>
+    <div *ngIf ="searchForm == true" >
+      <div class="card" >
+        <h5 class="card-header"> Search Properties</h5>
+        <div class="card-body">
+          <div class="alert alert-primary" role="alert">
+            <p>
+              Search properties by property address, street or roll number. <br>
+              Please be advised that any building permits issued before  <b> January 1, 2000 </b> may not be available on this database.
+            </p>    
           </div>
-          <div class="col-12 col-md-4">
-            <mat-form-field class="full-width">
-              <input type="text" placeholder="Street Name" aria-label="Street Name" matInput formControlName="streetName" [matAutocomplete]="streetName">
-              <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
-                <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
-                  {{streetName.propStreet}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-          <div class="col-12 col-md-4">
-            <mat-form-field class="full-width">
-              <input type="text" placeholder="Street Type" aria-label="Street Type" matInput formControlName="streetType" [matAutocomplete]="streetType">
-              <mat-autocomplete #streetType="matAutocomplete" [displayWith]="displayfilterStreetType">
-                <mat-option *ngFor="let streetType of filteredStreetTypes | async" [value]="streetType">
-                  {{streetType.description}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>    
-        </div>
-        <div class="row form-panel mt-2">
-          <div class="col-12 col-md-4">
-            <mat-form-field class="full-width">
-                <input type="text" placeholder="Direction" aria-label="Direction" matInput formControlName="streetDirection" [matAutocomplete]="streetDirection">
-                <mat-autocomplete #streetDirection="matAutocomplete" [displayWith]="displayfilterDirection">
-                  <mat-option *ngFor="let streetDirection of filteredstreetDirection | async" [value]="streetDirection">
-                    {{streetDirection.addressDirection}}
+    
+        <form [formGroup] = "searchProperties">
+          <div class="row form-panel mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Street Number" formControlName = 'streetNumber'>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4">
+              <mat-form-field class="full-width">
+                <input type="text" placeholder="Street Name" aria-label="Street Name" matInput formControlName="streetName" [matAutocomplete]="streetName">
+                <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
+                  <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
+                    {{streetName.propStreet}}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
             </div>
             <div class="col-12 col-md-4">
               <mat-form-field class="full-width">
-                <input matInput placeholder="Unit Number" formControlName = 'unitNumber'>
+                <input type="text" placeholder="Street Type" aria-label="Street Type" matInput formControlName="streetType" [matAutocomplete]="streetType">
+                <mat-autocomplete #streetType="matAutocomplete" [displayWith]="displayfilterStreetType">
+                  <mat-option *ngFor="let streetType of filteredStreetTypes | async" [value]="streetType">
+                    {{streetType.description}}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
-            </div>  
-        </div>   
-      <hr>
-      <div class="row form-panel" style="margin-top:-5px">
-        <div class="col-12 col-md-4">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Roll Number" formControlName = 'rollNumber'>
-            <mat-hint align="start"><strong>Enter Digits Only</strong> </mat-hint>
-          </mat-form-field>
-        </div>       
-      </div>
-      </form>
-    </div>
-  </div>
-  <div style="height:18px" >
-    <div class="text-center text-red" *ngIf="msgShow == true">
-        <b> {{msg}} </b>
-    </div>
-  </div>
-
-  <div class="mt-1" *ngIf ="searchResultshow == false">
-      <div class="button-panel">
-          <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
-            Clear
-          </button>
-          <button class="btn btn-primary btn-sm float-right ripple">
-            <a (click) = searchProperty() > Search </a>
-          </button>
-      </div>
-    </div>
-    </div>
-
-  <div *ngIf ="searchResultshow == true">
-  <h5> {{searchResultMsg}}</h5>
-    <div class="card"  >
-      <h5 class="card-header"> Search Results</h5>
-      <div class="mat-elevation-z1 result-table">
-        <div class="responsive_table">
-        <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" class="result-table">
-          <ng-container matColumnDef="propertyRoll" >
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let searchResult" class="col-md-7 col-12"> 
-              <div class="card m-1 full-width" >
-                <div class=" result-body">
-                    <p > 
-                      <span> <i class="fas fa-home"></i> <span > Address: </span> </span>
-                      <span >
-                        <b>{{ searchResult.propHouse+ addSpacer + searchResult.propStreet+ addComma +addSpacer +searchResult.propCity }}</b>
-                      </span>
-                    </p>
-                    <p> 
-                      <span> <i class="fas fa-sort-numeric-up"></i> <span > Roll Number: </span> </span>
-                      <span > <b>{{searchResult.propertyRoll}}</b> </span>
-                    </p>
-                    <p > 
-                      <span > <i class="fas fa-book-open"></i> <span > Legal Description: </span> </span> 
-                      <span > <b>{{searchResult.legalDesc}}</b></span>
-                    </p>
-                </div>
-              </div> 
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="propArea" >
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let searchResult" class="col-md-3 col-12"> 
-              <div class="card m-1 full-width">
-                <div class="result-body">
-                    <p>  
-                      <span> <i class="fas fa-vector-square"></i> <span> Area (acres): </span> </span> 
-                      <span><b>{{searchResult.propArea}}</b> </span> 
-                    </p>
-                    <p> 
-                      <span> <i class="fas fa-campground"></i> <span> Frontage (feet): </span> </span>
-                      <span> <b>{{searchResult.propFrontage}}</b> </span>
-                    </p>
-
-                    <p> 
-                      <span> <i class="fas fa-ruler-combined"></i> <span> Depth (feet): </span> </span>
-                      <span> <b>{{searchResult.propDepth}}</b> </span>
-                    </p>
-                </div>
+            </div>    
+          </div>
+          <div class="row form-panel mt-2">
+            <div class="col-12 col-md-4">
+              <mat-form-field class="full-width">
+                  <input type="text" placeholder="Direction" aria-label="Direction" matInput formControlName="streetDirection" [matAutocomplete]="streetDirection">
+                  <mat-autocomplete #streetDirection="matAutocomplete" [displayWith]="displayfilterDirection">
+                    <mat-option *ngFor="let streetDirection of filteredstreetDirection | async" [value]="streetDirection">
+                      {{streetDirection.addressDirection}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
               </div>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="folderTypeDesc" >
-            <mat-header-cell *matHeaderCellDef ></mat-header-cell>
-            <mat-cell *matCellDef="let searchResult" class="col-md-2 col-12"> 
-              <div class="card m-1 full-width">
-                <div class=" result-body text-center">
-                  <button class="btn btn-primary ripple btn-sm">    
-                    <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >
-                      Permits
-                    </a>
-                  </button>
-                  <br>
-                  <button class="btn btn-primary ripple btn-sm">
-                    <a> Map </a>
-                  </button>
-                </div>
-              </div> 
-            </mat-cell>
-          </ng-container>
-      
-          <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> -->
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-      
-      </div>  
-        <mat-paginator #paginator (page)="pageEvent($event)" [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
-      
-      </div>        
+              <div class="col-12 col-md-4">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Unit Number" formControlName = 'unitNumber'>
+                </mat-form-field>
+              </div>  
+          </div>   
+        <hr>
+        <div class="row form-panel" style="margin-top:-5px">
+          <div class="col-12 col-md-4">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Roll Number" formControlName = 'rollNumber'>
+              <mat-hint align="start"><strong>Enter Digits Only</strong> </mat-hint>
+            </mat-form-field>
+          </div>       
+        </div>
+        </form>
+      </div>
     </div>
-    <div class="button-panel mt-3">
-        <button  class="btn btn-primary btn-sm ripple float-left" (click) = searchShow()>
-          <span class="button-mobile-label"><i class="fas fa-arrow-left"></i></span>
-          <span class="button-label"> Back to Search Properties</span> 
-        </button>
+    <div style="height:18px" >
+      <div class="text-center text-red" *ngIf="msgShow == true">
+          <b> {{msg}} </b>
+      </div>
     </div>
+    
+    <div class="mt-1" *ngIf ="searchResultshow == false">
+        <div class="button-panel">
+            <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
+              Clear
+            </button>
+            <button class="btn btn-primary btn-sm float-right ripple">
+              <a (click) = searchProperty() > Search </a>
+            </button>
+        </div>
+      </div>
+      </div>
+    
+      <div *ngIf ="searchResultshow == true">
+      <div> {{searchResultMsg}}</div>
+        <div class="card"  >
+          <h5 class="card-header"> Search Results</h5>
+          <div class="mat-elevation-z1 result-table">
+            <div class="responsive_table">
+            <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" class="result-table">
+              <ng-container matColumnDef="propertyRoll" >
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let searchResult" class="col-md-7 col-12"> 
+                  <div class="card m-1 full-width" >
+                    <div class=" result-body">
+                        <p > 
+                          <span> <i class="fas fa-home"></i> <span > Address: </span> </span>
+                          <span >
+                            <b>{{ searchResult.propHouse+ addSpacer + searchResult.propStreet+ addComma +addSpacer +searchResult.propCity }}</b>
+                          </span>
+                        </p>
+                        <p> 
+                          <span> <i class="fas fa-sort-numeric-up"></i> <span > Roll Number: </span> </span>
+                          <span > <b>{{searchResult.propertyRoll}}</b> </span>
+                        </p>
+                        <p > 
+                          <span > <i class="fas fa-book-open"></i> <span > Legal Description: </span> </span> 
+                          <span > <b>{{searchResult.legalDesc}}</b></span>
+                        </p>
+                    </div>
+                  </div> 
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="propArea" >
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let searchResult" class="col-md-3 col-12"> 
+                  <div class="card m-1 full-width">
+                    <div class="result-body">
+                        <p>  
+                          <span> <i class="fas fa-vector-square"></i> <span> Area (acres): </span> </span> 
+                          <span><b>{{searchResult.propArea}}</b> </span> 
+                        </p>
+                        <p> 
+                          <span> <i class="fas fa-campground"></i> <span> Frontage (feet): </span> </span>
+                          <span> <b>{{searchResult.propFrontage}}</b> </span>
+                        </p>
+    
+                        <p> 
+                          <span> <i class="fas fa-ruler-combined"></i> <span> Depth (feet): </span> </span>
+                          <span> <b>{{searchResult.propDepth}}</b> </span>
+                        </p>
+                    </div>
+                  </div>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="folderTypeDesc" >
+                <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+                <mat-cell *matCellDef="let searchResult" class="col-md-2 col-12"> 
+                  <div class="card m-1 full-width">
+                    <div class=" result-body text-center">
+                      <button class="btn btn-primary ripple btn-sm">    
+                        <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >
+                          Permits
+                        </a>
+                      </button>
+                      <br>
+                      <button class="btn btn-primary ripple btn-sm">
+                        <a> Map </a>
+                      </button>
+                    </div>
+                  </div> 
+                </mat-cell>
+              </ng-container>
+          
+              <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> -->
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          
+          </div>  
+            <mat-paginator #paginator (page)="pageEvent($event)" [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
+          
+          </div>        
+        </div>
+        <div class="button-panel mt-3">
+            <button  class="btn btn-primary btn-sm ripple float-left" (click) = searchShow()>
+              <span class="button-mobile-label"><i class="fas fa-arrow-left"></i></span>
+              <span class="button-label"> Back to Search Properties</span> 
+            </button>
+        </div>
+      </div>
   </div>
   
 </div>

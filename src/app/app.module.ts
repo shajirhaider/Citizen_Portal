@@ -25,6 +25,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { UpdatePasswordComponent } from './auth/update-password/update-password.component';
 import { UpdatePersonalInfoComponent } from './auth/update-personal-info/update-personal-info.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { RegisterFormComponent } from './auth/register-form/register-form.component';
+import { HomeComponent } from './home/home.component';
+import { LogoutComponent } from './auth/logout/logout.component';
 
 
 @NgModule({
@@ -40,7 +43,10 @@ import { RegisterComponent } from './auth/register/register.component';
     LoginComponent,
     UpdatePasswordComponent,
     UpdatePersonalInfoComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent,
+    LogoutComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../services/http.service';
 import { UrlService } from '../services/url.service';
 import { LoaderService } from '../services/loader.service';
@@ -53,20 +54,32 @@ export class SearchPropertiesComponent implements OnInit {
   msg: String ="msg";
   searchResultMsg: string = '';
   address: String = "";
+  btnShow: Boolean = false;
+  agree:Boolean;
+  agreeContent: Boolean = true;
 
   displayedColumns: string[] = ['propertyRoll', 'propArea', 'folderTypeDesc'];
   dataSource: MatTableDataSource<any[]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private httpService: HttpService, private url: UrlService, private loaderService: LoaderService, private storage : LocalStorageService) {
+  constructor(private httpService: HttpService, 
+              private router: Router,
+              private url: UrlService, 
+              private loaderService: LoaderService, 
+              private storage : LocalStorageService) {
 
+    if(this.storage.getItem("agree-content")){
+      this.agreeContent = false;
+    }
     if(this.storage.getItem("citizen_searchProp")){
+      this.agreeContent = false;
       let a = JSON.parse(this.storage.getItem("citizen_searchProp"))
       this.searchProperties.setValue(a)
     }
 
     if(this.storage.getItem("citizen_searchRslt")){
+      this.agreeContent = false;
       this.searchResultshow = true
       this.searchForm = false
       this.searchResults = JSON.parse(this.storage.getItem("citizen_searchRslt"))
@@ -79,9 +92,6 @@ export class SearchPropertiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getValidStreetType()
-    this.getValidStreetDirections()
-    this.getValidStreet()
   }
   getValidStreetType(){     
     let lid = "";
@@ -256,6 +266,18 @@ export class SearchPropertiesComponent implements OnInit {
     this.storage.removeItem("citizen_searchRslt")
     this.storage.removeItem("citizen_search_rslt_msg")
   }
+    
+  localStorageDataRemove(){
+    localStorage.removeItem("citizen_searchRslt")
+    localStorage.removeItem("citizen_searchProp")
+    localStorage.removeItem("citizen_search_rslt_msg")
+    this.agreeContent =false;
+    this.getValidStreetType()
+    this.getValidStreetDirections()
+    this.getValidStreet()
+
+  }
+
   displayfilterStreetType(type?: StreetType): string | undefined {
     return type ? type.description : undefined;
   }

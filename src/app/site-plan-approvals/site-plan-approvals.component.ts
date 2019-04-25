@@ -82,6 +82,7 @@ export class SitePlanApprovalsComponent implements OnInit{
     this.storage.removeItem("citizen_searchRslt")
     this.storage.removeItem("citizen_searchProp")
     this.storage.removeItem("citizen_search_rslt_msg")
+    this.storage.setItem('agree-content',"false")
     this.router.navigate(['/search-properties']);
 
   }

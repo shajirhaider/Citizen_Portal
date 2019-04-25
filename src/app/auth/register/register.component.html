@@ -1,6 +1,5 @@
 
   <div>
-      <h5> <b> Online Permits </b> </h5>
       <div class="card" >
         <h5 class="card-header"> Register</h5>
         <div class="card-body" *ngIf = 'askPin'>  
@@ -55,7 +54,7 @@
       </div>  
             
       <div class="button-panel mt-3"  *ngIf = 'askPin' >
-          <button class="btn btn-primary btn-sm ripple float-left" (click)=localStorageDataRemove()>
+          <button class="btn btn-primary btn-sm ripple float-left"  (click)="gotoLogin()">
             <span class="button-label">Previous</span>
           </button>
         <button *ngIf = "btnShow == true" class="btn btn-primary btn-sm ripple float-right mr-2" (click)=next()>
@@ -68,14 +67,14 @@
 
               <div class="float-left">
                   <div class="button-panel">
-                      <button class="btn btn-primary btn-sm float-left ripple" (click)="authenticatePublicUser()">
+                      <button class="btn btn-primary btn-sm float-left ripple"  (click)="goAskPin()">
                         Previous
                       </button>
                   </div>
                 </div>
             <div class="float-right">
               <div class="button-panel">
-                  <button class="btn btn-primary btn-sm float-left ripple" (click)="authenticatePublicUser()">
+                  <button class="btn btn-primary btn-sm float-left ripple">
                     Proceed With Register
                   </button>
               </div>

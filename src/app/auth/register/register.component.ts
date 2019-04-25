@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(''),
     token: new FormControl('amandaportal')
 });
-  constructor() { }
+  constructor(  private router: Router,) { }
 
   ngOnInit() {
   }
@@ -24,5 +25,16 @@ export class RegisterComponent implements OnInit {
       this.pinYes = true
       this.askPin = false
     }
+
+    if(this.isPIN == false){
+      this.router.navigate(['login/register/form']);
+    }
+  }
+  gotoLogin(){
+    this.router.navigate(['login']);
+  }
+  goAskPin(){
+    this.pinYes = false,
+    this.askPin = true
   }
 }

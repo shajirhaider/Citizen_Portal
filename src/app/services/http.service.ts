@@ -10,10 +10,8 @@ import 'rxjs/Rx';
 export class HttpService {
   constructor(private http: HttpClient) {}
   baseUrl = 'http://demo.randomaccess.ca/Amanda/API_FW/Services/ServiceMain.svc/json/';
-
   post(url: string, data: any): Observable<any> {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    
+    const headers = new Headers({'Content-Type': 'application/json'});  
     try {
         return this.http.post<any>(this.baseUrl+url, data,{ observe: 'response' });
     } catch (err) {

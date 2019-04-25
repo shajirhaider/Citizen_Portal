@@ -1,0 +1,185 @@
+<div>
+  <div class="card">
+    <div class="card-header">
+      Person or Organization?
+    </div>
+    <div class="card-body">
+      Are you registering on behalf of a Person or Organization?
+      <div class="agree-button mt-3">
+          <span class="mr-5">     
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" [(ngModel)] = "person" [value]="true" (click) = 'agreeContentShow()' >
+              <label class="form-check-label">
+                <b> Person</b>
+              </label>
+            </div>
+          </span>
+          <span> 
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" [(ngModel)] = "person" [value]="false" (click) = 'agreeContentShow()'>
+              <label class="form-check-label">
+                <b> Organization</b>
+              </label>
+            </div>
+          </span>
+        </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="agreeContent == true">
+    <div class="card-header">
+      Request PIN
+    </div>
+    <div class="card-body">
+      <div class="alert alert-primary">
+        Complete the following form and you’ll receive your PIN immediately via email. Once you have your PIN you’ll be able to complete the registration process and access additional services through the portal.
+      </div>
+
+    <div>
+      <form [formGroup] = "personForm" *ngIf = 'person == true'>
+        <div class="row mt-2">
+          <div class="col-12 col-md-4 "> 
+            <mat-form-field class="full-width">
+              <input matInput placeholder="First Name" formControlName = 'pin' type="text">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12 col-md-4 "> 
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Last Name" formControlName = 'pin' type="text">
+            </mat-form-field>
+          </div>
+        </div>
+          <div class="row mt-2">
+              <div class="col-12 col-md-4 "> 
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Street Number" formControlName = 'pin' type="number">
+                </mat-form-field>
+              </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Street Name" formControlName = 'pin' type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="City" formControlName = 'pin' type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Email" formControlName = 'pin' type="email">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Confirm Email" formControlName = 'pin' type="email">
+              </mat-form-field>
+            </div>
+          </div>
+      </form>
+
+      <form [formGroup] = "orgForm" *ngIf = 'person == false'>
+        <div class="row mt-2">
+          <div class="col-12 col-md-4 "> 
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Organization Name" formControlName = 'pin' type="text">
+            </mat-form-field>
+          </div>
+          <mat-hint align="start" class="col-12">
+            <strong>
+              This will be the company name that appears on all permit applications your company or representative members apply for. This cannot be changed by the user once registration is requested. If you have any questions in regards to this procedure please contact the Building Department at (519) 740-4613 or building@cambridge.ca during regular office hours.
+            </strong> 
+        </mat-hint>
+        </div>
+          <div class="row mt-2">
+              <div class="col-12 col-md-4 "> 
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Street Number" formControlName = 'pin' type="number">
+                </mat-form-field>
+              </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Street Name" formControlName = 'pin' type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="City" formControlName = 'pin' type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Email" formControlName = 'pin' type="email">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Confirm Email" formControlName = 'pin' type="email">
+              </mat-form-field>
+            </div>
+          </div>
+      </form>
+    </div>
+
+    <div>
+      <div class="agree-content" >
+        <h5 class=""> <b> Terms of Use Agreement </b>  </h5>
+            The City of Cambridge maintains this website as a service to members of the public for the purpose of providing on-line information about building application status within the City of Cambridge. By using this site, you are agreeing to comply with, and be bound by, the following terms of use. 
+            <a href="">
+              Please review the following terms carefully.
+            </a> 
+         
+        <div class="agree-button text-center mt-3">
+          <span class="mr-5">     
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="agreeBtn" [(ngModel)] = "agree" [value]="true" (input) = "btnShowT()">
+              <label class="form-check-label">
+                <b> I Agree</b>
+              </label>
+            </div>
+          </span>
+          <span> 
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="agreeBtn" [(ngModel)] = "agree" [value]="false"  (input) = "btnShowF()">
+              <label class="form-check-label">
+                <b> I Disagree</b>
+              </label>
+            </div>
+          </span>
+        </div>
+      
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+  <div >
+    <div class="button-panel mt-3" >
+      <button class="btn btn-primary btn-sm ripple float-left" (click)='previous()'>
+        <span class="button-label">Previous</span>
+      </button>
+    <button class="btn btn-primary btn-sm ripple float-right mr-2"  *ngIf="agree == true">
+      <span class="button-label">Request Pin</span>
+    </button>
+    </div>
+  </div>
+</div>

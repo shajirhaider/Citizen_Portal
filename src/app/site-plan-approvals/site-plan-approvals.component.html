@@ -1,6 +1,5 @@
 
 <div class="">
-    <h5> <b> Online Permits </b> </h5> 
     <div class="card mb-2" >
       <h5 class="card-header">Property Address</h5>
       <div class="card-body">
@@ -22,7 +21,7 @@
        </div>
         <div class="card-body"> 
         <div class="mat-elevation-z1">    
-          <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" class="result-table" matSort>
+          <mat-table #table [dataSource]="dataSource" class="result-table" matSort>
             <ng-container matColumnDef="folderRSN" >
               <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-1"> RSN </mat-header-cell>
               <mat-cell *matCellDef="let element" class="col-md-1 col-12"> 
