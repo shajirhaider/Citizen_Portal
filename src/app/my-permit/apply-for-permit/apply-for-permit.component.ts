@@ -27,6 +27,7 @@ export class ApplyForPermitComponent implements OnInit {
     }
   ]
   a = 'M';
+  b = '1';
 
   constructor() { }
 
