@@ -28,6 +28,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './auth/logout/logout.component';
+import { ApplyForPermitComponent } from './my-permit/apply-for-permit/apply-for-permit.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { LogoutComponent } from './auth/logout/logout.component';
     RegisterComponent,
     HomeComponent,
     LogoutComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    ApplyForPermitComponent
   ],
   imports: [
     BrowserModule,

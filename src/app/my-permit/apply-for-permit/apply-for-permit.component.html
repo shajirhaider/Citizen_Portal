@@ -1,0 +1,49 @@
+<div>
+  <div class="card">
+    <div class="card-header">
+      Apply For A Permit
+    </div>
+    <div class="card-body">
+      <div *ngFor = 'let form of formJson' class="row">
+        <div *ngFor = 'let control of form.controls' class="col-12">
+          <div *ngIf = "control.controlType == 'input'">
+            <div class="col-12 col-md-4 "> 
+              <mat-form-field class="full-width">
+                <input matInput [placeholder]=control.label type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf = "control.controlType == 'radio'">
+            <span class="col-3"> <b> {{control.label}} </b></span>
+            <span *ngFor = 'let option of control.option' class="col-9">
+              <span class="mr-5">     
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" [(ngModel)] = "a" [value]="option.value">
+                  <label class="form-check-label">
+                    {{option.text}}
+                  </label>
+                </div>
+              </span>
+            </span>
+          </div>
+          <div *ngIf = "control.controlType == 'checkbox'">
+            <span class="col-3"> <b> {{control.label}} </b></span>
+            <span *ngFor = 'let option of control.option' class="col-9">
+              <span class="mr-5">     
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" [(ngModel)] = "a" [value]="option.value">
+                  <label class="form-check-label">
+                    {{option.text}}
+                  </label>
+                </div>
+              </span>
+              </span>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

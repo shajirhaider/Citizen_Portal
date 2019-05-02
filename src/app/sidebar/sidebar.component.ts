@@ -45,7 +45,7 @@ export class SidebarComponent implements OnInit {
       child:[ 
         {
           text:"Apply for a Permit",
-          url:"/apply-permit"
+          url:"/apply-for-permit"
         },  
         {
           text:"Track My Application",
