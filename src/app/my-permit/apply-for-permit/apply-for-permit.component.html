@@ -1,49 +1,69 @@
 <div>
-  <div class="card">
-    <div class="card-header">
-      Apply For A Permit
-    </div>
-    <div class="card-body">
-      <div *ngFor = 'let form of formJson' class="row">
-        <div *ngFor = 'let control of form.controls' class="col-12">
-          <div *ngIf = "control.controlType == 'input'">
-            <div class="col-12 col-md-4 "> 
-              <mat-form-field class="full-width">
-                <input matInput [placeholder]=control.label type="text">
-              </mat-form-field>
+  <div  *ngFor = 'let form of formJson; let i = index'>
+    <div  *ngIf = 'form.taborder == tabOrder' >
+      <div class="card">
+          <h5 class="card-header"> {{form.tabname}}</h5>
+
+          <!-- <div class="card-header">
+            {{form.tabname}}
+          </div> -->
+          <div class="card-body">
+          <div *ngFor = 'let control of form.controls' class="col-12">
+            <div *ngIf = "control.controltype == 'label'">
+              {{control.label}}
             </div>
-          </div>
-          <div *ngIf = "control.controlType == 'radio'">
-            <span class="col-3"> <b> {{control.label}} </b></span>
-            <span *ngFor = 'let option of control.option' class="col-9">
-              <span class="mr-5">     
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" [(ngModel)] = "a" [value]="option.value">
-                  <label class="form-check-label">
-                    {{option.text}}
-                  </label>
-                </div>
+            
+            <div *ngIf = "control.controltype == 'input'">
+              <div class="col-12 col-md-4 "> 
+                <mat-form-field class="full-width">
+                  <input matInput [placeholder]=control.label type="text">
+                </mat-form-field>
+              </div>
+            </div>
+            <div *ngIf = "control.controltype == 'radiobutton'">
+              <span class="mr-5"> <b> {{control.label}} </b></span>
+              <span *ngFor = 'let option of control.options'>
+                <span class="mr-5">     
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" [name]=control.label type="radio" [(ngModel)] = "control.selectedvalue" [value]="option.value">
+                    <label class="form-check-label">
+                      {{option.text}}
+                    </label>
+                  </div>
+                </span>
               </span>
-            </span>
+            </div>
+            <div *ngIf = "control.controltype == 'checkbox'">
+              <!-- <span class="col-3"> <b> {{control.label}} </b></span> -->
+              <!-- <span *ngFor = 'let option of control.option' class="col-9"> -->
+                <span class="mr-5">     
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" >
+                    <label class="form-check-label"  >
+                      <span [innerHTML] = control.label></span>
+                    </label>
+                  </div>
+                </span>
+                <!-- </span> -->
+  
+            </div>
+  
           </div>
-          <div *ngIf = "control.controlType == 'checkbox'">
-            <span class="col-3"> <b> {{control.label}} </b></span>
-            <span *ngFor = 'let option of control.option' class="col-9">
-              <span class="mr-5">     
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" [(ngModel)] = "b" [value]="option.value">
-                  <label class="form-check-label">
-                    {{option.text}}
-                  </label>
-                </div>
-              </span>
-              </span>
-
-          </div>
-
+  
         </div>
-
+      
       </div>
+      <div class="mt-1">
+        <div class="button-panel">
+            <button class="btn btn-primary btn-sm float-left ripple" (click)='previousTab()'>
+              {{form.previousbuttonlabel}}
+            </button>
+            <button class="btn btn-primary btn-sm float-right ripple" (click)='nextTab()'>
+              {{form.nextbuttonlabel}}
+            </button>
+        </div>
+      </div>
+       
     </div>
   </div>
 </div>

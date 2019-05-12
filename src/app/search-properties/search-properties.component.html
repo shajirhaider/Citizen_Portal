@@ -117,15 +117,15 @@
     </div>
     
     <div class="mt-1" *ngIf ="searchResultshow == false">
-        <div class="button-panel">
-            <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
-              Clear
-            </button>
-            <button class="btn btn-primary btn-sm float-right ripple">
-              <a (click) = searchProperty() > Search </a>
-            </button>
-        </div>
+      <div class="button-panel">
+          <button class="btn btn-primary btn-sm float-left ripple" (click) = clear()>
+            Clear
+          </button>
+          <button class="btn btn-primary btn-sm float-right ripple">
+            <a (click) = searchProperty() > Search </a>
+          </button>
       </div>
+    </div>
       </div>
     
       <div *ngIf ="searchResultshow == true">
@@ -186,7 +186,7 @@
                   <div class="card m-1 full-width">
                     <div class=" result-body text-center">
                       <button class="btn btn-primary ripple btn-sm">    
-                        <a [routerLink]="['/site-plan-approvals', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >
+                        <a [routerLink]="['/search-properties/permits', searchResult.propertyRSN, searchResult.propHouse, searchResult.propStreet, searchResult.propCity ]" >
                           Permits
                         </a>
                       </button>

@@ -8,17 +8,17 @@ export class LocalStorageService {
   constructor() { }
 
   setItem(name: string, value:string){
-    return localStorage.setItem(name, value)
+    return sessionStorage.setItem(name, value)
   }
 
   getItem(name: string){
-    return localStorage.getItem(name)
+    return sessionStorage.getItem(name)
   }
 
   removeItem(name: string){
-    return localStorage.removeItem(name)
+    return sessionStorage.removeItem(name)
   }
   clear(){
-    return localStorage.clear()
+    return sessionStorage.clear()
   }
 }

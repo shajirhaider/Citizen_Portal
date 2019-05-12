@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
   { path: 'search-properties', component: SearchPropertiesComponent},
-  { path: 'site-plan-approvals/:rsn/:house/:street/:city', component: SitePlanApprovalsComponent},
+  { path: 'search-properties/permits/:rsn/:house/:street/:city', component: SitePlanApprovalsComponent},
   { path: 'search-mobile-sign-location', component: SearchMobileSignLocationComponent},
   { path: 'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
