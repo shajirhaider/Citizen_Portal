@@ -12,6 +12,7 @@ import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-appr
 import { SearchMobileSignLocationComponent } from './search-mobile-sign-location/search-mobile-sign-location.component';
 import { HomeComponent } from './home/home.component';  
 import { ApplyForPermitComponent } from './my-permit/apply-for-permit/apply-for-permit.component';
+import { ApplyForLicenceComponent } from './my-licence/apply-for-licence/apply-for-licence.component';
 
 
 const routes: Routes = [ 
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'login/register', component: RegisterComponent},
   { path: 'login/register/form', component: RegisterFormComponent},
   { path: 'apply-for-permit', component: ApplyForPermitComponent},
+  { path: 'apply-for-licence', component: ApplyForLicenceComponent},
 ];
 
 @NgModule({

@@ -58,6 +58,24 @@ export class SidebarComponent implements OnInit {
       ]
     },
     {
+      text:"My Licences", 
+      hasChild:false,
+      child:[ 
+        {
+          text:"Apply for Licence",
+          url:"/apply-for-licence"
+        },  
+        {
+          text:"Track My Application",
+          url:"/track-application"
+        },
+        {
+          text:"My Shopping Cart",
+          url:"/shopping-cart"
+        }
+      ]
+    },
+    {
       text:"Logout", 
       url:"/logout" 
     },

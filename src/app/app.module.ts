@@ -29,7 +29,7 @@ import { RegisterFormComponent } from './auth/register-form/register-form.compon
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { ApplyForPermitComponent } from './my-permit/apply-for-permit/apply-for-permit.component';
-
+import { ApplyForLicenceComponent } from './my-licence/apply-for-licence/apply-for-licence.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import { ApplyForPermitComponent } from './my-permit/apply-for-permit/apply-for-
     HomeComponent,
     LogoutComponent,
     RegisterFormComponent,
-    ApplyForPermitComponent
+    ApplyForPermitComponent,
+    ApplyForLicenceComponent,
   ],
   imports: [
     BrowserModule,
