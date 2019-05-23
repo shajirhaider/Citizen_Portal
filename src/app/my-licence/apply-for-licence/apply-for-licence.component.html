@@ -30,7 +30,7 @@
                 <div *ngIf="control.onChange && control.hasChild">
                   
                   <label class=""> <b> {{control.label}} </b></label>
-                  <select name="" id="" class="form-control" [(ngModel)]=control.selectedvalue (change)="getChildList(control, form)" >
+                  <select name="" id="" class="form-control" [(ngModel)]=control.selectedvalue (change)="getChildList(form)" >
                     <option *ngFor = 'let option of control.options'  [value]=option.value>{{option.text}}</option>
                   </select>
 

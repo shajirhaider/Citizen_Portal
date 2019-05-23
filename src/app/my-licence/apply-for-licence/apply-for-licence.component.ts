@@ -347,7 +347,9 @@ export class ApplyForLicenceComponent implements OnInit {
     let result = []
     for(var vl of val.controls) {
       if(vl.hasOwnProperty("isRequried")){       
-        result = val.controls.map(a => a.selectedvalue);       
+        // result = val.controls.map(a => a.selectedvalue); 
+        result.push(vl.selectedvalue)
+        console.log(result)      
       }
     }
     for(var i = 0; i < result.length; i++) {
@@ -368,11 +370,9 @@ export class ApplyForLicenceComponent implements OnInit {
   procedeToPreviousTab(){
     this.tabOrder= this.tabOrder-1;
   }
-
-  getChildList(value, tab){
+  getChildList(tab){
     let selectedValue:any[] = [];
     let result = true;
-    // tab.controls.forEach(element => {
     for(var element of tab.controls) {
       if(element.hasOwnProperty("parentcontrolIDs") && element.selectedvalue === ""){
         element.parentcontrolIDs.forEach(parId => {
@@ -399,7 +399,6 @@ export class ApplyForLicenceComponent implements OnInit {
         }  
       }  
     }
-    // });
   }
 
   getApplicationSubType(obj){
