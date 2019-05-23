@@ -7,6 +7,7 @@ import {
   MatFormFieldModule,
   MatGridListModule,
   MatInputModule,
+  MatDatepickerModule,
   MatListModule,
   MatRadioModule,
   MatSelectModule,
@@ -14,6 +15,8 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
+  MatNativeDateModule
+  
 } from '@angular/material';
 
 @NgModule({
@@ -25,6 +28,7 @@ import {
     MatFormFieldModule,
     MatGridListModule,
     MatInputModule,
+    MatDatepickerModule,
     MatListModule,
     MatRadioModule,
     MatSelectModule,
@@ -32,6 +36,7 @@ import {
     MatTableModule,
     MatPaginatorModule,    
     MatSortModule,
+    MatNativeDateModule
   ],
   exports: [
     MatButtonModule, 
@@ -40,6 +45,7 @@ import {
     MatAutocompleteModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatDatepickerModule,
     MatInputModule,
     MatListModule,
     MatRadioModule,
@@ -48,6 +54,7 @@ import {
     MatTableModule,
     MatPaginatorModule, 
     MatSortModule,
+    MatNativeDateModule
   ],
 })
 export class MaterialModule { }
