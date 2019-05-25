@@ -2,15 +2,17 @@
   <div  *ngFor = 'let form of formJson; let i = index'>
     <div  *ngIf = 'form.taborder == tabOrder' >
       <div class="card">
-          <h5 class="card-header"> {{form.tabname}}</h5>
-
-          <div class="card-body">
+        <h5 class="card-header"> {{form.tabname}}</h5>
+        <div class="card-body">
           <div *ngFor = 'let control of form.controls' class="col-12">         
             <div *ngIf = "control.controltype == 'input'">
               <div class="col-12 col-md-4 "> 
                 <mat-form-field class="full-width">
                   <input matInput [placeholder]=control.label [(ngModel)] = control.selectedvalue type="text"  autocomplete="off">
                 </mat-form-field>
+              </div>
+              <div class="mt-1" *ngIf="control.hasError">
+                <small>{{control.errorText}}</small>
               </div>
             </div>
             <div *ngIf = "control.controltype == 'datePicker'">
@@ -20,6 +22,9 @@
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
+                </div>
+                <div class="mt-1" *ngIf="control.hasError">                
+                  <small>{{control.errorText}}</small>
                 </div>
               </div>
             <div *ngIf = "control.controltype == 'select'">
@@ -35,7 +40,7 @@
                   </select>
 
                   <div class="mt-1" *ngIf="control.hasError">
-                    <b>This is required</b>
+                    <small>{{control.errorText}}</small>
                   </div>
                   
                 </div>
@@ -47,7 +52,7 @@
                     </select>
 
                     <div class="mt-1" *ngIf="control.hasError">
-                      <b>This is required</b>
+                      <small>{{control.errorText}}</small>
                     </div>
                   </div>
                 <div *ngIf="control.onChange == false">
@@ -56,8 +61,8 @@
                     <option *ngFor = 'let option of control.options' [value]=option.value>{{option.text}}</option>
                   </select>
 
-                  <div class="mt-1" *ngIf="control.hasError">
-                    <b>This is required</b>
+                  <div class="mt-1" *ngIf="control.hasError">                   
+                    <small>{{control.errorText}}</small>  
                   </div>
                 </div>
               </div>
@@ -76,6 +81,10 @@
                   </div>
                 </span>
               </span>
+              
+              <div class="mt-1" *ngIf="control.hasError">
+                <small>{{control.errorText}}</small>
+              </div>
             </div>
             
             <div *ngIf = "control.controltype == 'label'">
@@ -122,10 +131,8 @@
               </div>
             </div>
   
-          </div>
-  
-        </div>
-      
+          </div>    
+        </div>      
       </div>
       <div class="mt-1">
         <div class="button-panel">

@@ -9,7 +9,7 @@ import { __core_private_testing_placeholder__ } from '@angular/core/testing';
   styleUrls: ['./apply-for-licence.component.css']
 })
 export class ApplyForLicenceComponent implements OnInit {
-  tabOrder:number = 1;
+  tabOrder:number = 3;
   formJson =[
     {
       "tabname": "New Application for a License",
@@ -47,23 +47,26 @@ export class ApplyForLicenceComponent implements OnInit {
             }
           ]
         },
-        {
-          "controltype": "select",
-          "label": "Application Subtype",
-          "controlID":"abcd",
-          "onChange": true,
-          "parentcontrolIDs":["applicationType"],
-          "selectedvalue": "",
-          "hasParent":true,
-          "hasChild":true,
-          "isRequried":true,          
-          "hasError":false,
-          "serviceMethodName":"getApplicationSubType",
-          "serviceParameters":{
-            "applicationType":"",
-          },
-          "options": [],
-        },
+        // {
+        //   "controltype": "select",
+        //   "label": "Application Subtype",
+        //   "controlID":"abcd",
+        //   "onChange": true,
+        //   "parentcontrolIDs":["applicationType"],
+        //   "selectedvalue": "",
+        //   "hasParent":true,
+        //   "hasChild":true,
+        //   "isRequried":true,          
+        //   "hasError":false,
+        //   "errorText":"Application Type is required",
+        //   "toolTipText":"Application Type",
+        //   "placeholderText":"Select Application Type",
+        //   "serviceMethodName":"getApplicationSubType",
+        //   "serviceParameters":{
+        //     "applicationType":"",
+        //   },
+        //   "options": [],
+        // },
         {
           "controltype": "select",
           "label": "Application Subtype",
@@ -73,6 +76,9 @@ export class ApplyForLicenceComponent implements OnInit {
           "hasParent":true,
           "isRequried":true,          
           "hasError":false,
+          "errorText":"Application Subtype is required",
+          "toolTipText":"Application Subtype",
+          "placeholderText":"Select Application Subtype",
           "serviceMethodName":"getApplicationSubType",
           "serviceParameters":{
             "applicationType":"",
@@ -138,6 +144,9 @@ export class ApplyForLicenceComponent implements OnInit {
           "label": "Are you a licensee If no, please select a licensee. <font style='color:red;'>*</font>",
           "selectedvalue": "",
           "isRequried":true,
+          "hasError":false,        
+          "errorText":"This is required",
+          "toolTipText":"Application Type",
           "options": [
             {
               "text": "No",
@@ -152,8 +161,14 @@ export class ApplyForLicenceComponent implements OnInit {
         {
           "controltype": "input",
           "controlID":"licenseeName",
+          "parentcontrolIDs":["licensee"],
+          "expectedParentsValue":["No"],
           "label": "Licensee Name",
-          "selectedvalue": ""
+          "selectedvalue": "",
+          "hasError":false,
+          "errorText":" Licensee Name is required",
+          "toolTipText":"Application Type",
+          "placeholderText":"Enter Licensee Name",
         },
         {
           "controltype": "button",
@@ -180,6 +195,9 @@ export class ApplyForLicenceComponent implements OnInit {
           "label": "Are you an backflow tester? If no, please select a backflow tester.<font style='color:red;'>*</font>",
           "selectedvalue": "No",
           "isRequried":true,
+          "hasError":false,
+          "errorText":" This is required",
+          "toolTipText":"Application Type",
           "options": [
             {
               "text": "No",
@@ -194,14 +212,25 @@ export class ApplyForLicenceComponent implements OnInit {
         {
           "controltype": "input",
           "controlID":"tab4FirstName",
+          "parentcontrolIDs":["radioBtnTester"],
+          "expectedParentsValue":["No"],
           "label": "First Name",
-          "selectedvalue": ""
+          "selectedvalue": "",
+          "hasError":false,        
+          "errorText":"First Name is required",
+          "toolTipText":"Application Type",
+          
         },
         {
           "controltype": "input",
           "controlID":"tab4LastName",
+          "parentcontrolIDs":["radioBtnTester"],
+          "expectedParentsValue":["No"],
           "label": "Last Name",
-          "selectedvalue": ""
+          "selectedvalue": "",
+          "hasError":false,     
+          "errorText":"Last Name is required",
+          "toolTipText":"Application Type",
         },
         {
           "controltype": "button",         
@@ -346,14 +375,33 @@ export class ApplyForLicenceComponent implements OnInit {
   procedeToNextTab(val){
     let result = []
     for(var vl of val.controls) {
-      if(vl.hasOwnProperty("isRequried")){       
-        // result = val.controls.map(a => a.selectedvalue); 
-        result.push(vl.selectedvalue)
-        console.log(result)      
+      if(vl.hasOwnProperty("isRequried")){   
+        if(vl.selectedvalue === ""){
+          vl.hasError = true
+        }else{
+          vl.hasError = false
+        }    
+        result.push(vl.selectedvalue) 
+      }
+      if(vl.hasOwnProperty("expectedParentsValue")){       
+        for (var i = 0, len = vl.parentcontrolIDs.length; i < len; ++i){
+          for(var element of val.controls){
+            if ( vl.parentcontrolIDs[i] === element.controlID){
+              if(vl.expectedParentsValue[i] !== element.selectedvalue){     
+                vl.hasError = false       
+                break 
+              }else{
+                vl.hasError = true
+                result.push(vl.selectedvalue)
+                console.log("deep1",result)               
+              }
+            }
+          }
+        }   
       }
     }
     for(var i = 0; i < result.length; i++) {
-      if (result[i] === "" || result[i] === false)  {
+      if (result[i] === "" || result[i] === false){
         this.nextTab = false 
         break;
       }
@@ -363,6 +411,7 @@ export class ApplyForLicenceComponent implements OnInit {
     }
     if(this.nextTab === true){
       this.tabOrder = this.tabOrder+1;
+      val.controls.forEach((item) => item.hasError = false);
     }
 
   }
