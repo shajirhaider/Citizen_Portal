@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from './../../services/local-storage.service'
 @Component({
   selector: 'app-apply-for-licence',
   templateUrl: './apply-for-licence.component.html',
@@ -11,9 +12,7 @@ export class ApplyForLicenceComponent implements OnInit {
       "tabname": "New Application for a License",
       "tabID": "1",
       "taborder": 1,
-      "isValidated":false,
       "nextbuttonlabel": "Next",
-      "previousbuttonlabel": "Previous",
       "controls": [
         {
           "controltype": "select",
@@ -276,13 +275,13 @@ export class ApplyForLicenceComponent implements OnInit {
           "controltype": "text-info",
           "controlID":"applicant",
           "label": "Applicant:",
-          "selectedvalue": "Region of Waterloo Hanif Mohammad"
+          "selectedvalue": this.storage.getItem('username')
         },
         {
           "controltype": "text-info",
           "controlID":"backflowTester",
           "label": "Backflow Tester:",          
-          "otherControlID":"radioBtnTester",
+          "otherControlID":"tab4FirstName",
           "valueFromOtherControl":true,
           "selectedvalue": ""
         },
@@ -303,7 +302,6 @@ export class ApplyForLicenceComponent implements OnInit {
       "nextbuttonlabel": "Next",
       "serviceFnName":"abcd",
       "submit":true,
-      "isPreviousBtnVisible":true,
       "controls": [
         {
           "controltype": "input",
@@ -392,10 +390,10 @@ export class ApplyForLicenceComponent implements OnInit {
   replaceString = "test";
   nextTab = false;
 
-  constructor() { }
+  constructor(private storage : LocalStorageService ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
   procedeToNextTab(val){
     let result = []
     for(var vl of val.controls) {
@@ -489,7 +487,6 @@ export class ApplyForLicenceComponent implements OnInit {
   }
 
   controlIsHidden(tab){
-    console.log(tab)
     tab.controls.forEach(element => {
       if (element.hasOwnProperty("isHidden")){
         
@@ -505,31 +502,24 @@ export class ApplyForLicenceComponent implements OnInit {
 
       }
     });
-    // for(var element of controlsArr){
-    //   if (element.controlID === obj.parentcontrolID){
-    //     if(element.selectedvalue === obj.expectedParentsValue){
-    //       return false
-    //     }else{
-    //       return true
-    //     }
-    //   }
-    // }
 
-    // for (var key in this.formJson[this.tabOrder-1]) {
-    //   for(var element of this.formJson) {
-    //     for(var vl of element.controls) {
-    //       if(parentControlID === vl.controlID){
-    //         if( controlValue === vl.selectedvalue){            
-    //           return false
-    //         } 
-    //         else{
-    //           return true
-    //         }  
-    //       }
-    //     }
-    //   }
-    // }
+  }
 
+  valueFromOtherControl(control){
+    
+    if(control.hasOwnProperty("valueFromOtherControl") ){  
+      for(var vl of this.formJson) {
+        for(var el of vl.controls){       
+          if( control.otherControlID === el.controlID){
+            if(el.selectedvalue == ""){             
+              return  control.selectedvalue = this.storage.getItem('username')
+            }else{
+              return  control.selectedvalue = el.selectedvalue
+            }
+          }
+        } 
+      }
+    }
   }
 
 }

@@ -144,33 +144,49 @@
             </div>
             
             <div *ngIf = "control.controltype == 'text-info'">
-              <div class="row">
-                  <span class="col-12 col-md-3" >
-                    <span class="float-right">
-                        {{control.label}}
+              <div *ngIf = "control.valueFromOtherControl === true">               
+                <div class="row">
+                    <span class="col-12 col-md-3" >
+                      <span class="float-right">
+                          {{control.label}}
+                      </span>
                     </span>
-                  </span>
-                  <span class="col-12 col-md-9">
-                    <span class="float-left">
-                        <b>
-                          {{control.selectedvalue}}
-                        </b>
-
+                    <span class="col-12 col-md-9">
+                      <span class="float-left">
+                          <b> {{valueFromOtherControl(control)}} </b>
+                      </span>
                     </span>
-                  </span>
-
+                </div>
               </div>
             </div>
+                   
+            <div *ngIf = "control.controltype == 'text-info'">
+                <div *ngIf = "!control.valueFromOtherControl">
+                  <div class="row">
+                      <span class="col-12 col-md-3" >
+                        <span class="float-right">
+                            {{control.label}}
+                        </span>
+                      </span>
+                      <span class="col-12 col-md-9">
+                        <span class="float-left">
+                            <b> {{control.selectedvalue}} </b>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+              </div>
   
           </div>    
         </div>      
       </div>
       <div class="mt-1">
         <div class="button-panel">
-            <button class="btn btn-primary btn-sm float-left ripple" (click)='procedeToPreviousTab()'>
+            <button *ngIf="form.previousbuttonlabel" class="btn btn-primary btn-sm float-left ripple" (click)='procedeToPreviousTab()'>
               {{form.previousbuttonlabel}}
             </button>
-            <button class="btn btn-primary btn-sm float-right ripple" (click)='procedeToNextTab(form)'>
+            <button  *ngIf="form.nextbuttonlabel" class="btn btn-primary btn-sm float-right ripple" (click)='procedeToNextTab(form)'>
               {{form.nextbuttonlabel}}
             </button>
         </div>

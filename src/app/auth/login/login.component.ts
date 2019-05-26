@@ -73,6 +73,7 @@ constructor(
           let username = response["body"]["organizationName"]+" ("+ name + " )"
           this.authService.getUsername(username)
           this.authService.display(true);
+          this.storage.setItem('username', username)
           this.router.navigate(['/home']);
           this.loaderService.display(false);  
         },
