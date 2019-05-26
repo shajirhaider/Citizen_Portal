@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { bypassSanitizationTrustResourceUrl } from '@angular/core/src/sanitization/bypass';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { __core_private_testing_placeholder__ } from '@angular/core/testing';
-
 @Component({
   selector: 'app-apply-for-licence',
   templateUrl: './apply-for-licence.component.html',
@@ -139,10 +135,11 @@ export class ApplyForLicenceComponent implements OnInit {
       "previousbuttonlabel": "Previous",
       "controls": [
         {
-          "controltype": "radiobutton",
+          "controltype": "radiobuttonOnChange",
           "controlID":"licensee",
           "label": "Are you a licensee If no, please select a licensee. <font style='color:red;'>*</font>",
-          "selectedvalue": "",
+          "selectedvalue": "No",
+          "onChange":"true",
           "isRequried":true,
           "hasError":false,        
           "errorText":"This is required",
@@ -159,16 +156,22 @@ export class ApplyForLicenceComponent implements OnInit {
           ]
         },
         {
-          "controltype": "input",
+          "controltype": "autoComplete",
           "controlID":"licenseeName",
-          "parentcontrolIDs":["licensee"],
-          "expectedParentsValue":["No"],
+          "parentcontrolID":"licensee",
+          "expectedParentsValue":"No",
           "label": "Licensee Name",
           "selectedvalue": "",
           "hasError":false,
+          "isHidden":false,
           "errorText":" Licensee Name is required",
           "toolTipText":"Application Type",
           "placeholderText":"Enter Licensee Name",
+          "serviceMethodName":"getLicenseeName",
+          "serviceParameters":{
+            "searchValue":"", // selected value of this control
+          },
+          "options": [],
         },
         {
           "controltype": "button",
@@ -190,7 +193,7 @@ export class ApplyForLicenceComponent implements OnInit {
       "previousbuttonlabel": "Previous",
       "controls": [
         {
-          "controltype": "radiobutton",
+          "controltype": "radiobuttonOnChange",
           "controlID":"radioBtnTester",
           "label": "Are you an backflow tester? If no, please select a backflow tester.<font style='color:red;'>*</font>",
           "selectedvalue": "No",
@@ -210,10 +213,11 @@ export class ApplyForLicenceComponent implements OnInit {
           ]
         },
         {
-          "controltype": "input",
+          "controltype": "autoComplete",
           "controlID":"tab4FirstName",
-          "parentcontrolIDs":["radioBtnTester"],
-          "expectedParentsValue":["No"],
+          "parentcontrolID":"radioBtnTester",
+          "expectedParentsValue":"No",
+          "isHidden":false,
           "label": "First Name",
           "selectedvalue": "",
           "hasError":false,        
@@ -222,10 +226,11 @@ export class ApplyForLicenceComponent implements OnInit {
           
         },
         {
-          "controltype": "input",
+          "controltype": "autoComplete",
           "controlID":"tab4LastName",
-          "parentcontrolIDs":["radioBtnTester"],
-          "expectedParentsValue":["No"],
+          "parentcontrolID":"radioBtnTester",
+          "expectedParentsValue":"No",
+          "isHidden":false,
           "label": "Last Name",
           "selectedvalue": "",
           "hasError":false,     
@@ -249,19 +254,23 @@ export class ApplyForLicenceComponent implements OnInit {
       "tabID": "5",
       "taborder": 5,
       "nextbuttonlabel": "Confirm",
-      "previousbuttonlabel": "Previous",
+      "previousbuttonlabel": "Previous",   
       "controls": [
         {
           "controltype": "text-info",          
           "controlID":"licenseType",
           "label": "License Type:",
-          "selectedvalue": "Backflow Device Tester"
+          "otherControlID":"applicationType",
+          "valueFromOtherControl":true,
+          "selectedvalue": ""
         },
         {
           "controltype": "text-info",
           "label": "License Subtype:",          
-          "controlID":"licenseSubtype",
-          "selectedvalue": "Backflow Device Tester"
+          "controlID":"licenseSubtype",      
+          "otherControlID":"applicationType",
+          "valueFromOtherControl":true,
+          "selectedvalue": ""
         },
         {
           "controltype": "text-info",
@@ -272,14 +281,18 @@ export class ApplyForLicenceComponent implements OnInit {
         {
           "controltype": "text-info",
           "controlID":"backflowTester",
-          "label": "Backflow Tester:",
-          "selectedvalue": "Region of Waterloo Hanif Mohammad"
+          "label": "Backflow Tester:",          
+          "otherControlID":"radioBtnTester",
+          "valueFromOtherControl":true,
+          "selectedvalue": ""
         },
         {
           "controltype": "text-info",
           "controlID":"licensee",
-          "label": "Licensee:",
-          "selectedvalue": "Region of Waterloo Hanif Mohammad"
+          "label": "Licensee:",         
+          "otherControlID":"licenseeName",
+          "valueFromOtherControl":true,
+          "selectedvalue": ""
         }
       ]
     },
@@ -288,7 +301,9 @@ export class ApplyForLicenceComponent implements OnInit {
       "tabID": "6",
       "taborder": 6,
       "nextbuttonlabel": "Next",
-      "previousbuttonlabel": "",
+      "serviceFnName":"abcd",
+      "submit":true,
+      "isPreviousBtnVisible":true,
       "controls": [
         {
           "controltype": "input",
@@ -298,6 +313,7 @@ export class ApplyForLicenceComponent implements OnInit {
         },
         {
           "controltype": "datePicker",
+          "dateFormate":"yyyy-mm-dd",
           "controlID":"expiryDate",
           "label": "Expiry Date",
           "selectedvalue": ""
@@ -319,6 +335,10 @@ export class ApplyForLicenceComponent implements OnInit {
           "controlID":"showContractorsList",
           "label": "Show on Contractors List? <font style='color:red;'>*</font>",
           "selectedvalue": "",
+          "isRequried":true,
+          "hasError":false,        
+          "errorText":"This is required",
+          "toolTipText":"Application Type",
           "options": [
             {
               "text": "No",
@@ -335,18 +355,22 @@ export class ApplyForLicenceComponent implements OnInit {
           "controlID":"approvedSystems",
           "label": "Approved Systems:  <font style='color:red;'>*</font>",
           "selectedvalue": "",
+          "isRequried":true,
+          "hasError":false,        
+          "errorText":"Approved Systems is required",
+          "toolTipText":"Application Type",
           "options": [
             {
               "text": "All Systems",
-              "value": "No"
+              "value": "All"
             },
             {
               "text": "Fire Protection Equipment Only",
-              "value": "Yes"
+              "value": "Fire Protection"
             },
             {
               "text": "Lawn Irrigation Systems Only",
-              "value": "Yes"
+              "value": "Lawn Irrigation"
             }
           ]
         },
@@ -360,7 +384,7 @@ export class ApplyForLicenceComponent implements OnInit {
           "controltype": "datePicker",
           "controlID":"insuranceExpiryDate",
           "label": "Insurance Expiry Date",
-          "selectedvalue": ""
+          "selectedvalue": "",
         }
       ]
     }
@@ -383,22 +407,17 @@ export class ApplyForLicenceComponent implements OnInit {
         }    
         result.push(vl.selectedvalue) 
       }
-      if(vl.hasOwnProperty("expectedParentsValue")){       
-        for (var i = 0, len = vl.parentcontrolIDs.length; i < len; ++i){
-          for(var element of val.controls){
-            if ( vl.parentcontrolIDs[i] === element.controlID){
-              if(vl.expectedParentsValue[i] !== element.selectedvalue){     
-                vl.hasError = false       
-                break 
-              }else{
-                vl.hasError = true
-                result.push(vl.selectedvalue)
-                console.log("deep1",result)               
-              }
-            }
-          }
+      if(vl.hasOwnProperty("isHidden") ){   
+        if( vl.isHidden === false){         
+          if(vl.selectedvalue === ""){
+            vl.hasError = true            
+            result.push(vl.selectedvalue) 
+          }else{
+            vl.hasError = false
+          } 
         }   
       }
+      console.log(result)
     }
     for(var i = 0; i < result.length; i++) {
       if (result[i] === "" || result[i] === false){
@@ -413,7 +432,6 @@ export class ApplyForLicenceComponent implements OnInit {
       this.tabOrder = this.tabOrder+1;
       val.controls.forEach((item) => item.hasError = false);
     }
-
   }
 
   procedeToPreviousTab(){
@@ -466,14 +484,52 @@ export class ApplyForLicenceComponent implements OnInit {
         "value": "Contrator"
       }
     ]
-    // value.forEach(element => {
-    //   obj.serviceParameters =  obj.serviceParameters.map(function(credential){
-                
-    //       return credential;
-    //   })
-    // });
    
     
+  }
+
+  controlIsHidden(tab){
+    console.log(tab)
+    tab.controls.forEach(element => {
+      if (element.hasOwnProperty("isHidden")){
+        
+        for(var el of tab.controls){
+          if (element.parentcontrolID === el.controlID){
+            if(element.expectedParentsValue === el.selectedvalue){
+              element.isHidden = true
+            }else{
+              element.isHidden = false
+            }
+          }
+        }
+
+      }
+    });
+    // for(var element of controlsArr){
+    //   if (element.controlID === obj.parentcontrolID){
+    //     if(element.selectedvalue === obj.expectedParentsValue){
+    //       return false
+    //     }else{
+    //       return true
+    //     }
+    //   }
+    // }
+
+    // for (var key in this.formJson[this.tabOrder-1]) {
+    //   for(var element of this.formJson) {
+    //     for(var vl of element.controls) {
+    //       if(parentControlID === vl.controlID){
+    //         if( controlValue === vl.selectedvalue){            
+    //           return false
+    //         } 
+    //         else{
+    //           return true
+    //         }  
+    //       }
+    //     }
+    //   }
+    // }
+
   }
 
 }

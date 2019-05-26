@@ -15,6 +15,17 @@
                 <small>{{control.errorText}}</small>
               </div>
             </div>
+                   
+            <div *ngIf = "control.controltype == 'autoComplete' && control.isHidden === false">
+              <div class="col-12 col-md-4 "> 
+                <mat-form-field class="full-width">
+                  <input matInput [placeholder]=control.label [(ngModel)] = control.selectedvalue type="text"  autocomplete="off">
+                </mat-form-field>
+              </div>
+              <div class="mt-1" *ngIf="control.hasError">
+                <small>{{control.errorText}}</small>
+              </div>
+            </div>
             <div *ngIf = "control.controltype == 'datePicker'">
                 <div class="col-12 col-md-4 "> 
                   <mat-form-field class="full-width">
@@ -23,7 +34,7 @@
                       <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
                 </div>
-                <div class="mt-1" *ngIf="control.hasError">                
+                <div class="" *ngIf="control.hasError">                
                   <small>{{control.errorText}}</small>
                 </div>
               </div>
@@ -75,6 +86,26 @@
                 <span class="mr-5">     
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" [name]=control.label type="radio" [(ngModel)] = "control.selectedvalue" [value]="option.value">
+                    <label class="form-check-label">
+                      {{option.text}}
+                    </label>
+                  </div>
+                </span>
+              </span>
+              
+              <div class="mt-1" *ngIf="control.hasError">
+                <small>{{control.errorText}}</small>
+              </div>
+            </div>
+            
+            <div *ngIf = "control.controltype == 'radiobuttonOnChange'">
+                <label class="form-check-label mr-5"  >
+                    <span [innerHTML] = control.label></span>
+                </label>
+              <span *ngFor = 'let option of control.options'>
+                <span class="mr-5">     
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" [name]=control.label type="radio" [(ngModel)] = "control.selectedvalue" [value]="option.value" (click)="controlIsHidden(form)">
                     <label class="form-check-label">
                       {{option.text}}
                     </label>
