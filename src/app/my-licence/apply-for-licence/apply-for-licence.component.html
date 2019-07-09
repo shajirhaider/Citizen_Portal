@@ -1,197 +1,257 @@
-<div >
-  <div  *ngFor = 'let form of formJson; let i = index'>
-    <div  *ngIf = 'form.taborder == tabOrder' >
-      <div class="card">
-        <h5 class="card-header"> {{form.tabname}}</h5>
-        <div class="card-body">
-          <div *ngFor = 'let control of form.controls' class="col-12">         
-            <div *ngIf = "control.controltype == 'input'">
-              <div class="col-12 col-md-4 "> 
-                <mat-form-field class="full-width">
-                  <input matInput [placeholder]=control.label [(ngModel)] = control.selectedvalue type="text"  autocomplete="off">
-                </mat-form-field>
-              </div>
-              <div class="mt-1" *ngIf="control.hasError">
-                <small>{{control.errorText}}</small>
-              </div>
-            </div>
-                   
-            <div *ngIf = "control.controltype == 'autoComplete' && control.isHidden === false">
-              <div class="col-12 col-md-4 "> 
-                <mat-form-field class="full-width">
-                  <input matInput [placeholder]=control.label [(ngModel)] = control.selectedvalue type="text"  autocomplete="off">
-                </mat-form-field>
-              </div>
-              <div class="mt-1" *ngIf="control.hasError">
-                <small>{{control.errorText}}</small>
-              </div>
-            </div>
-            <div *ngIf = "control.controltype == 'datePicker'">
-                <div class="col-12 col-md-4 "> 
-                  <mat-form-field class="full-width">
-                      <input matInput [matDatepicker]="picker" [placeholder]=control.label (click)="picker.open()" autocomplete="off">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="" *ngIf="control.hasError">                
-                  <small>{{control.errorText}}</small>
-                </div>
-              </div>
-            <div *ngIf = "control.controltype == 'select'">
-              <div class="col-12 col-md-4 "> 
-                <!-- <mat-form-field class="full-width">
-                  <input matInput [placeholder]=control.label type="text">
-                </mat-form-field> -->
-                <div *ngIf="control.onChange && control.hasChild">
-                  
-                  <label class=""> <b> {{control.label}} </b></label>
-                  <select name="" id="" class="form-control" [(ngModel)]=control.selectedvalue (change)="getChildList(form)" >
-                    <option *ngFor = 'let option of control.options'  [value]=option.value>{{option.text}}</option>
-                  </select>
+<div>
+  <div *ngFor='let form of formJson; let i = index'>
+      <div *ngIf='form.taborder == tabOrder'>
+          <div class="card">
+              <h5 class="card-header"> {{form.tabname}}</h5>
+              <div class="card-body">
+                  <div *ngFor='let control of form.controls' class="col-12">
 
-                  <div class="mt-1" *ngIf="control.hasError">
-                    <small>{{control.errorText}}</small>
-                  </div>
-                  
-                </div>
-                
-                <div *ngIf="control.hasParent && !control.hasChild">
-                    <label class=""> <b> {{control.label}} </b></label>
-                    <select name="" id="" class="form-control"  [(ngModel)]=control.selectedvalue >
-                      <option *ngFor = 'let option of control.options' [value]=option.value>{{option.text}}</option>
-                    </select>
+                      <!--for input type control-->
 
-                    <div class="mt-1" *ngIf="control.hasError">
-                      <small>{{control.errorText}}</small>
-                    </div>
-                  </div>
-                <div *ngIf="control.onChange == false">
-                  <label class=""> <b> {{control.label}} </b></label>
-                  <select name="" id="" class="form-control"  [(ngModel)]=control.selectedvalue >
-                    <option *ngFor = 'let option of control.options' [value]=option.value>{{option.text}}</option>
-                  </select>
+                      <div *ngIf="control.controltype == 'conditionalInput' && control.isHidden === false" class="">
+                          <div class="col-12 col-md-12 ">
+                              <label class="form-check-label">
+                                  <span [innerHTML]=control.label></span>
+                              </label>
+                          </div>
+                          <div class="col-12 col-md-5 ">
+                              <mat-form-field class="full-width" appearance="outline">
+                                  <mat-label>{{control.placeholderText}}</mat-label>
+                                  <input matInput [(ngModel)]=control.selectedvalue type="text" autocomplete="off">
+                                  <mat-hint  style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div *ngIf="control.controltype == 'input'" class="">
+                          <div class="col-12 col-md-12 ">
+                              <label class="form-check-label">
+                                  <span [innerHTML]=control.label></span>
+                              </label>
+                          </div>
+                          <div class="col-12 col-md-5 ">
+                              <mat-form-field class="full-width" appearance="outline">
+                                  <mat-label>{{control.placeholderText}}</mat-label>
+                                  <input matInput [(ngModel)]=control.selectedvalue type="text" autocomplete="off">
+                                  <mat-hint  style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                              </mat-form-field>
+                          </div>
 
-                  <div class="mt-1" *ngIf="control.hasError">                   
-                    <small>{{control.errorText}}</small>  
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div *ngIf = "control.controltype == 'radiobutton'">
-                <label class="form-check-label mr-5"  >
-                    <span [innerHTML] = control.label></span>
-                </label>
-              <span *ngFor = 'let option of control.options'>
-                <span class="mr-5">     
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" [name]=control.label type="radio" [(ngModel)] = "control.selectedvalue" [value]="option.value">
-                    <label class="form-check-label">
-                      {{option.text}}
-                    </label>
-                  </div>
-                </span>
-              </span>
-              
-              <div class="mt-1" *ngIf="control.hasError">
-                <small>{{control.errorText}}</small>
-              </div>
-            </div>
-            
-            <div *ngIf = "control.controltype == 'radiobuttonOnChange'">
-                <label class="form-check-label mr-5"  >
-                    <span [innerHTML] = control.label></span>
-                </label>
-              <span *ngFor = 'let option of control.options'>
-                <span class="mr-5">     
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" [name]=control.label type="radio" [(ngModel)] = "control.selectedvalue" [value]="option.value" (click)="controlIsHidden(form)">
-                    <label class="form-check-label">
-                      {{option.text}}
-                    </label>
-                  </div>
-                </span>
-              </span>
-              
-              <div class="mt-1" *ngIf="control.hasError">
-                <small>{{control.errorText}}</small>
-              </div>
-            </div>
-            
-            <div *ngIf = "control.controltype == 'label'">
-              <label class="form-check-label"  >
-                <span [innerHTML] = control.label></span>
-              </label>
-            </div>
-            <div *ngIf = "control.controltype == 'checkbox'">
-              <!-- <span class="col-3"> <b> {{control.label}} </b></span> -->
-              <!-- <span *ngFor = 'let option of control.option' class="col-9"> -->
-                <span class="mr-5">     
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" [(ngModel)] = 'control.selectedvalue' type="checkbox" >
-                    <label class="form-check-label"  >
-                      <span [innerHTML] = control.label></span>
-                    </label>
-                  </div>
-                </span>
-                <!-- </span> -->
-  
-            </div>
-            <div *ngIf = "control.controltype == 'button'">
-              <div class="float-right form-check form-check-inline" style="">
-                <button class="btn btn-sm btn-primary" style="display: inline-block; ">{{control.label}}</button>
-              </div>
-            </div>
-            
-            <div *ngIf = "control.controltype == 'text-info'">
-              <div *ngIf = "control.valueFromOtherControl === true">               
-                <div class="row">
-                    <span class="col-12 col-md-3" >
-                      <span class="float-right">
-                          {{control.label}}
-                      </span>
-                    </span>
-                    <span class="col-12 col-md-9">
-                      <span class="float-left">
-                          <b> {{valueFromOtherControl(control)}} </b>
-                      </span>
-                    </span>
-                </div>
-              </div>
-            </div>
-                   
-            <div *ngIf = "control.controltype == 'text-info'">
-                <div *ngIf = "!control.valueFromOtherControl">
-                  <div class="row">
-                      <span class="col-12 col-md-3" >
-                        <span class="float-right">
-                            {{control.label}}
-                        </span>
-                      </span>
-                      <span class="col-12 col-md-9">
-                        <span class="float-left">
-                            <b> {{control.selectedvalue}} </b>
-                        </span>
-                      </span>
-                    </div>
-                  </div>
+                     
+                      </div>
 
+                      <!--for auto-complete type control-->
+                      <div *ngIf="control.controltype == 'autoComplete' && control.isHidden === false" class="">
+                          <div class="col-12 col-md-12 ">
+                              <label class="form-check-label">
+                                  <span [innerHTML]=control.label></span>
+                              </label>
+                          </div>
+                          <div class="col-12 col-md-5 ">
+                              <mat-form-field class="full-width" appearance="outline">
+
+                                  <mat-label>{{control.placeholderText}}</mat-label>
+                                  <input matInput [(ngModel)]=control.selectedvalue type="text" autocomplete="off">
+                                  <mat-hint  style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                              </mat-form-field>
+                          </div>
+
+                      </div>
+
+                      <!--for data-picker type control-->
+                      <div *ngIf="control.controltype == 'datePicker'" class="">
+                          <div class="col-12 col-md-12 ">
+                              <label class="form-check-label">
+                                  <span [innerHTML]=control.label></span>
+                              </label>
+                          </div>
+                          <div class="col-12 col-md-5 ">
+
+                              <mat-form-field class="full-width" appearance="outline">
+                                  <mat-label>{{control.placeholderText}}</mat-label>
+                                  <input [matDatepicker]="picker" matInput [(ngModel)]="control.selectedvalue" (click)="picker.open()" autocomplete="off">
+                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
+
+                                  <mat-hint style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                              </mat-form-field>
+                          </div>
+                      </div>
+
+                      <!--for select type control-->
+                      <div *ngIf="control.controltype == 'select'" class="mb-3">
+                          <div *ngIf="control.onChange && control.hasChild" class="">
+
+                              <div class="col-12 col-md-12 ">
+                                  <label class="form-check-label">
+                                      <span [innerHTML]=control.label></span>
+                                  </label>
+                              </div>
+                              <div class="col-12 col-md-5 ">
+
+                                  <select name="" id="" class="form-control" [(ngModel)]=control.selectedvalue (change)="getChildList(form)">
+                                      <option *ngFor='let option of control.options' [value]=option.value>{{option.text}}</option>
+                                  </select>
+                                  <mat-hint  style="color:red; font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                              </div>
+
+                          </div>
+
+                          <div *ngIf="control.hasParent && !control.hasChild" class="">
+                              <div class="col-12 col-md-12 ">
+                                  <label class="form-check-label">
+                                      <span [innerHTML]=control.label></span>
+                                  </label>
+                              </div>
+                              <div class="col-12 col-md-5 ">
+
+                                  <select name="" id="" class="form-control" [(ngModel)]=control.selectedvalue>
+                                      <option *ngFor='let option of control.options' [value]=option.value>{{option.text}}</option>
+                                  </select>
+                                  <mat-hint  style="color:red; font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                              </div>
+                          </div>
+                          <div *ngIf="control.onChange == false" class="">
+                              <div class="col-12 col-md-12 ">
+                                  <label class="form-check-label">
+                                      <span [innerHTML]=control.label></span>
+                                  </label>
+                              </div>
+                              <div class="col-12 col-md-5 ">
+                                  <select name="" id="" class="form-control" [(ngModel)]=control.selectedvalue>
+                                      <option *ngFor='let option of control.options' [value]=option.value>{{option.text}}</option>
+                                  </select>
+                                  <mat-hint  style="color:red; font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--for radion button type control-->
+                      <div *ngIf="control.controltype == 'radiobutton'" class="mb-3">
+                          <div class="col-12 col-md-12 ">
+                              <label class="form-check-label">
+                                  <span [innerHTML]=control.label></span>
+                              </label>
+                          </div>
+                          <div class="col-12 col-md-5 ">
+
+                              <span *ngFor='let option of control.options'>
+                                  <span class="mr-5">
+                                      <div class="form-check form-check-inline">
+                                          <input class="form-check-input" [name]=control.label type="radio" [(ngModel)]="control.selectedvalue" [value]="option.value">
+                                          <label class="form-check-label">
+                                              {{option.text}}
+                                          </label>
+                                      </div>
+                                  </span>
+                              </span>
+                              <mat-hint  style="color:red;font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                          </div>
+                      </div>
+
+                      <!--for radiobuttinOnChange type control-->
+                      <div *ngIf="control.controltype == 'radiobuttonOnChange'" class="mb-3">
+                          <div class="col-12 col-md-12 ">
+                              <label class="form-check-label">
+                                  <span [innerHTML]=control.label></span>
+                              </label>
+                          </div>
+                          <div class="col-12 col-md-5 ">
+                              <span *ngFor='let option of control.options'>
+                                  <span class="mr-5">
+                                      <div class="form-check form-check-inline">
+                                          <input class="form-check-input" [name]=control.label type="radio" [(ngModel)]="control.selectedvalue" [value]="option.value" (click)="controlIsHidden(form)">
+                                          <label class="form-check-label">
+                                              {{option.text}}
+                                          </label>
+                                      </div>
+                                  </span>
+                              </span>
+                              <mat-hint  style="color:red;font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+                          </div>
+                      </div>
+
+                      <!--for label type control-->
+                      <div *ngIf="control.controltype == 'label'" class="">
+                          <label class="form-check-label">
+                              <span [innerHTML]=control.label></span>
+                          </label>
+                      </div>
+
+                      <!--for check box type control-->
+                      <div *ngIf="control.controltype == 'checkbox'" class="">
+
+                          <!-- <span class="col-3"> <b> {{control.label}} </b></span> -->
+                          <!-- <span *ngFor = 'let option of control.option' class="col-9"> -->
+                          <span class="mr-5">
+                              <div class="form-check form-check-inline">
+                                  <input class="form-check-input" [(ngModel)]='control.selectedvalue' type="checkbox">
+                                  <label class="form-check-label">
+                                      <span [innerHTML]=control.label></span>
+                                  </label>
+                              </div>
+                          </span>
+                          <!-- </span> -->
+
+                      </div>
+
+                      <!--for button type control-->
+                      <div *ngIf="control.controltype == 'button'">
+                          <div class="float-right form-check form-check-inline" style="">
+                              <button class="btn btn-sm btn-primary" style="display: inline-block; ">{{control.label}}</button>
+                          </div>
+                      </div>
+
+                      <!--for text-info type control and valueFromother Control-->
+                      <div *ngIf="control.controltype == 'text-info'">
+                          <div *ngIf="control.valueFromOtherControl === true">
+                              <div class="row mb-3">
+                                  <span class="col-12 col-md-4">
+                                      <span class="float-right">
+                                          {{control.label}}
+                                      </span>
+                                  </span>
+                                  <span class="col-12 col-md-8">
+                                      <span class="float-left">
+                                          <b> {{valueFromOtherControl(control)}} </b>
+                                      </span>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--for text-info type control-->
+                      <div *ngIf="control.controltype == 'text-info'">
+                          <div *ngIf="!control.valueFromOtherControl">
+                              <div class="row mb-3">
+                                  <span class="col-12 col-md-4">
+                                      <span class="float-right">
+                                          {{control.label}}
+                                      </span>
+                                  </span>
+                                  <span class="col-12 col-md-8">
+                                      <span class="float-left">
+                                          <b> {{control.selectedvalue}} </b>
+                                      </span>
+                                  </span>
+                              </div>
+                          </div>
+
+                      </div>
+
+                  </div>
               </div>
-  
-          </div>    
-        </div>      
+          </div>
+          <div class="mt-1">
+              <div class="button-panel">
+                  <button type="button" *ngIf="form.previousbuttonlabel" class="btn btn-primary btn-sm float-left ripple" (click)='procedeToPreviousTab()'>
+                      {{form.previousbuttonlabel}}
+                  </button>
+                  <button type="button" *ngIf="form.nextbuttonlabel" class="btn btn-primary btn-sm float-right ripple" (click)='procedeToNextTab(form)'>
+                      {{form.nextbuttonlabel}}
+                  </button>
+              </div>
+          </div>
+
       </div>
-      <div class="mt-1">
-        <div class="button-panel">
-            <button *ngIf="form.previousbuttonlabel" class="btn btn-primary btn-sm float-left ripple" (click)='procedeToPreviousTab()'>
-              {{form.previousbuttonlabel}}
-            </button>
-            <button  *ngIf="form.nextbuttonlabel" class="btn btn-primary btn-sm float-right ripple" (click)='procedeToNextTab(form)'>
-              {{form.nextbuttonlabel}}
-            </button>
-        </div>
-      </div>
-       
-    </div>
   </div>
 </div>

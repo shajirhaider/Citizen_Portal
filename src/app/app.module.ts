@@ -30,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { ApplyForPermitComponent } from './my-permit/apply-for-permit/apply-for-permit.component';
 import { ApplyForLicenceComponent } from './my-licence/apply-for-licence/apply-for-licence.component';
+import { FormGeneratorComponent } from './form-generator/form-generator.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ApplyForLicenceComponent } from './my-licence/apply-for-licence/apply-f
     RegisterFormComponent,
     ApplyForPermitComponent,
     ApplyForLicenceComponent,
+    FormGeneratorComponent,
   ],
   imports: [
     BrowserModule,
