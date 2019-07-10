@@ -4,6 +4,8 @@ import {
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
+import { ItemsList } from '@ng-select/ng-select/ng-select/items-list';
+import { copyStyles } from '@angular/animations/browser/src/util';
 
 
 @Component({
@@ -13,8 +15,18 @@ import {
 })
 export class FormGeneratorComponent implements OnInit {
   controlList = [
-    {controlName:"Label",controlType:"label", controlID:"", html:"", label:"" },
-    {controlName:"Checkbox",controlType:"checkbox", controlID:"", label:"", selectedValue:"", isRequired:"" }, 
+    { controlName:"Label",
+      controlType:"label", 
+      controlID:"",  
+      label:"",
+      html:""
+    },
+    { controlName:"Checkbox",
+      controlType:"checkbox", 
+      controlID:"", label:"", 
+      selectedValue:"", 
+      isRequired:""
+    }, 
     { controlName:"Radio button with on-change",
       controltype:"radiobuttonOnChange", 
       controlID:"", 
@@ -28,7 +40,7 @@ export class FormGeneratorComponent implements OnInit {
     }
   ];
 
-  formArea = [ ];
+  formJson = []
   copyControlList = [];
   constructor() { }
 
@@ -36,6 +48,32 @@ export class FormGeneratorComponent implements OnInit {
     this.resetList();
   }
   private resetList() {
+    this.controlList = [
+      { controlName:"Label",
+        controlType:"label", 
+        controlID:"",  
+        label:"",
+        html:""
+      },
+      { controlName:"Checkbox",
+        controlType:"checkbox", 
+        controlID:"", label:"", 
+        selectedValue:"", 
+        isRequired:""
+      }, 
+      { controlName:"Radio button with on-change",
+        controltype:"radiobuttonOnChange", 
+        controlID:"", 
+        label:"",
+        selectedValue:"", 
+        isRequired:"" ,     
+        hasError: false,
+        errorText: "",
+        toolTipText: "",
+        options: []
+      }
+    ];
+  
     setTimeout(() => {
       this.copyControlList = this.controlList.slice();
     }, 0);    
@@ -53,7 +91,38 @@ export class FormGeneratorComponent implements OnInit {
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
-                        this.resetList()
+
+      this.resetList()
     }
+  }
+
+  addTab(){
+    console.log(this.formJson)
+    this.formJson.push(
+      {
+        "tabName": "",
+        "tabID": "",
+        "tabOrder": "",
+        "nextButtonLabel": "",
+        "previousButtonLabel": "",
+        "controls": []
+      }
+    )    
+  }
+
+  deleteTab(index){
+    this.formJson.splice(index,1)
+  }
+
+  addOption(option){
+    option.push(
+      {
+        "text": "",
+        "value": ""
+      }
+    )    
+  }
+  deleteOption(item,index){
+    item.splice(index,1)
   }
 }
