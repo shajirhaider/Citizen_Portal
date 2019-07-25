@@ -1,25 +1,32 @@
-<div class="row" cdkDropListGroup>
-	<div class=" col-3">
-		<h5>Controls</h5>
+<div class="card-header mb-2">
+	<h6>Form Designer
+		<div class="float-right">
+			
+		</div>
+	</h6>
+</div>
+<div class="row p-2" cdkDropListGroup>
+	<div class=" col-2 border-right control-list-bg">
+		<h6 >Controls List</h6>
 		<div
 			cdkDropList
 			[cdkDropListData]="copyControlList"
-			class="control-list"
+			class="control-list mat-elevation-z1"
 			(cdkDropListDropped)="drop($event)"
 		>
-			<div class="example-box" *ngFor="let item of copyControlList" cdkDrag>
+			<div class="example-box mat-elevation-z1" *ngFor="let item of copyControlList" cdkDrag>
 				{{item.controlName}}
 			</div>
 		</div>
 	</div>
-  
-	<div class=" col-9 ">
-		<h5>Form</h5> 
-		<div class="mb-3" *ngFor = "let tab of formJson; let i = index">
-			<div class="card">
-				<div class="card-header mb-3">				
-					<mat-expansion-panel>
-							<mat-expansion-panel-header  [collapsedHeight]="'30px'" >      
+
+	<div class="col-6 border-right">	
+		<div  style="height: 500px; overflow-y:auto">
+			<div class="mb-3" *ngFor = "let tab of formJson; let i = index" >
+				<div class="">
+					<div class="card-header mb-3">				
+						<mat-expansion-panel class="mat-elevation-z0">
+							<mat-expansion-panel-header  [collapsedHeight]="'30px'" (click)="getItem(tab)" >      
 								<mat-panel-title> 
 									<div>
 										<b>	{{tab.tabName}} </b> 
@@ -31,185 +38,423 @@
 								<div class="mr-5 ripple" (click) = "deleteTab(i)" >		
 									<small> <strong><i class="fa fa-trash"></i> Delete Tab</strong></small>
 								</div>
-							</mat-expansion-panel-header> 
-							<div class="row">
-								<div class="col-12 col-md-6">										
-									<mat-form-field class="full-width">
-										<input matInput placeholder="Tab ID"  [(ngModel)]= tab.tabID>
-									</mat-form-field >   
-
-									<mat-form-field class="full-width">
-										<input matInput placeholder="Tab Order" [(ngModel)]= tab.tabOrder>
-									</mat-form-field> 
-								</div> 
+						</mat-expansion-panel-header> 							
+					<div
+						cdkDropList
+						[cdkDropListData]= tab.controls
+						class="drop-list"
+						(cdkDropListDropped)="drop($event)"
+					>
 								
-								<div class="col-12 col-md-6">
-									<mat-form-field class="full-width">
-										<input matInput placeholder="Tab Name" [(ngModel)]= tab.tabName>
-									</mat-form-field>
-								</div>
-
+                    <div *ngFor='let control of tab.controls' cdkDrag>
+						<div class="row"   [class.active]="control === item" (click)="getControl(control)"  >
+							<div class="col-12 col-md-4" *ngIf="control.controlType !== 'checkbox'">
+								<label class="form-check-label">
+									<span *ngIf="control.isRequired === true; else notRequired " class="required">{{control.label}}</span>
+									<ng-template #notRequired>{{control.label}}</ng-template>
+								</label>
 							</div>
-					</mat-expansion-panel>
-				</div>
-				<div
-					cdkDropList
-					[cdkDropListData]= tab.controls
-					class="drop-list"
-					(cdkDropListDropped)="drop($event)"
-				>
-
-					<div class="example-box" *ngFor="let item of tab.controls" cdkDrag>
-						
-						<mat-expansion-panel>
-							<mat-expansion-panel-header  [collapsedHeight]="'30px'">  
-								<mat-panel-title> 
-									<div>
-										<b>	{{item.label}} </b> 
-										<small class="hints"  *ngIf = 'item.label == "" '>
-											<strong>Enter {{item.controlName}} Details </strong>
-										</small>
-									</div>
-								</mat-panel-title>  								
-							</mat-expansion-panel-header> 
-
-							<div class="row">
-								<div class="col-12 col-md-6">
-										
-									<mat-form-field class="full-width">
-										<input matInput placeholder="Control ID"  [(ngModel)]= item.controlID>
-									</mat-form-field >   
-
-									<mat-form-field class="full-width" *ngIf="item.controlType !== 'label'">
-										<input matInput placeholder="Selected Value" [(ngModel)]= item.selectedValue>
-									</mat-form-field> 
-								</div> 
-								
-								<div class="col-12 col-md-6">
-
-									<mat-form-field class="full-width">
-										<input matInput placeholder="Label" [(ngModel)]= item.label>
+							<div class="col-12 col-md-8 ">							
+								<div  *ngIf="control.controlType =='autoComplete'" >
+									<mat-form-field class="full-width" appearance="outline">
+	
+										<mat-label>{{control.placeholderText}}</mat-label>
+										<input matInput [(ngModel)]=control.selectedValue type="text">
+										<mat-hint  style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
 									</mat-form-field>
-
-									<mat-form-field class="full-width" *ngIf="item.controlType !== 'label'">
-										<input matInput placeholder="Tooltip Text" [(ngModel)]= item.toolTipText>
-									</mat-form-field> 
-
 								</div>
 
-								<div class="col-12 col-md-6">
-									<span class="row" *ngIf="item.controlType !== 'label'" >
-										<span class="col-12 col-md-4 hints">
-											Is Required?
-										</span>
-										<span class="col-12 col-md-8">
+								<div *ngIf="control.controlType == 'checkbox'" class="">		
+									<span class="mr-5">
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" [(ngModel)]='control.selectedValue' type="checkbox">
+											<label class="form-check-label">
+												<span *ngIf="control.isRequired === true; else notRequired " class="required">{{control.label}}</span>
+												<ng-template #notRequired>{{control.label}}</ng-template>
+											</label>
+										</div>
+									</span>		
+								</div>
+
+								<div *ngIf="control.controlType == 'select'">	
+									<select name="" id="" class="form-control" [(ngModel)]=control.selectedValue (change)="getChildList(form)">
+										<option *ngFor='let option of control.options' [value]=option.value>{{option.text}}</option>
+									</select>
+									<mat-hint  style="color:red; font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>									
+								</div>
+
+								<!-- <div class="col-12 col-md-8 "> -->
+									<div *ngIf="control.controlType == 'input'" class="">
+										<mat-form-field class="full-width" appearance="outline">
+											<mat-label>{{control.placeholderText}}</mat-label>
+											<input matInput [(ngModel)]=control.selectedValue type="text" autocomplete="off">
+											<mat-hint  style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+										</mat-form-field>
+									</div>		
+								<!-- </div> -->
+
+								
+								<div *ngIf="control.controlType == 'radiobutton'" class="mb-3">
+									<div class="col-12 col-md-12 ">
+										<label class="form-check-label">
+											<span *ngIf="control.isRequired === true; else notRequired " class="required">{{control.label}}</span>
+											<ng-template #notRequired>{{control.label}}</ng-template>
+										</label>
+									</div>
+
+									<div class="col-12 col-md-5 ">		
+										<span *ngFor='let option of control.options'>
 											<span class="mr-5">
 												<div class="form-check form-check-inline">
-													<input type="radio" name="isRequired" [(ngModel)]= item.isRequired value="true" >
+													<input class="form-check-input" [name]=control.label type="radio" [(ngModel)]="control.selectedValue" [value]="option.value">
 													<label class="form-check-label">
-														True
+														{{option.text}}
 													</label>
 												</div>
-											</span>
-											
-											<span class="">
-												<div class="form-check form-check-inline">
-													<input type="radio" name="isRequired" [(ngModel)]= item.isRequired value="false">
-													<label class="form-check-label">
-														False
-													</label>
-												</div>
-											</span>
 											</span>
 										</span>
-									
-										<mat-form-field class="full-width" *ngIf="item.controlType !== 'label' && item.controlType !== 'checkbox'">
-										<input matInput placeholder="Error Text" [(ngModel)]= item.errorText>
-										</mat-form-field>
-
+										<mat-hint  style="color:red;font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
+									</div>
 								</div>
 
-								<div class="col-12 col-md-6"> 
-									<span class="row" *ngIf="item.controlType !== 'label' && item.controlType !== 'checkbox'">
-									<span class="col-12 col-md-4 hints">
-										Has Error
-									</span>
-									<span class="col-12 col-md-8">
-										<span class="mr-5">
-											<div class="form-check form-check-inline">
-												<input type="radio" name="hasError" [(ngModel)]= item.hasError value="true" >
-												<label class="form-check-label">
-													True
-												</label>
-											</div>
-										</span>
-										
-										<span class="mr-5">
-											<div class="form-check form-check-inline">
-												<input type="radio" name="hasError" [(ngModel)]= item.hasError value="false">
-												<label class="form-check-label">
-													False
-												</label>
-											</div>
-										</span>
-										</span>
-									</span>
-								</div> 
 
-								<div class="col-12 col-md-12"> 
-									<span class="" *ngIf="item.controlType !== 'label' && item.controlType !== 'checkbox'">
-										<span class="hints mr-5" >
-											Option 
-										</span>
-										<span (click) = addOption(item.options)>
-											<i class="fa fa-plus"></i>
-										</span>
-										<div *ngFor = "let opt of item.options, let i = index">
-											<div class="row">
-												<div class="col-12 col-md-6">
-													<mat-form-field class="full-width">
-														<input matInput placeholder="Option Label"  [(ngModel)]= opt.text>
-													</mat-form-field > 
-												</div>
-												<div class="col-12 col-md-5">
-													<mat-form-field class="full-width">
-														<input matInput placeholder="Option Value"  [(ngModel)]= opt.value>
-													</mat-form-field >								
-												</div>
-												<div class="col-12 col-md-1">
-													<span (click)= 'deleteOption( item.options, i)'>
-														<i class="fas fa-trash mt-25"></i>
-													</span> 
-												</div>
-
-											</div>
-										</div>
-									</span>
-								</div> 
 							</div>
-						</mat-expansion-panel>
-					</div>
-				</div>	
-			</div>	
-			<div class="mt-1">
-				<div class="button-panel">
-					<div class="row">
-						<div class="col-6">
-							<input type="text" [(ngModel)] = 'tab.previousbuttonlabel' class="col-6 float-left btn btn-primary btn-sm" placeholder="Enter Previous Button Label">
-						</div>							
-						<div class="col-6 ">
-							<input type="text" [(ngModel)] = 'tab.nextbuttonlabel' class="col-6 float-right btn btn-primary btn-sm" placeholder="Enter Next Button Label">
+
 						</div>
-					</div>					
-				</div>
-			</div>	
-		</div>
-		
-		<div>
-			<button type="button" class="btn btn-primary full-width" (click)="addTab()">
-				<b> <i class="fas fa-plus mr-2"></i> </b> Add New Tab
-			</button>
+					</div>
+					</div>
+					</mat-expansion-panel>
+					</div>	
+				</div>		
+			</div>
+				
+			<div>
+				<button type="button" class="btn-primary btn btn-sm float-right" (click)="addTab()">
+					<b> <i class="fas fa-plus mr-2"></i> </b> Add Tab
+				</button>
+			</div>
+
 		</div>
 	</div>
+
+
+	<div class="col-4 border-right control-list-bg">
+		<div class="" *ngIf="item !== null">
+			<h6 class=""> Properties</h6>
+			<!-- <div class="col-12">		 -->
+				
+				<!-- <mat-form-field class="full-width"> -->
+				<div class="row mb-2">
+						<div class="col-12 col-md-4 label-box-properties">
+							Control ID
+						</div>
+						<div class="col-12 col-md-8">
+							<input placeholder="Control ID" class="form-control"  [(ngModel)]= item.controlID>						
+						</div>
+
+				</div>
+				<!-- </mat-form-field >   -->
+
+				<div *ngIf="item.controlType==='tab'" class="row">							
+					<!-- <mat-form-field class="full-width"> -->
+						<!-- <input matInput placeholder="Tab ID"  [(ngModel)]= item.tabID> -->
+					<div class="col-12 col-md-4 label-box-properties">
+						Tab ID
+					</div>
+					<div class="col-12 col-md-8">
+						<input placeholder="Tab ID" class="form-control mb-2"  [(ngModel)]= item.tabID>						
+					</div>
+					<!-- </mat-form-field >    -->
+	
+					<!-- <mat-form-field class="full-width"> -->
+					<div class="col-12 col-md-4 label-box-properties">
+						Tab Order
+					</div>
+					<div class="col-12 col-md-8">
+						<input placeholder="Tab Order" class="form-control mb-2"  [(ngModel)]= item.tabOrder  type="number">						
+					</div>
+						<!-- <input matInput placeholder="Tab Order" [(ngModel)]= item.tabOrder type="number"> -->
+					<!-- </mat-form-field>  -->
+	
+					<!-- <mat-form-field class="full-width"> -->
+					<div class="col-12 col-md-4 label-box-properties">
+						Tab Name
+					</div>
+					<div class="col-12 col-md-8">
+						<input type="text" placeholder="Tab Name" [(ngModel)]= item.tabName class="form-control mb-2">						
+					</div>
+					<div class="col-12 col-md-4 label-box-properties">
+						Previous button label
+					</div>
+					<div class="col-12 col-md-8">
+						<input type="text" placeholder="Previous Button Label" [(ngModel)]= item.previousButtonLabel class="form-control mb-2">						
+					</div>
+					<div class="col-12 col-md-4 label-box-properties">
+						Next button label
+					</div>
+					<div class="col-12 col-md-8">
+						<input type="text" placeholder="Next Button Label" [(ngModel)]= item.nextButtonLabel class="form-control mb-2">						
+					</div>
+					<span class="col-12 col-md-4 label-box-properties">
+						Submit
+					</span>
+					<span class="col-12 col-md-8">
+						<span class="mr-5">
+							<div class="form-check form-check-inline">
+								<input type="radio" [name]=i+item.controlID+i [(ngModel)]= item.submit [value]="true" >
+								<label class="form-check-label label-box-properties">
+									True
+								</label>
+							</div>
+
+						</span>
+						<!-- [name] ="item.controlID" -->
+						<span class="">
+							<div class="form-check form-check-inline">
+								<input type="radio" [name]=i+item.controlID+i [(ngModel)]= item.submit [value]="false">
+								<label class="form-check-label label-box-properties">
+									False
+								</label>
+							</div>
+						</span>
+					</span>
+					<!-- </mat-form-field> -->
+				</div> 
+				
+				<div *ngIf=" item.controlType !=='tab'">
+					<div *ngIf="item.controlType !== 'label'" class="row mb-2">
+						<div class="col-12 col-md-4 label-box-properties">
+							Selected Value
+						</div>
+						<div class="col-12 col-md-8">
+							<input  placeholder="Selected Value" [(ngModel)]= item.selectedValue class="form-control">					
+						</div>
+						<!-- <input matInput placeholder="Selected Value" [(ngModel)]= item.selectedValue> -->
+					</div> 
+				
+				<!-- <mat-form-field class="full-width" > -->
+					<div class="row mb-2">
+						<div class="col-12 col-md-4 label-box-properties">
+							Label
+						</div>
+						<div class="col-12 col-md-8">
+							<input  placeholder="Label" [(ngModel)]= item.label class="form-control">					
+						</div>
+					</div>
+				<!-- </mat-form-field> -->
+
+				<div class="full-width" *ngIf="item.controlType !== 'label' && item.controlType !== 'text-info'" class="row mb-2">					
+					<div class="col-12 col-md-4 label-box-properties">
+						Tooltip Text
+					</div>
+					<div class="col-12 col-md-8">
+						<input  placeholder="Tooltip Text" [(ngModel)]= item.toolTipText class="form-control">					
+					</div>
+					<!-- </div> -->
+					<!-- <input matInput placeholder="Tooltip Text" [(ngModel)]= item.toolTipText> -->
+				</div> 
+					
+				<span class="row mb-2" *ngIf="item.controlType !== 'label' && item.controlType !== 'text-info'" >
+						<span class="col-12 col-md-4 label-box-properties">
+							Is Required?
+						</span>
+						<span class="col-12 col-md-8">
+							<span class="mr-5">
+								<div class="form-check form-check-inline">
+									<input type="radio" [name]=i+item.controlID+i [(ngModel)]= item.isRequired [value]="true" >
+									<label class="form-check-label label-box-properties">
+										True
+									</label>
+								</div>
+	
+							</span>
+							<!-- [name] ="item.controlID" -->
+							<span class="">
+								<div class="form-check form-check-inline">
+									<input type="radio" [name]=i+item.controlID+i [(ngModel)]= item.isRequired [value]="false">
+									<label class="form-check-label label-box-properties">
+										False
+									</label>
+								</div>
+							</span>
+							</span>
+						</span>
+				
+						<div class="full-width" *ngIf= "item.controlType !== 'label' && item.controlType !== 'checkbox'
+																   && item.controlType !== 'text-info'" class="row mb-2">
+							<div class="col-12 col-md-4 label-box-properties">
+								Error Text
+							</div>
+							<div class="col-12 col-md-8">
+								<input  placeholder="Error Text" [(ngModel)]= item.errorText class="form-control">					
+							</div>
+							<!-- <input matInput placeholder="Error Text" [(ngModel)]= item.errorText> -->
+						</div>
+					
+						<div *ngIf= "item.controlType !== 'label' && item.controlType !== 'checkbox'
+																   && item.controlType !== 'text-info'" class="row mb-2">
+
+							<div class="col-12 col-md-4 label-box-properties">
+								Placeholder Text
+							</div>
+							<div class="col-12 col-md-8">
+								<input  placeholder="Placeholder Text" [(ngModel)]= item.placeholderText class="form-control">					
+							</div>
+							<!-- <input matInput placeholder="Placeholder Text" [(ngModel)]= item.placeholderText> -->
+						</div>
+						<span class="row mb-2" *ngIf="item.controlType !== 'label' && item.controlType !== 'checkbox'
+												&& item.controlType !== 'text-info'">
+							<span class="col-12 col-md-4 label-box-properties">
+								Has Error
+							</span>
+							<span class="col-12 col-md-8">
+								<span class="mr-5">
+									<div class="form-check form-check-inline">
+										<input type="radio"  [name]=i+item.controlID+i+i [(ngModel)]= item.hasError [value]="true" >
+										<label class="form-check-label label-box-properties">
+											True
+										</label>
+									</div>
+								</span>
+								
+								<span class="mr-5">
+									<div class="form-check form-check-inline">
+										<input type="radio" [name]=i+item.controlID+i+i [(ngModel)]= item.hasError [value]="false">
+										<label class="form-check-label label-box-properties">
+											False
+										</label>
+									</div>
+								</span>
+								</span>
+						</span>
+						<span class="row mb-2" *ngIf="item.controlType !== 'label' && item.controlType !== 'checkbox'
+												&& item.controlType !== 'text-info' && item.controlType !== 'radiobuttonOnChange'
+												&& item.controlType !== 'select'">
+							<span class="col-12 col-md-4 label-box-properties">
+								Is Hidden?
+							</span>
+							<span class="col-12 col-md-8">
+								<span class="mr-5">
+									<div class="form-check form-check-inline">
+										<input type="radio" [name]=item.controlID+i [(ngModel)]= item.isHidden [value]="true" >
+										<label class="form-check-label label-box-properties">
+											True
+										</label>
+									</div>
+								</span>
+							
+								<span class="mr-5">
+									<div class="form-check form-check-inline">
+										<input type="radio" [name] =item.controlID+i  [(ngModel)]= item.isHidden [value]="false">
+										<label class="form-check-label label-box-properties">
+											False
+										</label>
+									</div>
+								</span>
+								</span>
+						</span>
+		
+						<span class="row mb-2" *ngIf="item.controlType == 'text-info'">
+							<span class="col-12 col-md-5 label-box-properties">
+								Has Dependency
+							</span>
+							<span class="col-12 col-md-7">
+								<span class="mr-5">
+									<div class="form-check form-check-inline">
+										<input type="radio" [name]=i+item.controlID+i+i+i [(ngModel)]= item.valueFromOtherControl [value]="true" >
+										<label class="form-check-label label-box-properties">
+											True
+										</label>
+									</div>
+								</span>
+								
+								<span class="mr-5">
+									<div class="form-check form-check-inline">
+										<input type="radio" [name]=i+item.controlID+i+i+i [(ngModel)]= item.valueFromOtherControl [value]="false">
+										<label class="form-check-label label-box-properties">
+											False
+										</label>
+									</div>
+								</span>
+							</span>
+							
+							<div class="row mb-2">
+								
+								<div class="col-12 col-md-4 label-box-properties">
+									Other control ID
+								</div>
+								<div class="col-12 col-md-8">
+									<input  placeholder="Other Control ID" [(ngModel)]= item.otherControlID class="form-control">					
+								</div>
+								<!-- <input matInput placeholder="Other Control ID" [(ngModel)]= item.otherControlID> -->
+							</div>
+						</span>
+		
+						<span class="row mb-2" *ngIf="item.controlType == 'select'">
+							<span class="col-12 col-md-4 label-box-properties">
+								On Change
+							</span>
+							<span class="col-12 col-md-8">
+								<span class="mr-5">
+									<div class="form-check form-check-inline">
+										<input type="radio" [name]=i+i+item.controlID+i+i+i [(ngModel)]= item.onChange [value]="true" >
+										<label class="form-check-label label-box-properties">
+											True
+										</label>
+									</div>
+								</span>
+								
+								<span class="mr-5">
+									<div class="form-check form-check-inline">
+										<input type="radio" [name]=i+i+item.controlID+i+i+i [(ngModel)]= item.onChange [value]="false">
+										<label class="form-check-label label-box-properties">
+											False
+										</label>
+									</div>
+								</span>
+								</span>
+						</span>
+						<span class="" *ngIf="item.controlType !== 'radio' && item.controlType !== 'checkbox'
+											 && item.controlType !== 'text-info' && item.controlType !== 'input'
+											 && item.controlType !== 'datapicker'">
+
+							<div class="row mb-2">									 
+								<span class="label-box-properties mr-5 ml-3" >
+									Option 
+								</span>
+								<span (click) = addOption(item.options) class="label-box-properties">
+									<i class="fa fa-plus"></i>
+								</span>
+								
+							</div>	
+							<div *ngFor = "let opt of item.options, let i = index">
+								<div class="row">
+									<div class="col-12 col-md-6">
+										<!-- <mat-form-field class="full-width"> -->
+											<input class="form-control" placeholder="Option Label"  [(ngModel)]= opt.text>
+										<!-- </mat-form-field >  -->
+									</div>
+									<div class="col-12 col-md-5">
+										<!-- <mat-form-field class="full-width"> -->
+											<input class="form-control" placeholder="Option Value"  [(ngModel)]= opt.value>
+										<!-- </mat-form-field >	 -->
+									</div>
+									<div class="col-12 col-md-1">
+										<span (click)= 'deleteOption( item.options, i)'>
+											<i class="fas fa-trash mt-25"></i>
+										</span> 
+									</div>
+								</div>
+							</div>
+						</span>
+			</div>  
+		<!-- </div> -->
+	</div>
+
+
+
 </div>
 
+
+		
+</div>

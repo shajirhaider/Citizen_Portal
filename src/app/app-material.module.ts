@@ -16,8 +16,8 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatNativeDateModule,
-  MatExpansionModule
-  
+  MatExpansionModule,
+  MatTabsModule
   
 } from '@angular/material';
 
@@ -41,7 +41,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatSortModule,
     MatNativeDateModule,
     DragDropModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ],
   exports: [
     MatButtonModule, 
@@ -61,7 +62,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatSortModule,
     MatNativeDateModule,
     DragDropModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ],
 })
 export class MaterialModule { }

@@ -7,7 +7,7 @@ import { LocalStorageService } from './../../services/local-storage.service'
 })
 export class ApplyForLicenceComponent implements OnInit {
   tabOrder:number = 3;
-  formJson = [
+  formJson =  [
     {
         "tabName": "New Application for a License",
         "tabID": "1",
@@ -140,9 +140,9 @@ export class ApplyForLicenceComponent implements OnInit {
                 "placeholderText": "Enter Licensee Name",
                 "serviceMethodName": "getLicenseeName",
                 "serviceParameters": {
-                    "searchValue": "", // selected value of this control
+                    "searchValue": "",
                 },
-                "options": [],
+                "options": []
             }
         ]
     },
@@ -185,6 +185,11 @@ export class ApplyForLicenceComponent implements OnInit {
                 "errorText": "First Name is required",
                 "toolTipText": "Application Type",
                 "placeholderText": "Enter First Name",
+                "serviceMethodName": "getTesterName",
+                "serviceParameters": {
+                    "searchValue": "",
+                },
+                "options": []
 
             },
             {
@@ -199,6 +204,11 @@ export class ApplyForLicenceComponent implements OnInit {
                 "errorText": "Last Name is required",
                 "toolTipText": "Application Type",
                 "placeholderText": "Enter Last Name",
+                "serviceMethodName": "getTesterName",
+                "serviceParameters": {
+                    "searchValue": "",
+                },
+                "options": []
             }
         ]
     },
@@ -348,11 +358,9 @@ export class ApplyForLicenceComponent implements OnInit {
                 "selectedValue": "",
                 "placeholderText": "dd/mm/yyyy",
             }
-        ]
+        ] 
     }
-]
-
-
+    ]
 replaceString = "test";
   nextTab = false;
 

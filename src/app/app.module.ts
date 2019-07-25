@@ -31,6 +31,7 @@ import { LogoutComponent } from './auth/logout/logout.component';
 import { ApplyForPermitComponent } from './my-permit/apply-for-permit/apply-for-permit.component';
 import { ApplyForLicenceComponent } from './my-licence/apply-for-licence/apply-for-licence.component';
 import { FormGeneratorComponent } from './form-generator/form-generator.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { FormGeneratorComponent } from './form-generator/form-generator.componen
     AppRoutingModule,
     MaterialModule,
     NgSelectModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    ModalModule.forRoot(),
   ],
   providers: [HttpService, LoaderService, DateUtilService, AuthService],
   bootstrap: [AppComponent]

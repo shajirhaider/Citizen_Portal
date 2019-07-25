@@ -12,9 +12,9 @@
   
   .control-list {
     border: solid 1px #ccc;
-    min-height: 60px;
-    background: white;
-    border-radius: 4px;
+    /* min-height: 60px; */
+    background: rgb(223, 223, 223);
+    border-radius: 2px;
     overflow: hidden;
     display: block;
   }
@@ -29,7 +29,7 @@
   }
   
   .example-box {
-    padding: 5px 5px;
+    padding: 2px 5px;
     border-bottom: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
     display: flex;
@@ -39,6 +39,26 @@
     box-sizing: border-box;
     cursor: move;
     background: white;
+    font-size: 14px;
+  }
+
+  .label-box {
+    /* padding: 2px 5px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background: white;
+    font-size: 14px;
+  }
+  .label-box-properties {
+    /* padding: 2px 5px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
     font-size: 14px;
   }
   
@@ -62,5 +82,77 @@
   .mt-25{
     margin-top: 25px;
   }
+  .modal.show {
+    display:block;
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2;
+  }
+
+  .modal-content{
+    animation-name: example;
+    animation-duration: 0.3s;
+  }
+  
+  @keyframes example {
+    0%   {transform: scale(0.5)}
+    75%  {transform: scale(1.1)}
+    100% {transform: scale(1)}
+  }
 
   
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+  top: -1.5em;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  transform: translateY(-1.1em) scale(.75);
+  width: 133.33333%;
+}
+.required:after {
+  color: red;
+  content: " *";
+}
+
+.border-right{
+  border-right: 1px solid rgb(202, 202, 202);
+}
+
+.form-control{
+  /* padding: 2px !important; */
+  height: calc(1em + .75rem + 2px) !important;
+}
+
+.control-list-bg{
+  background: #f0f0f0;
+  padding: 0px 5px;
+}
+
+.control-list-bg h6{
+  background: #2976AD;
+  color:white; 
+  padding: 2px; 
+  text-align: center;
+}
+
+.mat-button-toggle-checked{
+  background: #2976AD;
+  color: white;
+}
+
+.active{
+  background: #f0f0f0;
+}
+.mat-form-field-wrapper{
+  padding: 0em 0em !important;
+}
