@@ -21,6 +21,7 @@ export class UrlService {
   public Get_Valid_County = 'getValidCounty'
   public Get_Valid_Countries ='getValidCountries'
   public Update_People = 'updatePeople'
+  public Get_Form_By_Key = 'getFormByKey'
 
 
   constructor() { }

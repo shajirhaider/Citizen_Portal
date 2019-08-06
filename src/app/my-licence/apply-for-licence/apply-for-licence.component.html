@@ -1,10 +1,10 @@
 <div>
-    <div *ngFor='let form of formJson; let i = index'>
+    <div *ngFor='let form of formData.tabList; let i = index'>
         <div *ngIf='form.tabOrder == tabOrder'>
             <div class="card">
                 <h5 class="card-header"> {{form.tabName}}</h5>
                 <div class="card-body">
-                    <div *ngFor='let control of form.controls' class="col-12">
+                    <div *ngFor='let control of form.controlList' class="col-12">
 
                         <!--for input type control-->
 
@@ -94,7 +94,9 @@
                                 <div class="col-12 col-md-5 ">
 
                                     <select name="" id="" class="form-control" [(ngModel)]=control.selectedValue (change)="getChildList(form)">
-                                        <option *ngFor='let option of control.options' [value]=option.value>{{option.text}}</option>
+                                        <option value="folderType">option.folderDesc</option>
+
+                                        <!-- <option *ngFor='let option of control.options' [value]=option.folderType>{{option.folderDesc}}</option> -->
                                     </select>
                                     <mat-hint  style="color:red; font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
                                 </div>
