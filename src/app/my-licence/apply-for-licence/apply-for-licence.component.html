@@ -83,7 +83,7 @@
 
                         <!--for select type control-->
                         <div *ngIf="control.controlType == 'select'" class="mb-3">
-                            <div *ngIf="control.onChange && control.hasChild" class="">
+                            <!-- <div *ngIf="control.onChange && control.hasChild" class=""> -->
 
                                 <div class="col-12 col-md-12 ">
                                     <label class="form-check-label">
@@ -94,14 +94,14 @@
                                 <div class="col-12 col-md-5 ">
 
                                     <select name="" id="" class="form-control" [(ngModel)]=control.selectedValue (change)="getChildList(form)">
-                                        <option value="folderType">option.folderDesc</option>
+                                        <!-- <option value="folderType">option.text</option> -->
 
-                                        <!-- <option *ngFor='let option of control.options' [value]=option.folderType>{{option.folderDesc}}</option> -->
+                                        <option *ngFor='let option of control.options' [value]=option.value>{{option.text}}</option>
                                     </select>
                                     <mat-hint  style="color:red; font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
                                 </div>
 
-                            </div>
+                            <!-- </div> -->
 
                             <div *ngIf="control.hasParent && !control.hasChild" class="">
                                 <div class="col-12 col-md-12 ">
@@ -118,8 +118,8 @@
                                     <mat-hint  style="color:red; font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
                                 </div>
                             </div>
-                            <div *ngIf="control.onChange == false" class="">
-                                <div class="col-12 col-md-12 ">
+                            <!-- <div *ngIf="control.onChange == false" class=""> -->
+                                <!-- <div class="col-12 col-md-12 ">
                                     <label class="form-check-label">
                                         <span *ngIf="control.isRequired === true; else notRequired " class="required">{{control.label}}</span>
                                         <ng-template #notRequired>{{control.label}}</ng-template>
@@ -130,8 +130,8 @@
                                         <option *ngFor='let option of control.options' [value]=option.value>{{option.text}}</option>
                                     </select>
                                     <mat-hint  style="color:red; font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
-                                </div>
-                            </div>
+                                </div> -->
+                            <!-- </div> -->
                         </div>
 
                         <!--for radion button type control-->

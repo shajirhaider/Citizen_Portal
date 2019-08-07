@@ -413,12 +413,14 @@ procedeToPreviousTab() {
     this.tabOrder = this.tabOrder - 1;
 }
 getChildList(tab) {
+    console.log(this.formData)
     let selectedValue: any[] = [];
     let result = true;
-    for (var element of tab.controls) {
-        if (element.hasOwnProperty("parentcontrolIDs") && element.selectedValue === "") {
-            element.parentcontrolIDs.forEach(parId => {
-                tab.controls.forEach(el => {
+    for (var element of tab.controlList) {
+        if (element.hasOwnProperty("parentcontrolIds") && element.selectedValue === "" && element.parentcontrolIds.length > 0 ) {
+            console.log("sp", element.serviceParameters)
+            element.parentcontrolIds.forEach(parId => {
+                tab.controlList.forEach(el => {
                     if (parId === el.controlID) {
                         if (el.selectedValue !== "") {
                             let b = el.selectedValue
@@ -426,7 +428,13 @@ getChildList(tab) {
                         }
                     }
                 });
+                console.log("para1", element.serviceParameters)
             });
+            
+            for (var i = 0; i < element.serviceParameters.length; i++) {
+                element.serviceParameters[i].text = element.serviceParameters[i].value;
+            }
+            console.log("para", element.serviceParameters)
             for (const [index, [key, value]] of Object.entries(Object.entries(element.serviceParameters))) {
                 element.serviceParameters[key] = selectedValue[index]
             }
@@ -537,17 +545,18 @@ getForm() {
         .subscribe(
             (response) => {
                 this.formData = response.body
-                console.log( this.formData.tabList[0])
+                this.getFormData()
             },
             (error) => console.log(error)
-    );
+    ); 
 
 }
 
 getFormData(){   
-    for (var vl of this.formData1.tabList) {
-        for (var el of vl.controls) {
-            if (el.hasOwnProperty("onitServiceCall") && el.onitServiceCall === true) {
+    for (var vl of this.formData.tabList) {
+        for (var el of vl.controlList) {
+            if (el.hasOwnProperty("serviceParameters") && el.hasOwnProperty("parentcontrolIds") && el.parentcontrolIds.length ===0  ) {
+                console.log("el", el)
                 var requestdata_test = {
                     token: 'amandaportal',
                     lid: '',
@@ -555,36 +564,53 @@ getFormData(){
                     loginName: 'Hanif',
                     url: 'http://demo.randomaccess.ca/amanda/api_fw/Services/ServiceMain.svc/json/'
                  };
+                 
+                let requestdata: any = requestdata_test;
+                this.httpService.getBaseUrl(requestdata.url);
+
+                var body = {
+                    "token": requestdata.token,
+                    "lid": requestdata.lid,
+                };
+                for (var i = 0; i < el.serviceParameters.length; i++) {
+                    body[el.serviceParameters[i].text] = el.serviceParameters[i].value;
+                }
              
                  // let requestdata: any = window["requestdata"];
-                let requestdata: any = requestdata_test;
-                 this.httpService.getBaseUrl(requestdata.url);
              
                  //this.progress = true
-                 let body = {
-                     "token": requestdata.token,
-                     "lid": requestdata.lid,
-                     "folderTypeFor": "L"
-                 }
-                 this.httpService.post("getFolderType", body)
+                 this.httpService.post(el.serviceMethodName, body)
                      .subscribe(
                          (response) => {
-                             console.log(response)
                              el.options = response.body
-                             if(response.status === 200){
-                                this.formData = this.formData1
-                                console.log(el)
+                            //  if(response.status === 200){
+                            //     this.formData = this.formData1
+                            //     console.log(el)
 
-                             }
+                            //  }
                          },
                          (error) => console.log(error)
                  );
-
                  return
             }
             
         }
     }
+}
+
+saveApplyForLicensee(){
+    let formData = []
+    console.log( this.formData)
+    for (var i = 0; i <  this.formData.tabList.length; i++) {        
+        for (var j = 0; j < this.formData.tabList[i].controlList.length; j++) {
+            formData.push({
+                controlOID: this.formData.tabList[i].controlList[j].OID,
+                selectedValue: this.formData.tabList[i].controlList[j].selectedValue
+            });
+        }
+    }
+    console.log(formData)
+
 }
 
 

@@ -40,7 +40,8 @@ export class FormGeneratorComponent implements OnInit {
             controlName: "Label",
             controlType: "label",
             controlID: "",
-            label: ""
+            label: "",
+            formTabOID: ""
         },
         {
             controlName: "Checkbox",
@@ -48,7 +49,8 @@ export class FormGeneratorComponent implements OnInit {
             controlID: "",
             label: "",
             selectedValue: "",
-            isRequired: ""
+            isRequired: "",
+            formTabOID: ""
         },
         {
             controlName: "Radio button with on-change",
@@ -61,6 +63,7 @@ export class FormGeneratorComponent implements OnInit {
             errorText: "",
             toolTipText: "",
             options: [],
+            formTabOID: ""
         },
         {
             controlName: "Select",
@@ -79,7 +82,8 @@ export class FormGeneratorComponent implements OnInit {
             "options": [],
             "serviceMethodName": "",
             "serviceParameters": [],
-            "onitServiceCall": false,
+            // "onitServiceCall": false,
+            formTabOID: ""
         },
         {
             "controlName": "Auto Complete",
@@ -96,7 +100,8 @@ export class FormGeneratorComponent implements OnInit {
             "placeholderText": "",
             "serviceMethodName": "",
             "serviceParameters": [],
-            "options": []
+            "options": [],
+            formTabOID: ""
         },
         {
             controlName: "Text Info",
@@ -105,7 +110,8 @@ export class FormGeneratorComponent implements OnInit {
             "label": "",
             "otherControlID": "",
             "valueFromOtherControl": "",
-            "selectedValue": ""
+            "selectedValue": "",
+            formTabOID: ""
         },
         {
             controlName: "Input",
@@ -119,6 +125,7 @@ export class FormGeneratorComponent implements OnInit {
             "toolTipText": "",
             "placeholderText": "",
             "isRequired": "",
+            formTabOID: ""
         },
         {
             controlName: "Radio Button",
@@ -126,12 +133,13 @@ export class FormGeneratorComponent implements OnInit {
             "controlID": "",
             "label": "",
             "selectedValue": "",
-            "isRequired": "",
+            "isRequired": false,
             "hasError": false,
             "isHidden": false,
             "errorText": "",
             "toolTipText": "",
-            "options": []
+            "options": [],
+            formTabOID: ""
         },
         {
             controlName: "Date Picker",
@@ -139,11 +147,13 @@ export class FormGeneratorComponent implements OnInit {
             "controlID": "",
             "label": "",
             "selectedValue": "",
+            "isRequired": false,
             "isHidden": false,
             "hasError": false,
             "errorText": "",
             "toolTipText": "",
             "placeholderText": "",
+            formTabOID: "" 
         },
     ];
 
@@ -363,22 +373,30 @@ getForm() {
 
 }
 saveForm() {
-  this.formData.tabList.forEach((tab)=>{
-    tab.controlList.forEach((control)=>{
-      if (control.hasOwnProperty("serviceParameters")) {
-        var result = {};
-        for (var i = 0; i < control.serviceParameters.length; i++) {
-          result[control.serviceParameters[i].key] = control.serviceParameters[i].value;
-        }
-        control.serviceParametersString = JSON.stringify(result)
-        console.log(control)
-      }
+//   this.formData.tabList.forEach((tab)=>{
+//     tab.controlList.forEach((control)=>{
+//       if (control.hasOwnProperty("serviceParameters")) {
+//         var result = {};
+//         for (var i = 0; i < control.serviceParameters.length; i++) {
+//           result[control.serviceParameters[i].key] = control.serviceParameters[i].value;
+//         }
+//         control.serviceParametersString = JSON.stringify(result)
+//         console.log(control)
+//       }
 
-    })
+//     })
 
-  })
+//   })  
+var requestdata_test = {
+     token: 'amandaportal',
+     lid: '',
+     rsn: 0,
+     loginName: 'Hanif',
+     url: 'http://demo.randomaccess.ca/amanda/api_fw/Services/ServiceMain.svc/json/'
+  };
   console.log(this.formData)
-  let requestdata: any = window["requestdata"];
+//   let requestdata: any = window["requestdata"];
+  let requestdata: any = requestdata_test;
   this.httpService.getBaseUrl(requestdata.url);
 
   //this.progress = true
@@ -388,15 +406,16 @@ saveForm() {
       "data": this.formData
 
   }
-  // this.httpService.post(this.url.Update_Form, body)
-  // .subscribe(
-  //     (response) => {
-  //         console.log(response)
-  //     },
-  //     (error) => console.log(error)
-  // );
+  this.httpService.post("updateForm", body)
+  .subscribe(
+      (response) => {
+          console.log(response)
+      },
+      (error) => console.log(error)
+  );
 }
-getControl(control) {
+getControl(control, tab) {
+    control.formTabOID = tab.OID
   console.log(control)
   this.item = control
 

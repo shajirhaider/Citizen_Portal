@@ -48,7 +48,7 @@
 
                                 <div *ngFor='let control of tab.controlList' cdkDrag>
 
-                                    <div class="row" [class.active]="control === item" (click)="getControl(control)">
+                                    <div class="row" [class.active]="control === item" (click)="getControl(control, tab)">
 
                                             <div *ngIf="control.controlType == 'checkbox'" class="col-12">
                                                 <span class="mr-5">
