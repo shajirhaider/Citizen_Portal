@@ -135,7 +135,7 @@
                         </div>
 
                         <!--for radion button type control-->
-                        <div *ngIf="control.controlType == 'radiobutton'" class="mb-3">
+                        <!-- <div *ngIf="control.controlType == 'radiobutton'" class="mb-3">
                             <div class="col-12 col-md-12 ">
                                 <label class="form-check-label">
                                     <span *ngIf="control.isRequired === true; else notRequired " class="required">{{control.label}}</span>
@@ -156,10 +156,10 @@
                                 </span>
                                 <mat-hint  style="color:red;font-size: 75%" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!--for radiobuttinOnChange type control-->
-                        <div *ngIf="control.controlType == 'radiobuttonOnChange'" class="mb-3">
+                        <div *ngIf="control.controlType == 'radiobutton'" class="mb-3">
                             <div class="col-12 col-md-12 ">
                                 <label class="form-check-label">
                                     <span *ngIf="control.isRequired === true; else notRequired " class="required">{{control.label}}</span>

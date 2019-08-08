@@ -19,6 +19,7 @@ export class FormGeneratorComponent implements OnInit {
      tabList:[]
 
   }
+  parentControlOpt = ""
   copyControlList = [];
   preview = false;
   tabOrder = 1;
@@ -78,18 +79,18 @@ export class FormGeneratorComponent implements OnInit {
             "errorText": "",
             "toolTipText": "",
             "placeholderText": "",
-            "parentControlIDs": [],
+            "parentcontrolIds": [],
             "options": [],
             "serviceMethodName": "",
             "serviceParameters": [],
-            // "onitServiceCall": false,
+            "oninitServiceCall": false,
             formTabOID: ""
         },
         {
             "controlName": "Auto Complete",
             "controlType": "autoComplete",
             "controlID": "",
-            "parentControlIDs": [],
+            "parentcontrolIds": [],
             "expectedParentsValue": "",
             "isHidden": false,
             "label": "",
@@ -139,6 +140,7 @@ export class FormGeneratorComponent implements OnInit {
             "errorText": "",
             "toolTipText": "",
             "options": [],
+            "onChange": false,
             formTabOID: ""
         },
         {
@@ -212,6 +214,15 @@ addOption(option) {
 deleteOption(item, index) {
   item.splice(index, 1)
 }
+
+addParent(option) {
+  option.push(this.parentControlOpt)
+  this.parentControlOpt = ""
+}
+deleteParent(item, index) {
+  item.splice(index, 1)
+}
+
 
 procedeToNextTab(val) {
   let result = []
@@ -308,7 +319,7 @@ getApplicationSubType(obj) {
 
 controlIsHidden(tab) {
   tab.controlList.forEach(element => {
-      if (element.hasOwnProperty("isHidden")) {
+      if (element.isHidden === true) {
 
           for (var el of tab.controlList) {
               if (element.parentcontrolID === el.controlID) {

@@ -370,16 +370,22 @@ export class ApplyForLicenceComponent implements OnInit {
   }
 
 
-  procedeToNextTab(val) {
+procedeToNextTab(val) {
     let result = []
-    for (var vl of val.controls) {
+    for (var vl of val.controlList) {
+        console.log("vl",vl)
         if (vl.hasOwnProperty("isRequired")) {
-            if (vl.selectedValue === "") {
-                vl.hasError = true
-            } else {
-                vl.hasError = false
+            console.log(vl.isRequired)
+            if(vl.isRequired === true){
+                result.push(vl.selectedValue)
+                if (vl.selectedValue === "") {
+                    vl.hasError = true
+                } else {
+                    vl.hasError = false
+                }
+            }else{
+                continue
             }
-            result.push(vl.selectedValue)
         }
         if (vl.hasOwnProperty("isHidden")) {
             if (vl.isHidden === false) {
@@ -404,7 +410,7 @@ export class ApplyForLicenceComponent implements OnInit {
     }
     if (this.nextTab === true) {
         this.tabOrder = this.tabOrder + 1;
-        val.controls.forEach((item) => item.hasError = false);
+        val.controlList.forEach((item) => item.hasError = false);
     }
     console.log(this.formData.tabList)
 }
@@ -412,13 +418,28 @@ export class ApplyForLicenceComponent implements OnInit {
 procedeToPreviousTab() {
     this.tabOrder = this.tabOrder - 1;
 }
-getChildList(tab) {
-    console.log(this.formData)
+getChildList(tab) {    
+// let requestdata: any = window["requestdata"]; 
+    var requestdata_test = {
+        token: 'amandaportal',
+        lid: '',
+        rsn: 0,
+        loginName: 'Hanif',
+        url: 'http://demo.randomaccess.ca/amanda/api_fw/Services/ServiceMain.svc/json/'
+    };
+    
+    let requestdata: any = requestdata_test;
+    this.httpService.getBaseUrl(requestdata.url);
+    var body = {
+        "token": requestdata.token,
+        "lid": requestdata.lid,
+    };
+    let serviceMethodName = ""
+    console.log(tab)
     let selectedValue: any[] = [];
     let result = true;
     for (var element of tab.controlList) {
-        if (element.hasOwnProperty("parentcontrolIds") && element.selectedValue === "" && element.parentcontrolIds.length > 0 ) {
-            console.log("sp", element.serviceParameters)
+        if (element.hasOwnProperty("parentcontrolIds")  && element.parentcontrolIds.length > 0 ) {
             element.parentcontrolIds.forEach(parId => {
                 tab.controlList.forEach(el => {
                     if (parId === el.controlID) {
@@ -428,16 +449,16 @@ getChildList(tab) {
                         }
                     }
                 });
-                console.log("para1", element.serviceParameters)
             });
             
             for (var i = 0; i < element.serviceParameters.length; i++) {
-                element.serviceParameters[i].text = element.serviceParameters[i].value;
+                element.serviceParameters[i].value = selectedValue[i];
             }
-            console.log("para", element.serviceParameters)
-            for (const [index, [key, value]] of Object.entries(Object.entries(element.serviceParameters))) {
-                element.serviceParameters[key] = selectedValue[index]
+            
+            for (var i = 0; i < element.serviceParameters.length; i++) {
+                body[element.serviceParameters[i].text] = element.serviceParameters[i].value;
             }
+            serviceMethodName = element.serviceMethodName
 
             Object.keys(element.serviceParameters).forEach(function (key) {
                 if (element.serviceParameters[key] == "") {
@@ -445,49 +466,18 @@ getChildList(tab) {
                 }
             });
             if (result === true) {
-                return element.options = this.getApplicationSubType(element)
+                this.getServiceCall(serviceMethodName, body,element)
             }
         }
     }
 }
 
-getApplicationSubType(obj) {
-    console.log(obj)
-    var requestdata_test = {
-        token: 'amandaportal',
-        lid: '',
-        rsn: 0,
-        loginName: 'Hanif',
-        url: 'http://demo.randomaccess.ca/amanda/api_fw/Services/ServiceMain.svc/json/'
-     };
- 
-     // let requestdata: any = window["requestdata"];
-    let requestdata: any = requestdata_test;
-     this.httpService.getBaseUrl(requestdata.url);
- 
-     //this.progress = true
-     let body = {
-         "token": requestdata.token,
-         "lid": requestdata.lid,
-         "folderType": obj.serviceParameters.folderType
-     }
-     this.httpService.post("getFolderSub", body)
-         .subscribe(
-             (response) => {
-                 console.log(response)
-                 obj.options = response.body
-             },
-             (error) => console.log(error)
-     );
-
-
-}
 
 controlIsHidden(tab) {
-    tab.controls.forEach(element => {
-        if (element.hasOwnProperty("isHidden")) {
+    tab.controlList.forEach(element => {
+        if (element.isHidden===true) {
 
-            for (var el of tab.controls) {
+            for (var el of tab.controlList) {
                 if (element.parentcontrolID === el.controlID) {
                     if (element.expectedParentsValue === el.selectedValue) {
                         element.isHidden = true
@@ -520,7 +510,6 @@ valueFromOtherControl(control) {
     }
 }
 
-
 getForm() {
 
     var requestdata_test = {
@@ -552,50 +541,49 @@ getForm() {
 
 }
 
-getFormData(){   
+getFormData(){  
+                
+    // let requestdata: any = window["requestdata"]; 
+    var requestdata_test = {
+        token: 'amandaportal',
+        lid: '',
+        rsn: 0,
+        loginName: 'Hanif',
+        url: 'http://demo.randomaccess.ca/amanda/api_fw/Services/ServiceMain.svc/json/'
+     };
+     
+    let requestdata: any = requestdata_test;
+    this.httpService.getBaseUrl(requestdata.url);
+    var body = {
+        "token": requestdata.token,
+        "lid": requestdata.lid,
+    };
+    let serviceMethodName = ""
     for (var vl of this.formData.tabList) {
         for (var el of vl.controlList) {
-            if (el.hasOwnProperty("serviceParameters") && el.hasOwnProperty("parentcontrolIds") && el.parentcontrolIds.length ===0  ) {
-                console.log("el", el)
-                var requestdata_test = {
-                    token: 'amandaportal',
-                    lid: '',
-                    rsn: 0,
-                    loginName: 'Hanif',
-                    url: 'http://demo.randomaccess.ca/amanda/api_fw/Services/ServiceMain.svc/json/'
-                 };
-                 
-                let requestdata: any = requestdata_test;
-                this.httpService.getBaseUrl(requestdata.url);
-
-                var body = {
-                    "token": requestdata.token,
-                    "lid": requestdata.lid,
-                };
+            if (el.hasOwnProperty("oninitServiceCall") === true && el.oninitServiceCall === true) {
+                serviceMethodName = el.serviceMethodName
                 for (var i = 0; i < el.serviceParameters.length; i++) {
                     body[el.serviceParameters[i].text] = el.serviceParameters[i].value;
                 }
-             
-                 // let requestdata: any = window["requestdata"];
-             
-                 //this.progress = true
-                 this.httpService.post(el.serviceMethodName, body)
-                     .subscribe(
-                         (response) => {
-                             el.options = response.body
-                            //  if(response.status === 200){
-                            //     this.formData = this.formData1
-                            //     console.log(el)
-
-                            //  }
-                         },
-                         (error) => console.log(error)
-                 );
-                 return
-            }
-            
+                this.getServiceCall(serviceMethodName, body, el)
+            }   
         }
     }
+}
+
+getServiceCall(serviceMethodName,body, el){
+    this.httpService.post(serviceMethodName, body)
+        .subscribe(
+            (response) => {
+                console.log("data", response)
+             if(response.status === 200){
+                el.options = response.body
+             }
+            },
+            (error) => console.log(error)
+    );
+
 }
 
 saveApplyForLicensee(){

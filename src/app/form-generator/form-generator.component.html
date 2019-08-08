@@ -496,7 +496,7 @@
                         <input placeholder="Service Method Name" [(ngModel)]=item.serviceMethodName class="form-control">
                     </div>
                 </div>
-                <span class="row mb-2" *ngIf="item.controlType == 'select'">
+                <span class="row mb-2" *ngIf="item.controlType == 'select' || item.controlType == 'radiobutton' ">
                     <span class="col-12 col-md-4 label-box-properties">
                         On Change
                     </span>
@@ -571,6 +571,33 @@
                             </div>
                             <div class="col-12 col-md-1">
                                 <span (click)='deleteOption( item.serviceParameters, i)'>
+                                    <i class="fas fa-trash mt-25"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <span class="label-box-properties mr-5 ml-3">
+                            Parent Control IDs
+                        </span>
+                        <span>
+                            <input class="form-control" placeholder="Parameter Name" [(ngModel)]=parentControlOpt>
+                        </span>                           
+                        <span (click)=addParent(item.parentcontrolIds) class="label-box-properties ml-3">
+                            <i class="fa fa-plus"></i>
+                        </span> 
+
+                    </div>
+                    <div *ngFor="let opt of item.parentcontrolIds, let i = index">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <!-- <mat-form-field class="full-width"> -->
+                                <input class="form-control" placeholder="Parameter Name" [(ngModel)]=opt > 
+                                <!-- </mat-form-field >  -->
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <span (click)='deleteParent( item.parentcontrolIds, i)'>
                                     <i class="fas fa-trash mt-25"></i>
                                 </span>
                             </div>
