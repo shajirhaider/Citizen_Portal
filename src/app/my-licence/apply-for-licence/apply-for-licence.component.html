@@ -4,10 +4,10 @@
             <div class="card">
                 <h5 class="card-header"> {{form.tabName}}</h5>
                 <div class="card-body">
-                    <div *ngFor='let control of form.controlList' class="col-12">
+                    <div *ngFor='let control of form.controlList | orderBy: controlOrder' class="col-12">
 
                         <!--for input type control-->
-
+                        <div >
                         <div *ngIf="control.controlType == 'conditionalInput' && control.isHidden === false" class="">
                             <div class="col-12 col-md-12 ">
                                 <label class="form-check-label">
@@ -18,7 +18,7 @@
                             <div class="col-12 col-md-5 ">
                                 <mat-form-field class="full-width" appearance="outline">
                                     <mat-label>{{control.placeholderText}}</mat-label>
-                                    <input matInput [(ngModel)]=control.selectedValue type="text" autocomplete="off">
+                                    <input matInput [(ngModel)]=control.selectedValue type="text" autocomplete="off"  >
                                     <mat-hint  style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
                                 </mat-form-field>
                             </div>
@@ -53,7 +53,7 @@
                                 <mat-form-field class="full-width" appearance="outline">
 
                                     <mat-label>{{control.placeholderText}}</mat-label>
-                                    <input matInput [(ngModel)]=control.selectedValue type="text" autocomplete="off">
+                                    <input matInput [(ngModel)]=control.selectedValue type="text" autocomplete="off" (input)="getText(control)">
                                     <mat-hint  style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
                                 </mat-form-field>
                             </div>
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-12 col-md-5 ">
 
-                                    <select name="" id="" class="form-control" [(ngModel)]=control.selectedValue (change)="getChildList(form)">
+                                    <select name="" id="" class="form-control" [(ngModel)]=control.selectedValue (change)="getChildList(form); getText(control)">
                                         <!-- <option value="folderType">option.text</option> -->
 
                                         <option *ngFor='let option of control.options' [value]=option.value>{{option.text}}</option>
@@ -215,7 +215,7 @@
 
                         <!--for text-info type control and valueFromother Control-->
                         <div *ngIf="control.controlType == 'text-info'">
-                            <div *ngIf="control.valueFromOtherControl === true">
+                            <!-- <div *ngIf="control.valueFromOtherControl === true"> -->
                                 <div class="row mb-3">
                                     <span class="col-12 col-md-4">
                                         <span class="float-right">
@@ -228,12 +228,12 @@
                                         </span>
                                     </span>
                                 </div>
-                            </div>
+                            <!-- </div> -->
                         </div>
 
                         <!--for text-info type control-->
-                        <div *ngIf="control.controlType == 'text-info'">
-                            <div *ngIf="!control.valueFromOtherControl">
+                        <!-- <div *ngIf="control.controlType == 'text-info'">
+                            <div *ngIf="control.valueFromOtherControl === false || control.valueFromOtherControl === '' ">
                                 <div class="row mb-3">
                                     <span class="col-12 col-md-4">
                                         <span class="float-right">
@@ -248,10 +248,12 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
+                            
+            </div>
             </div>
             <div class="mt-1">
                 <div class="button-panel">

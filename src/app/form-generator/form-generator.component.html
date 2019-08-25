@@ -46,9 +46,9 @@
                                  class="drop-list"
                                  (cdkDropListDropped)="drop($event)">
 
-                                <div *ngFor='let control of tab.controlList' cdkDrag>
+                                <div *ngFor='let control of tab.controlList; let i = index' cdkDrag>
 
-                                    <div class="row" [class.active]="control === item" (click)="getControl(control, tab)">
+                                    <div class="row" [class.active]="control === item" (click)="getControl(control, tab, i)">
 
                                             <div *ngIf="control.controlType == 'checkbox'" class="col-12">
                                                 <span class="mr-5">
@@ -184,6 +184,24 @@
                                                     <mat-hint style="color:red" *ngIf="control.hasError" align="start">{{control.errorText}}</mat-hint>
                                                 </mat-form-field>
                                             </div>
+
+                                        </div>
+                                        <div *ngIf="control.controlType == 'text-info'" class="col-12">
+                                            <!-- <div *ngIf="!control.valueFromOtherControl"> -->
+                                                <div class="row mb-3">
+                                                    <span class="col-12 col-md-4">
+                                                        <span class="float-right">
+                                                            {{control.label}}
+                                                        </span>
+                                                    </span>
+                                                    <span class="col-12 col-md-8">
+                                                        <span class="float-left">
+                                                            <b> {{control.selectedValue}} </b>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            <!-- </div> -->
+                        
 
                                         </div>
                                         <div *ngIf="control.controlType == 'datePicker'" class="col-12">

@@ -1,0 +1,76 @@
+
+<div class="" *ngIf = "detailsShow == false">
+  <div class="card" >
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-7 col-12">
+            <span style="font-size:20px; vertical-align:middle"> My Licenses</span>         
+
+          </div>
+          <div class="col-md-5 col-12">
+              <input class="form-control float-right" (keyup)="applyFilter($event.target.value)" placeholder="Search">     
+          </div>
+        </div>
+
+     </div>
+      <div class="card-body"> 
+      <div class="mat-elevation-z1">    
+        <mat-table #table [dataSource]="dataSource" class="result-table" matSort>
+          <ng-container matColumnDef="LicenseNo" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-3"> License No </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="col-md-3 col-12"> 
+              <span class="mobile-label"><i class="fas fa-star-half-alt"></i></span>
+              {{element.LicenseNo}} 
+            </mat-cell>
+          </ng-container>  
+          <ng-container matColumnDef="owner">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-3"> License Owner</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="col-md-3 col-12"> 
+              <span class="mobile-label"><i class="fas fa-folder"></i></span>
+              {{element.owner}} 
+            </mat-cell>
+          </ng-container>  
+          <ng-container matColumnDef="subject" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="col-md-2"> License Subject </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="col-md-2 col-12" > 
+              <span class="mobile-label"> <i class="fas fa-check-square"></i></span>
+              {{element.subject}} 
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="expiryDate" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header  class="col-md-2"> Expiry Date </mat-header-cell>
+            <mat-cell *matCellDef="let element"  class="col-md-2 col-12"> 
+              <span class="mobile-label"><i class="fas fa-calendar-plus"></i></span>
+              {{element.expiryDate}} 
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="status" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header  class="col-md-1"> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"  class="col-md-1 col-12" > 
+              <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
+              {{element.status}} 
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="details" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header  class="col-md-1"> Details </mat-header-cell>
+            <mat-cell *matCellDef="let element"  class="col-md-1 col-12" > 
+              <span class="mobile-label"><i class="fas fa-calendar-week"></i></span>
+              <button class="btn btn-sm btn-primary" (click)="gotoDetails()"> Details</button> 
+            </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
+      </div>
+      </div>
+    </div>
+
+</div>
+
+<div  *ngIf = "detailsShow == true">
+  <app-track-my-application-details></app-track-my-application-details>
+</div>
+  
+  

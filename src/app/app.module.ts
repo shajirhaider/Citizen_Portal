@@ -33,6 +33,10 @@ import { ApplyForLicenceComponent } from './my-licence/apply-for-licence/apply-f
 import { FormGeneratorComponent } from './form-generator/form-generator.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+import { OrderModule } from 'ngx-order-pipe';
+import { TrackMyApplicationComponent } from './my-licence/track-my-application/track-my-application.component';
+import { TrackMyApplicationDetailsComponent } from './my-licence/track-my-application-details/track-my-application-details.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +57,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ApplyForPermitComponent,
     ApplyForLicenceComponent,
     FormGeneratorComponent,
+    TrackMyApplicationComponent,
+    TrackMyApplicationDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +71,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NgSelectModule,
     StoreModule.forRoot(reducers),
     ModalModule.forRoot(),
+    OrderModule
   ],
   providers: [HttpService, LoaderService, DateUtilService, AuthService],
   bootstrap: [AppComponent]

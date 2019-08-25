@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { ApplyForPermitComponent } from './my-permit/apply-for-permit/apply-for-permit.component';
 import { ApplyForLicenceComponent } from './my-licence/apply-for-licence/apply-for-licence.component';
 import { FormGeneratorComponent } from './form-generator/form-generator.component';
+import { TrackMyApplicationComponent } from './my-licence/track-my-application/track-my-application.component';
 
 
 const routes: Routes = [ 
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'apply-for-permit', component: ApplyForPermitComponent},
   { path: 'apply-for-licence', component: ApplyForLicenceComponent},
   { path: 'form-generator', component: FormGeneratorComponent},
+  { path: 'track-my-licence', component: TrackMyApplicationComponent},
 ];
 
 @NgModule({
