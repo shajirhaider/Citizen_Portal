@@ -36,6 +36,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { OrderModule } from 'ngx-order-pipe';
 import { TrackMyApplicationComponent } from './my-licence/track-my-application/track-my-application.component';
 import { TrackMyApplicationDetailsComponent } from './my-licence/track-my-application-details/track-my-application-details.component';
+import { RenewLicenseComponent } from './my-licence/renew-license/renew-license.component';
+import { TrackMyPermitComponent } from './my-permit/track-my-permit/track-my-permit.component';
+import { TrackMyPermitDetailsComponent } from './my-permit/track-my-permit-details/track-my-permit-details.component';
+import { ShoppingCartComponent } from './my-licence/shopping-cart/shopping-cart.component';
+import { ShoppingCartPermitComponent } from './my-permit/shopping-cart/shopping-cart.component';
+import { SearchNewComponent } from './search-properties/search-new/search-new.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +65,12 @@ import { TrackMyApplicationDetailsComponent } from './my-licence/track-my-applic
     FormGeneratorComponent,
     TrackMyApplicationComponent,
     TrackMyApplicationDetailsComponent,
+    RenewLicenseComponent,
+    TrackMyPermitComponent,
+    TrackMyPermitDetailsComponent,
+    ShoppingCartComponent,
+    ShoppingCartPermitComponent,
+    SearchNewComponent
   ],
   imports: [
     BrowserModule,

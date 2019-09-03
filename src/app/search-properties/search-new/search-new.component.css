@@ -1,0 +1,142 @@
+
+.result-body{
+    min-height: 120px;
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center; */
+    display: table-cell; 
+    vertical-align: middle;
+    padding:5px;
+  }
+  
+.result-body p {
+    text-align: left
+}
+
+.result-body button{
+    width: 90px !important;
+    margin-top: 10px;
+}
+
+.result-body i{
+    padding: 0px 10px 0px 0px;
+    color: #2876AD;
+}
+
+.mat-cell:last-of-type{
+    padding-right: 5px !important
+}
+.mat-cell:first-of-type{
+    padding-left: 5px !important;
+}
+.mat-table {
+    border-spacing: 0;
+    padding: 5px;
+}
+
+.mat-row{
+    border-style: none !important;
+}
+
+.mat-row:nth-child(odd) .card {
+    background-color:#eee;
+}
+.mat-row:nth-child(even) .card {
+    background-color:#fff;
+}
+
+.result-table .col-md-7 , .result-table .col-md-3, .result-table .col-md-2{
+    padding-right: 5px;
+}
+.result-table .col-md-3, .result-table .col-md-2{
+    padding-left: 5px;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-table {
+    overflow: auto;
+}
+  
+.mobile-label {
+    display: none;
+}
+
+.button-mobile-label{
+    display: none
+}
+@media(max-width: 600px) {
+
+    .result-body p >span>span, .button-label{
+        display: none;
+    }
+    .mat-header-row {
+        display: none;
+    }
+    .mat-row { 
+        flex-direction: column;
+        align-items: start;
+        padding: 5px 5px;
+        min-height: auto !important;
+        border-style: solid !important;
+    }
+    .mat-cell{
+        width:100%
+    }
+    .mat-cell:last-of-type{
+        padding-right: 2px !important
+    }
+    .mat-cell:first-of-type{
+        padding-left: 2px !important;    
+    }
+    .result-table [class*=col-]{
+        padding: 2px 2px;
+    }
+
+    .button-mobile-label{
+        display: inline
+    }
+}
+  
+@media(max-width: 768px) {
+    .result-table .col-md-7,  .result-table .col-md-3,  .result-table .col-md-2{
+        padding: 2px;
+    }
+
+    .result-table [class*=col-]{
+        padding: auto 0px;
+    }
+
+    .col-12{
+        padding: auto 0px !important
+    }
+
+    .result-body p >span>span{
+        display: none;
+    }
+    .result-body button{
+        width: 70px !important;
+        margin-top: 10px;
+        padding: 5px;
+        font-size: 12px
+    }
+}
+/* @media(max-width: 1024px) {
+
+    .result-table .col-md-7,  .result-table .col-md-3,  .result-table .col-md-2{
+        padding: 2px;
+    }
+    .result-body p >span>span{
+        display: none;
+    }
+    .result-body button{
+        width: 70px !important;
+        margin-top: 10px;
+        padding: 5px;
+        font-size: 12px
+    }
+} */

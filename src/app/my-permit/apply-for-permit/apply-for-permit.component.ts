@@ -8,7 +8,7 @@ import { UrlService } from '../../../../src/app/services/url.service';
   styleUrls: ['./apply-for-permit.component.css']
 })
 export class ApplyForPermitComponent implements OnInit {
-  tabOrder:number = 1;
+  tabOrder:number =3;
   formData:any = {}
   replaceString = "test";
   nextTab = false;
@@ -125,7 +125,6 @@ getChildList(tab) {
     }
 }
 
-
 controlIsHidden(tab) {
     tab.controlList.forEach(element => {
         for (var el of tab.controlList) {
@@ -163,6 +162,7 @@ valueFromOtherControl(control) {
         }
     // }
 }
+
 getText(control){
     if(control.controlType === "select"){
         control.options.forEach(element => {
@@ -174,6 +174,7 @@ getText(control){
         return control.selectedText = control.selectedValue
     }
 }
+
 getForm() {
 
     var requestdata_test = {
@@ -192,12 +193,13 @@ getForm() {
     let body = {
         "token": requestdata.token,
         "lid": requestdata.lid,
-        "formKey": "001-001-001-001"
+        "formKey": "001-001-001-002"
     }
     this.httpService.post(this.url.Get_Form_By_Key, body)
         .subscribe(
             (response) => {
                 this.formData = response.body
+                console.log(this.formData)
                 this.getFormData()
             },
             (error) => console.log(error)

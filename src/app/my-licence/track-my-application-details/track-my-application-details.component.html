@@ -83,63 +83,74 @@
             <b>  Trade's License </b>         
             <hr>
         </div>
-        <div class="col-md-2 col-2">        
-          <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
-          <span class="label">  Registration Number : </span>
+        <div *ngIf="isUpdateInfo == false" style="width: 100%">
+          <div class="col-md-2 col-2">        
+            <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
+            <span class="label">  Registration Number : </span>
+          </div>
+          <div class="col-md-10 col-10">
+            <b>{{currentLicense.regNo}}</b>
+          </div>
+          <div class="col-md-2 col-2">        
+            <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
+            <span class="label"> License Owner :</span>       
+          </div>
+          <div class="col-md-10 col-10">
+            <b>{{currentLicense.regNo}}</b>
+          </div>
+          <div class="col-md-2 col-2">        
+            <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
+            <span class="label"> License Type :</span>
+           
+          </div>
+          <div class="col-md-10 col-10">
+            <b>{{currentLicense.regNo}}</b>
+          </div>
+          <div class="col-md-2 col-2">        
+            <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
+            <span class="label"> Indate :</span>
+          </div>
+          <div class="col-md-10 col-10">
+            <b>{{currentLicense.regNo}}</b>
+          </div>
+          <div class="col-md-2 col-2">        
+            <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
+            <span class="label"> Issue Date :</span>
+          </div>
+          <div class="col-md-10 col-10">
+            <b>{{currentLicense.regNo}}</b>
+          </div>
+          <div class="col-md-2 col-2">        
+            <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
+            <span class="label"> Expiry Date :</span>
+          </div>
+          <div class="col-md-10 col-10">
+            <b>{{currentLicense.regNo}}</b>
+          </div>
+          <div class="col-md-2 col-2">        
+            <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
+            <span class="label"> Status :</span>
+          </div>
+          <div class="col-md-10 col-10">
+            <b>{{currentLicense.regNo}}</b>
+          </div>
+
         </div>
-        <div class="col-md-10 col-10">
-          <b>{{currentLicense.regNo}}</b>
-        </div>
-        <div class="col-md-2 col-2">        
-          <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
-          <span class="label"> License Owner :</span>       
-        </div>
-        <div class="col-md-10 col-10">
-          <b>{{currentLicense.regNo}}</b>
-        </div>
-        <div class="col-md-2 col-2">        
-          <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
-          <span class="label"> License Type :</span>
-         
-        </div>
-        <div class="col-md-10 col-10">
-          <b>{{currentLicense.regNo}}</b>
-        </div>
-        <div class="col-md-2 col-2">        
-          <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
-          <span class="label"> Indate :</span>
-        </div>
-        <div class="col-md-10 col-10">
-          <b>{{currentLicense.regNo}}</b>
-        </div>
-        <div class="col-md-2 col-2">        
-          <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
-          <span class="label"> Issue Date :</span>
-        </div>
-        <div class="col-md-10 col-10">
-          <b>{{currentLicense.regNo}}</b>
-        </div>
-        <div class="col-md-2 col-2">        
-          <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
-          <span class="label"> Expiry Date :</span>
-        </div>
-        <div class="col-md-10 col-10">
-          <b>{{currentLicense.regNo}}</b>
-        </div>
-        <div class="col-md-2 col-2">        
-          <span class="mobile-label"><i class="fas fa-calendar-check"></i></span>
-          <span class="label"> Status :</span>
-        </div>
-        <div class="col-md-10 col-10">
-          <b>{{currentLicense.regNo}}</b>
+
+        <div *ngIf="isUpdateInfo == true" style="width: 100%">
+
         </div>
       </div>
     </div>
     <div class="col-12">
       <hr>
-      <button class="btn btn-primary ripple btn-sm float-right">
+      <button class="btn btn-primary ripple btn-sm float-right" *ngIf="isUpdateInfo == false">
         <span class="button-mobile-label"><i class="fas fa-edit"></i></span>
         <span class="button-label"> Edit</span> 
+      </button>
+      <button class="btn btn-primary ripple btn-sm float-right" *ngIf="isUpdateInfo == true">
+        <span class="button-mobile-label"><i class="fas fa-edit"></i></span>
+        <span class="button-label"> Save Additional Info</span> 
       </button>
     </div>
   <div class="col-12">

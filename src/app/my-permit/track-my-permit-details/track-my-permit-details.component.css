@@ -1,0 +1,32 @@
+
+   @media(max-width: 768px) {
+    .mobile-label {
+      width: 20px;
+      display: inline-block;
+      font-weight: bold;
+      text-align: right;
+      margin-right: 5px;
+    }
+    .label{
+      display: none;
+    }
+
+    .btn{
+        width: 100%;
+    }
+  } 
+  
+  @media(max-width: 600px) {
+    .mobile-label {
+      width: 20px;
+      display: inline-block;
+      font-weight: bold;
+    }
+    .label{
+      display: none;
+    }
+    .btn{
+        width: 100%;
+    }
+  }
+  

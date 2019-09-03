@@ -38,7 +38,7 @@ export class FormGeneratorComponent implements OnInit {
   private resetList() {
     this.controlList = [
         {
-            controlName: "Label",
+            controlName: "Html",
             controlType: "label",
             controlID: "",
             label: "",
@@ -153,7 +153,7 @@ export class FormGeneratorComponent implements OnInit {
             controlOrder:""
         },
         {
-            controlName: "Date Picker",
+            "controlName": "Date Picker",
             "controlType": "datePicker",
             "controlID": "",
             "label": "",
@@ -164,8 +164,23 @@ export class FormGeneratorComponent implements OnInit {
             "errorText": "",
             "toolTipText": "",
             "placeholderText": "",
-            formTabOID: "" ,
-            controlOrder:""
+            "formTabOID": "" ,
+            "controlOrder":""
+        },
+        {
+            "controlName": "Address",
+            "controlType": "address",
+            "controlID": "",
+            "label": "",
+            "selectedValue": "",
+            "isRequired": false,
+            "isHidden": false,
+            "hasError": false,
+            "errorText": "",
+            "toolTipText": "",
+            "placeholderText": "",
+            "formTabOID": "" ,
+            "controlOrder":""
         },
     ];
 
@@ -361,7 +376,7 @@ getForm() {
   let body = {
       "token": requestdata.token,
       "lid": requestdata.lid,
-      "formKey": "001-001-001-001"
+      "formKey": "001-001-001-002"
   }
   this.httpService.post(this.url.Get_Form_By_Key, body)
       .subscribe(
@@ -416,6 +431,7 @@ getForm() {
     );
     }
     getControl(control, tab, index) {
+        console.log("tab",tab)
         control.formTabOID = tab.OID
         control.controlOrder = +(index+1)
         console.log(control)

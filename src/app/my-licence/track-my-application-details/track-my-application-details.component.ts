@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TrackMyApplicationDetailsComponent implements OnInit {
 
   currentLicense:any = {}
+  isUpdateInfo = false
   constructor() { }
 
   ngOnInit() {

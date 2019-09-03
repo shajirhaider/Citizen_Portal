@@ -6,11 +6,11 @@ import { DateUtilService } from '../../services/date.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
-  selector: 'app-track-my-application',
-  templateUrl: './track-my-application.component.html',
-  styleUrls: ['./track-my-application.component.css']
+  selector: 'app-track-my-permit',
+  templateUrl: './track-my-permit.component.html',
+  styleUrls: ['./track-my-permit.component.css']
 })
-export class TrackMyApplicationComponent implements OnInit {
+export class TrackMyPermitComponent implements OnInit {
   detailsShow= false;
   datas: any [] =[
     { 'LicenseNo':"19 000047 000 00 BT",'owner':"Hanif Mohammad Region of Waterloo", 'subject':"Backflow Device Tester", 'expiryDate':"",'status':"New" },
