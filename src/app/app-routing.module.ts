@@ -7,7 +7,6 @@ import { RegisterComponent } from './auth/register/register.component';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
 import { UpdatePersonalInfoComponent } from './auth/update-personal-info/update-personal-info.component';
 import { UpdatePasswordComponent } from './auth/update-password/update-password.component';
-// import { SearchPropertiesComponent } from './search-properties/search-properties.component';
 import { SearchNewComponent } from './search-properties/search-new/search-new.component';
 import { SitePlanApprovalsComponent } from './site-plan-approvals/site-plan-approvals.component';
 import { SearchMobileSignLocationComponent } from './search-mobile-sign-location/search-mobile-sign-location.component';
@@ -21,6 +20,7 @@ import { TrackMyPermitComponent } from './my-permit/track-my-permit/track-my-per
 import { ShoppingCartComponent } from './my-licence/shopping-cart/shopping-cart.component';
 import { ShoppingCartPermitComponent } from './my-permit/shopping-cart/shopping-cart.component';
 import { ComplaintLandingComponent } from './complaint/complaint-landing/complaint-landing.component';
+import { CreditsLandingComponent } from './credits/credits-landing/credits-landing.component';
 
 const routes: Routes = [ 
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'license-shopping-cart', component: ShoppingCartComponent},
   { path: 'permit-shopping-cart', component: ShoppingCartPermitComponent},
   { path: 'complaint', component: ComplaintLandingComponent},
+  { path: 'credits', component: CreditsLandingComponent}
 ];
 
 @NgModule({

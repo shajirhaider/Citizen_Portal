@@ -6,7 +6,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './app-material.module';
-import { from } from 'rxjs';
 import { HttpService} from './services/http.service'
 import { LoaderService } from './services/loader.service';
 import { AuthService } from './services/auth.service';
@@ -43,6 +42,7 @@ import { ShoppingCartComponent } from './my-licence/shopping-cart/shopping-cart.
 import { ShoppingCartPermitComponent } from './my-permit/shopping-cart/shopping-cart.component';
 import { SearchNewComponent } from './search-properties/search-new/search-new.component';
 import { ComplaintLandingComponent } from './complaint/complaint-landing/complaint-landing.component';
+import { CreditsLandingComponent } from './credits/credits-landing/credits-landing.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +72,8 @@ import { ComplaintLandingComponent } from './complaint/complaint-landing/complai
     ShoppingCartComponent,
     ShoppingCartPermitComponent,
     SearchNewComponent,
-    ComplaintLandingComponent
+    ComplaintLandingComponent,
+    CreditsLandingComponent
   ],
   imports: [
     BrowserModule,

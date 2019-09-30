@@ -2,21 +2,24 @@
   <div class="row">
       <div class="col-12">
           <div class="card">
-              <h5 class="card-header">Complaints</h5>
+              <h5 class="card-header">Choose Credit </h5>
               <div class="card-body">
                   <div class="alert alert-primary" role="alert">
                       <b>
-                          To submit for a <i> New Complaints</i>, please click one of the options listed below. A new page with the online application will open
+                        To apply for a <i> New Water Credit</i>, please click one of the options listed below. A new page with the online application will open
                       </b>
                   </div>
                   <div class="row">
                       <div class="col-12">
                           <div class="text-center">
                               <button type=" button" class=" btn btn-primary btn-width-200 height-60 font-16 mr-3" (click)="complaintFormShow = true">
-                                  By-Law Enforcement
+                                Stormwater Credit
                               </button>
-                              <button type=" button" class=" btn btn-success btn-width-200 height-60 font-16">
-                                  Licensing
+                              <button type=" button" class=" btn btn-success btn-width-200 height-60 font-16 mr-3">
+                                Stormwater Non Residential Credit
+                              </button>
+                              <button type=" button" class=" btn btn-warn btn-width-200 height-60 font-16">
+                                Stormwater Residential Credit
                               </button>
                           </div>
                       </div>
@@ -35,27 +38,35 @@
   <div class="card-body">
       <form>
           <div class="row form-panel mt-2">
-              <div class="col-12 col-md-6 col-sm-6">
+              <div class="col-12 col-md-4 col-sm-4">
                   <mat-form-field class="full-width">
                       <input matInput placeholder="Complaint Type">
                   </mat-form-field>
               </div>
-              <div class="col-12 col-md-6 col-sm-6">
+              <div class="col-12 col-md-4 col-sm-4">
                   <mat-form-field class="full-width">
                       <input matInput placeholder="Complaint Subtype">
+                  </mat-form-field>
+              </div>
+              <div class="col-12 col-md-4 col-sm-4">
+                  <mat-form-field class="full-width">
+                      <input matInput placeholder="Water Account No.">
                   </mat-form-field>
               </div>
           </div>
       </form>
 
       <mat-card class=" alert alert-primary">
-          <div>
-              <b>Response Time for Complaints Received : </b>
-          </div>
           <div class="font-10">
-              <b>*</b> Please Note that the typical response time for a Complaints submitted online is 48 hrs. For immediate assistant,
-              Please contact the by-law department at (519)747 785 (business hours : monday to friday 8.30 am to 4.30 pm) or the Cambridge
-              Regional Police Service at (519) 570-9777.
+            An email will be sent to you confirming that your application is received. Please comply with the necessary requirements
+            in order to complete your application. 
+            <span class="text-red">
+                Please note that until all requirements have been met, your permit application will not be processed.
+                <br>
+            </span>  
+          </div>
+          <div class="text-red text-center">
+              <b>You can only apply for ONE PERMIT at a time</b>
           </div>
       </mat-card>
 
@@ -63,7 +74,7 @@
           <div class="row form-panel mt-2">
               <div class="col-12 col-md-6">
                   <mat-form-field class="full-width">
-                      <input type="text" placeholder="Full Address" aria-label="Street Name" matInput formControlName="fullAddress" [matAutocomplete]="streetName" (input)='getValidStreet()'>
+                      <input type="text" placeholder="Location for Water Account" aria-label="Street Name" matInput formControlName="fullAddress" [matAutocomplete]="streetName" (input)='getValidStreet()'>
                       <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
                           <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
                               {{streetName.propDesc}}
@@ -85,22 +96,15 @@
           </div>
       </div>
 
-      <div class="mt-3">
-          <label for=""> Details/Notes</label>
-          <textarea name="" id="" cols="30" rows="3" class="full-width" placeholder="Enter Details"></textarea>
-
-      </div>
-
       <div>
           <button class="float-right btn btn-sm btn-primary" type="button">
-              Submit
+              Continue
           </button>
       </div>
-
   </div>
 </div>
 
-<div class="card" *ngIf="complaintFormShow == true">
+<!-- <div class="card" *ngIf="complaintFormShow == true">
   <div class="card-header">
       <b> Complaint Confirmation </b>
   </div>
@@ -216,4 +220,4 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
