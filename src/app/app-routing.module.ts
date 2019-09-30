@@ -20,6 +20,7 @@ import { RenewLicenseComponent } from './my-licence/renew-license/renew-license.
 import { TrackMyPermitComponent } from './my-permit/track-my-permit/track-my-permit.component';
 import { ShoppingCartComponent } from './my-licence/shopping-cart/shopping-cart.component';
 import { ShoppingCartPermitComponent } from './my-permit/shopping-cart/shopping-cart.component';
+import { ComplaintLandingComponent } from './complaint/complaint-landing/complaint-landing.component';
 
 const routes: Routes = [ 
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'track-my-permit', component: TrackMyPermitComponent},
   { path: 'license-shopping-cart', component: ShoppingCartComponent},
   { path: 'permit-shopping-cart', component: ShoppingCartPermitComponent},
+  { path: 'complaint', component: ComplaintLandingComponent},
 ];
 
 @NgModule({

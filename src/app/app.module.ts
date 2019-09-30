@@ -42,6 +42,7 @@ import { TrackMyPermitDetailsComponent } from './my-permit/track-my-permit-detai
 import { ShoppingCartComponent } from './my-licence/shopping-cart/shopping-cart.component';
 import { ShoppingCartPermitComponent } from './my-permit/shopping-cart/shopping-cart.component';
 import { SearchNewComponent } from './search-properties/search-new/search-new.component';
+import { ComplaintLandingComponent } from './complaint/complaint-landing/complaint-landing.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { SearchNewComponent } from './search-properties/search-new/search-new.co
     TrackMyPermitDetailsComponent,
     ShoppingCartComponent,
     ShoppingCartPermitComponent,
-    SearchNewComponent
+    SearchNewComponent,
+    ComplaintLandingComponent
   ],
   imports: [
     BrowserModule,

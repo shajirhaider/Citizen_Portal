@@ -1,0 +1,219 @@
+<div class="container-fluid" *ngIf="complaintFormShow == false">
+  <div class="row">
+      <div class="col-12">
+          <div class="card">
+              <h5 class="card-header">Complaints</h5>
+              <div class="card-body">
+                  <div class="alert alert-primary" role="alert">
+                      <b>
+                          To submit for a <i> New Complaints</i>, please click one of the options listed below. A new page with the online application will open
+                      </b>
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                          <div class="text-center">
+                              <button type=" button" class=" btn btn-primary btn-width-200 mr-3" (click)="complaintFormShow = true">
+                                  By-Law Enforcement
+                              </button>
+                              <button type=" button" class=" btn btn-success btn-width-200">
+                                  Licensing
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="card" *ngIf="complaintFormShow == true">
+  <div class="card-header">
+      <b>  Report a Complaint </b>
+  </div>
+  <div class="card-body">
+      <form>
+          <div class="row form-panel mt-2">
+              <div class="col-12 col-md-6 col-sm-6">
+                  <mat-form-field class="full-width">
+                      <input matInput placeholder="Complaint Type">
+                  </mat-form-field>
+              </div>
+              <div class="col-12 col-md-6 col-sm-6">
+                  <mat-form-field class="full-width">
+                      <input matInput placeholder="Complaint Subtype">
+                  </mat-form-field>
+              </div>
+          </div>
+      </form>
+
+      <mat-card class=" alert alert-primary">
+          <div>
+              <b>Response Time for Complaints Received : </b>
+          </div>
+          <div class="font-10">
+              <b>*</b> Please Note that the typical response time for a Complaints submitted online is 48 hrs. For immediate assistant,
+              Please contact the by-law department at (519)747 785 (business hours : monday to friday 8.30 am to 4.30 pm) or the Cambridge
+              Regional Police Service at (519) 570-9777.
+          </div>
+      </mat-card>
+
+      <form [formGroup]="searchProperties">
+          <div class="row form-panel mt-2">
+              <div class="col-12 col-md-6">
+                  <mat-form-field class="full-width">
+                      <input type="text" placeholder="Full Address" aria-label="Street Name" matInput formControlName="fullAddress" [matAutocomplete]="streetName" (input)='getValidStreet()'>
+                      <mat-autocomplete #streetName="matAutocomplete" [displayWith]="displayfilterStreetName">
+                          <mat-option *ngFor="let streetName of filteredStreetNames | async" [value]="streetName">
+                              {{streetName.propDesc}}
+                          </mat-option>
+                      </mat-autocomplete>
+                  </mat-form-field>
+              </div>
+          </div>
+      </form>
+      <div class="row" *ngIf="searchProperties.value.fullAddress !==''">
+          <div class="col-12 col-md-6 col-sm-6">
+              Full Address : <b> {{searchProperties.value.fullAddress.propDesc}} </b>
+          </div>
+          <div class="col-12 col-md-3 col-sm-4">
+              RSN : <b>{{searchProperties.value.fullAddress.propertyRSN}} </b>
+          </div>
+          <div class="col-12 col-md-3 col-sm-4">
+              Roll Number : <b>  {{searchProperties.value.fullAddress.propertyRoll}} </b>
+          </div>
+      </div>
+
+      <div class="mt-3">
+          <label for=""> Details/Notes</label>
+          <textarea name="" id="" cols="30" rows="3" class="full-width" placeholder="Enter Details"></textarea>
+
+      </div>
+
+      <div>
+          <button class="float-right btn btn-sm btn-primary" type="button">
+              Submit
+          </button>
+      </div>
+
+  </div>
+</div>
+
+<div class="card" *ngIf="complaintFormShow == true">
+  <div class="card-header">
+      <b> Complaint Confirmation </b>
+  </div>
+  <div class="card-body">
+      <div class="row">
+          <div class="col-md-3 col-12 col-sm-4">
+              <table class="info-table">
+                  <tr>
+                      <th>Complaint Number</th>
+                  </tr>
+                  <tr>
+                      <td>19-12-101010</td>
+                  </tr>
+              </table>
+          </div>
+          <div class="col-md-3 col-12 col-sm-4">
+              <table class="info-table">
+                  <tr>
+                      <th>Address</th>
+                  </tr>
+                  <tr>
+                      <td>19-12-101010</td>
+                  </tr>
+              </table>
+          </div>
+          <div class="col-md-3 col-12 col-sm-4">
+              <table class="info-table">
+                  <tr>
+                      <th>Status</th>
+                  </tr>
+                  <tr>
+                      <td>Sent</td>
+                  </tr>
+              </table>
+          </div>
+          <div class="col-md-3 col-12 col-sm-4">
+              <table class="info-table">
+                  <tr>
+                      <th>Date</th>
+                  </tr>
+                  <tr>
+                      <td>19-12-2019</td>
+                  </tr>
+              </table>
+          </div>
+          <div class="col-md-6 col-12 col-sm-6">
+              <table class="info-table mt-2">
+                  <tr>
+                      <th>Type</th>
+                  </tr>
+                  <tr>
+                      <td>By-law Enforcement(Lot Maint: Grass)</td>
+                  </tr>
+              </table>
+          </div>
+          <div class="col-md-6 col-12 col-sm-6">
+              <table class="info-table mt-2">
+                  <tr>
+                      <th>Submitted By</th>
+                  </tr>
+                  <tr>
+                      <td>Hanif</td>
+                  </tr>
+              </table>
+          </div>
+          <div class="col-md-12">
+              <table class="info-table mt-2">
+                  <tr>
+                      <th>Details/Note</th>
+                  </tr>
+                  <tr>
+                      <td>Test</td>
+                  </tr>
+              </table>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-12">
+              <table class="info-table mt-2">
+                  <tr>
+                      <th>Document Required</th>
+                  </tr>
+                  <tr>
+                      <td>
+                          <div class="row">
+                              <div class="col-12">
+                                  <table class="">
+                                      <tr *ngFor='let file of fileList; let i = index '>
+                                          <td>{{i+1}}</td>
+                                          <td class="width-300">  {{file}}</td>
+                                          <td>
+                                              <button class="btn text-red" (click)="removeFile(i)">
+                                                  <i class="fas fa-trash"></i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div class="col-12 col-md-6 col-sm-6">
+                                  Complaint Support <span class="text-red font-10"> (Upload a picture or document) </span>
+                              </div>
+                              <div class="col-12 col-md-6 col-sm-6">
+                                  <div class="upload-btn-wrapper">
+                                      <button class="upload-btn">Upload file</button>
+                                      <input type="file" id="file" (change)="fileUpload($event)" />
+                                  </div>
+                              </div>
+                          </div>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

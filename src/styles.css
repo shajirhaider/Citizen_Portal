@@ -1,6 +1,6 @@
 /* @import '~bootstrap/dist/css/bootstrap.min.css'; */
-@import "~@ng-select/ng-select/themes/default.theme.css";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 
 *, ::after, ::before {
   box-sizing: border-box;
@@ -126,8 +126,48 @@ ul {
   padding-left: 0;
 }
 
+.width-300 {
+    min-width: 300px;
+}
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
 
+.upload-btn {
+    border: 1px solid #079CAF;
+    color: white;
+    background-color: #0099AD;
+    padding: 4px 20px;
+    font-size: 14px;
+}
 
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.info-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.info-table td, .info-table th {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.info-table th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    background-color: #0076AD;
+    color: white;
+}
 .img-responsive {
   max-width: 100%;
   height: auto;
@@ -136,15 +176,23 @@ ul {
 .mt-1{
   margin-top: .25rem !important
 }
+.mt-2 {
+    margin-top: .5rem !important;
+}
 .mt-3{
   margin-top: 1rem !important;
 }
 
-.mt-2{
-  margin-top: .5rem!important;
+.mb-1 {
+    margin-bottom: .25rem !important
 }
-.mb-3{
-  margin-bottom: 1rem !important;
+
+.mb-2 {
+    margin-bottom: .5rem !important;
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
 }
 .mr-2{
   margin-right: .5rem !important;
@@ -156,6 +204,9 @@ ul {
   margin-right: 1.5rem !important;
 }
 
+.ml-3{
+    margin-left: 15px !important;
+}
 .float-right {
   float: right!important;
 }
@@ -168,6 +219,9 @@ ul {
 .form-control{
   font-size:14px !important;
   color: #212529 !important;
+}
+.font-10 {
+    font-size: 10px
 }
 .m-1{
   margin: 1px;
@@ -333,7 +387,15 @@ p{
 .text-red{
   color: #F4000B;
 }
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
 
+.btn-width-200{
+    width : 200px;
+}
 /* Absolute Center Spinner */
 .loading {
   position: fixed;
