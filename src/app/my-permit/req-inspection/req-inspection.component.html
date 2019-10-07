@@ -1,0 +1,68 @@
+
+<div class="card" >
+  <h5 class="card-header">Schedule Inspection</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-6 col-sm-6">
+        <b>Permit Number : </b> 16-100237 RE
+      </div>
+      <div class="col-12 col-md-6 col-sm-6">
+        <b>Address : </b> 100 REGINA ST S
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12 col-md-5 col-sm-5">
+          <b>Inspection</b>
+      </div>
+      <div class="col-12 col-md-2 col-sm-2">
+          <b>Status</b>
+      </div>
+      <div class="col-12 col-md-5 col-sm-5">
+          <b>Comment to Inspector</b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <hr>
+      </div>
+    </div>
+    <div class="row" *ngFor="let ins of inspectionJson">
+      <div class="col-12 col-md-5 col-sm-5">
+        <div>
+           {{ins.name}}
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <b>Schedule Date</b>
+            <mat-form-field class="full-width">           
+              <input [matDatepicker]="picker" matInput [(ngModel)]="ins.scheduleDate" (click)="picker.open()" autocomplete="off">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <b>time</b>
+            <mat-form-field class="full-width">  
+              <mat-select [(ngModel)]="ins.time">
+                <mat-option *ngFor="let time of timeList" name="time"  [value]="time.value">
+                  {{time.text}}
+                </mat-option>
+              </mat-select>         
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-2 col-sm-2">
+          <div>
+             <b>{{ins.status}}</b>
+          </div> 
+          <div>
+              <button class="btn btn-sm btn-primary mt-5">Cancel</button>
+           </div>
+      </div>
+      <div class="col-12 col-md-5 col-sm-5">
+          <textarea class="form-control" row="5" [(ngModel)]="ins.comment"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

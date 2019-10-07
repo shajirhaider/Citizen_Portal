@@ -43,6 +43,7 @@ import { ShoppingCartPermitComponent } from './my-permit/shopping-cart/shopping-
 import { SearchNewComponent } from './search-properties/search-new/search-new.component';
 import { ComplaintLandingComponent } from './complaint/complaint-landing/complaint-landing.component';
 import { CreditsLandingComponent } from './credits/credits-landing/credits-landing.component';
+import { ReqInspectionComponent } from './my-permit/req-inspection/req-inspection.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { CreditsLandingComponent } from './credits/credits-landing/credits-landi
     ShoppingCartPermitComponent,
     SearchNewComponent,
     ComplaintLandingComponent,
-    CreditsLandingComponent
+    CreditsLandingComponent,
+    ReqInspectionComponent
   ],
   imports: [
     BrowserModule,
