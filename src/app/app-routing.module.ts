@@ -22,6 +22,7 @@ import { ShoppingCartPermitComponent } from './my-permit/shopping-cart/shopping-
 import { ComplaintLandingComponent } from './complaint/complaint-landing/complaint-landing.component';
 import { CreditsLandingComponent } from './credits/credits-landing/credits-landing.component';
 import { ReqInspectionComponent } from './my-permit/req-inspection/req-inspection.component';
+import { ReportAnIssueComponent } from './report-an-issue/report-an-issue.component';
 
 const routes: Routes = [ 
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -45,7 +46,8 @@ const routes: Routes = [
   { path: 'permit-shopping-cart', component: ShoppingCartPermitComponent},
   { path: 'complaint', component: ComplaintLandingComponent},
   { path: 'credits', component: CreditsLandingComponent},
-  { path: 'request-inspection', component: ReqInspectionComponent}
+  { path: 'request-inspection', component: ReqInspectionComponent},
+  { path: 'report-issue', component: ReportAnIssueComponent}
 ];
 
 @NgModule({

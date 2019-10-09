@@ -44,6 +44,7 @@ import { SearchNewComponent } from './search-properties/search-new/search-new.co
 import { ComplaintLandingComponent } from './complaint/complaint-landing/complaint-landing.component';
 import { CreditsLandingComponent } from './credits/credits-landing/credits-landing.component';
 import { ReqInspectionComponent } from './my-permit/req-inspection/req-inspection.component';
+import { ReportAnIssueComponent } from './report-an-issue/report-an-issue.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { ReqInspectionComponent } from './my-permit/req-inspection/req-inspectio
     SearchNewComponent,
     ComplaintLandingComponent,
     CreditsLandingComponent,
-    ReqInspectionComponent
+    ReqInspectionComponent,
+    ReportAnIssueComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <b>
+        To report an urgent issue, please call us :
+      </b>
+      <div class="row">
+        <div class="col-4">
+          <b>Issue</b>
+        </div>
+        <div class="col-4">
+          <b>Business hours</b>
+        </div>
+        <div class="col-4">
+          <b>After hours</b>
+        </div>
+      </div>
+      <div *ngFor = "let phn of phoneNoList" class="row">
+        <div class="col-4">
+          {{phn.issueType}}
+        </div>
+        <div class="col-4">
+          {{phn.businessHr}}
+        </div>
+        <div class="col-4">
+          {{phn.afterHr}}
+        </div>
+
+      </div>
+
+      <div>
+        <b>For a non-urgent issue, please enter information below : </b>
+        <div class="mt-2">
+          <b class="text-red">Note -</b>
+          <b> traffic light issues are reported through the Region of Waterloo</b>
+        </div>
+
+        <div class="mt-2">
+          <div>
+            <b class="required">what type of issue do you have?</b>
+          </div>
+            
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" [(ngModel)]='value' type="checkbox">
+            <span class="form-check-label">
+                <span>Roads and bike lanes (such as obstructions or potholes)</span>
+            </span>
+          </div>
+            <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" [(ngModel)]='value' type="checkbox">
+            <span class="form-check-label">
+                <span>Parking (such as overnight parking or tickets</span>
+            </span>
+          </div>
+            <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" [(ngModel)]='value' type="checkbox">
+            <span class="form-check-label">
+                <span>Grass cutting or tree maintance (such as diseased trees and grass cutting needed at public parks) </span>
+            </span>
+          </div>
+            <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" [(ngModel)]='value' type="checkbox">
+            <span class="form-check-label">
+                <span>Sidewalks (such as large cracks)</span>
+            </span>
+          </div>
+            <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" [(ngModel)]='value' type="checkbox">
+            <span class="form-check-label">
+                <span>Trails (such as downed trees or other maintance issues)</span>
+            </span>
+          </div>
+            <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" [(ngModel)]='value' type="checkbox">
+            <span class="form-check-label">
+                <span>Billing issue for water or tax accout</span>
+            </span>
+          </div>
+            <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" [(ngModel)]='value' type="checkbox">
+            <span class="form-check-label">
+                <span>Website issue (such as a dead link or other error)</span>
+            </span>
+          </div>
+            <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" [(ngModel)]='value' type="checkbox">
+            <span class="form-check-label">
+                <span>Another type of issue</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-2">
+          <label for="" class="required">Describe the issue. Be as specific as possible, including dates, times and locations if possible</label>
+          <textarea name="" class="full-width" id="" rows="3"></textarea>
+        </div>
+
+        <div class="mt-2">
+          <label for="" class="mr-2"> Upload a photo or screen shot that will help us understand the issue (optional)</label>        
+          <input type="file" id="file" class="btn btn-sm btn-primary" (change)="fileUpload($event)" />        
+        </div>
+
+        <div class="mt-2">
+          <label for="" class="">To request follow up, enter your contact info below</label>        
+          
+          <div class="row">
+            <div class="col-12 col-md-6 col-sm-6">
+              <label for=""> Email (required for follow up)</label>
+              <input  class="form-control" type="text" name="" id="">
+            </div>
+            <div class="col-12 col-md-6 col-sm-6">
+              <label for=""> Name (required for follow up)</label>
+              <input  class="form-control" type="text" name="" id="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
